@@ -18,6 +18,8 @@ def load_data(data_path, bugName=None):
 
     # bugName to be used to select a specific bug
     data = np.loadtxt(data_path, dtype=str,comments=None, delimiter='<ml>')
+    if len(data) == 4:
+        data = np.array([data])
     df = pd.DataFrame(data,dtype=str,columns=['label','bugid','buggy','patched'])
 
     #bugname experiment
