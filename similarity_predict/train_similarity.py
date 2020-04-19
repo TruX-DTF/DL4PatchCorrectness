@@ -18,8 +18,6 @@ def load_data(data_path, bugName=None):
 
     # bugName to be used to select a specific bug
     data = np.loadtxt(data_path, dtype=str,comments=None, delimiter='<ml>')
-    if len(data) == 4:
-        data = np.array([data])
     df = pd.DataFrame(data,dtype=str,columns=['label','bugid','buggy','patched'])
 
     #bugname experiment
@@ -39,7 +37,7 @@ def core(df,model):
         print('wrong model')
 
 def bert(df):
-    len = df.shape[0]
+    length = df.shape[0]
     # tokenize
     df['buggy'] = df['buggy'].map(lambda x: word_tokenize(x))
     df['patched'] = df['patched'].map(lambda x: word_tokenize(x))
@@ -47,7 +45,7 @@ def bert(df):
     df['simi'] = None
     bc = BertClient(check_length=False)
     for index,row in df.iterrows():
-        print('{}/{}'.format(index,len))
+        print('{}/{}'.format(index,length))
         if row['buggy'] == [] or row['patched'] == []:
             print('buggy or patched is []')
             continue
@@ -88,6 +86,7 @@ def Doc_whole(df):
     pass
 
 def Doc(df):
+    length = df.shape[0]
     # tokenize
     df['buggy'] = df['buggy'].map(lambda x: word_tokenize(x))
     df['patched'] = df['patched'].map(lambda x: word_tokenize(x))
@@ -96,8 +95,10 @@ def Doc(df):
     data = list(df['buggy']) + list(df['patched'])
     documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(data)]
     model = Doc2Vec(documents, vector_size=64, window=5, min_count=1, workers=4)
+    model.save('../data/doc.model')
 
     for index, row in df.iterrows():
+        print('{}/{}'.format(index,length))
         bug_vec = model.infer_vector(row['buggy'],alpha=0.025,steps=300)
         patched_vec = model.infer_vector(row['patched'],alpha=0.025,steps=300)
         # similarity calculation
