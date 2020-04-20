@@ -17,8 +17,10 @@ path_patch_train = '../data/train_data5.txt'
 def load_data(data_path, bugName=None):
 
     # bugName to be used to select a specific bug
-    data = np.loadtxt(data_path, dtype=str,comments=None, delimiter='<ml>')
-    df = pd.DataFrame(data,dtype=str,columns=['label','bugid','buggy','patched'])
+    # data = np.loadtxt(data_path, dtype=str,comments=None, delimiter='<ml>')
+    df = pd.read_csv(data_path,sep='<ml>')
+    df.columns = ["label", "bugid", "buggy", "patched"]
+    # df = pd.DataFrame(data,dtype=str,columns=['label','bugid','buggy','patched'])
 
     #bugname experiment
     if bugName != None:
