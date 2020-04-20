@@ -16,11 +16,11 @@ def get_patch_cc2v(patch):
                 if line.startswith('@@') or line.startswith('diff') or line.startswith('index'):
                     continue
                 if line.startswith('---'):
-                    newline = re.split(pattern=p,string=line[3:].strip())
+                    newline = re.split(pattern=p,string=line.split(' ')[1].strip())
                     newline = 'mmm ' + ' '.join(newline) + ' <nl> '
                     lines += newline
                 elif line.startswith('+++'):
-                    newline = re.split(pattern=p,string=line[3:].strip())
+                    newline = re.split(pattern=p,string=line.split(' ')[1].strip())
                     newline = 'ppp ' + ' '.join(newline) + ' <nl> '
                     lines += newline
                 else:
@@ -77,6 +77,76 @@ def get_diff_files(patch,type):
                         # do nothing
                         pass
                     else:
+                        lines += line.strip() + ' '
+        # except Exception:
+        #     print(Exception)
+        #     return 'Error'
+        return lines
+
+def get_diff_files_frag(patch,type):
+    with open(patch, 'r') as file:
+        lines = ''
+        p = r"([^\w_])"
+        flag = True
+        # try:
+        for line in file:
+            line = line.strip()
+            if '*/' in line:
+                flag = True
+                continue
+            if flag == False:
+                continue
+            if line != '':
+                if line.startswith('@@') or line.startswith('diff') or line.startswith('index'):
+                    continue
+                elif '/*' in line:
+                    flag = False
+                    continue
+                elif type == 'buggy':
+                    if line.startswith('---'):
+                        line = re.split(pattern=p, string=line.split(' ')[1].strip())
+                        lines += ' '.join(line) + ' '
+                    elif line.startswith('-'):
+                        if line[1:].strip().startswith('//'):
+                            continue
+                        line = re.split(pattern=p, string=line[1:].strip())
+                        line = [x.strip() for x in line]
+                        while '' in line:
+                            line.remove('')
+                        line = ' '.join(line)
+                        lines += line.strip() + ' '
+                    elif line.startswith('+'):
+                        # do nothing
+                        pass
+                    else:
+                        line = re.split(pattern=p, string=line.strip())
+                        line = [x.strip() for x in line]
+                        while '' in line:
+                            line.remove('')
+                        line = ' '.join(line)
+                        lines += line.strip() + ' '
+                elif type == 'patched':
+                    if line.startswith('+++'):
+                        line = re.split(pattern=p, string=line.split(' ')[1].strip())
+                        lines += ' '.join(line) + ' '
+                    elif line.startswith('+'):
+                        if line[1:].strip().startswith('//'):
+                            continue
+                        line = re.split(pattern=p, string=line[1:].strip())
+                        line = [x.strip() for x in line]
+                        while '' in line:
+                            line.remove('')
+                        line = ' '.join(line)
+                        lines += line.strip() + ' '
+                    elif line.startswith('-'):
+                        # do nothing
+                        pass
+                    else:
+                        line = re.split(pattern=p, string=line.strip())
+                        line = [x.strip() for x in line]
+                        while '' in line:
+                            line.remove('')
+                        line = ' '.join(line)
                         lines += line.strip() + ' '
         # except Exception:
         #     print(Exception)
@@ -173,10 +243,10 @@ def create_train_data5(path_patch_kui):
                     #     f.write(sample)
         f.write(data)
 
-def create_train_data5_frag(path_patch_kui):
+def create_train_data5_frag(path_patch_train):
     with open('../data/train_data5_frag.txt','w+') as f:
         data = ''
-        for root,dirs,files in os.walk(path_patch_kui):
+        for root,dirs,files in os.walk(path_patch_train):
             if files == ['.DS_Store']:
                 continue
             # files = sorted(files,key=lambda x:int(x.split('-')[1].split('.')[0]))
@@ -191,8 +261,8 @@ def create_train_data5_frag(path_patch_kui):
                     try:
                         # if bug_id.endswith('Bears-114.txt'):
                             # pass
-                        buggy = get_diff_files(os.path.join(root,file),type='buggy')
-                        patched = get_diff_files(os.path.join(root, file), type='patched')
+                        buggy = get_diff_files_frag(os.path.join(root,file),type='buggy')
+                        patched = get_diff_files_frag(os.path.join(root, file), type='patched')
                     except Exception as e:
                         print(e)
                         continue
@@ -231,5 +301,5 @@ if __name__ == '__main__':
     # create_data_wholefile(path_patched)
 
     create_train_data5(path_patch_train)
-    create_train_data5_frag(path_patch_train)
-    create_train_data5_for_cc2v(path_patch_train)
+    # create_train_data5_frag(path_patch_train)
+    # create_train_data5_for_cc2v(path_patch_train)

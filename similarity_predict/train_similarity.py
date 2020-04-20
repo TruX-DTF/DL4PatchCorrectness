@@ -67,7 +67,7 @@ def bert(df):
     re += 'the average similarity is {}'.format(np.mean(np.array(df[['simi']]))) + '\n'
     re += 'the median similarity is {}'.format(np.median(np.array(df[['simi']]))) + '\n'
 
-    np.savetxt(r'../data/train_result_doc.txt', df[['bugid', 'simi']].values, fmt='%s', header=re)
+    np.savetxt(r'../data/train_result_bert.txt', df[['bugid', 'simi']].values, fmt='%s', header=re)
     # df[['bugid','simi']].to_csv('../data/train_result_bert.txt', header=None, index=None, sep=' ', mode='a+')
 
 

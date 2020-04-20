@@ -44,7 +44,7 @@ def bert(df, threshold):
     block += '**************\n'
     block += 'Budid: {}, patches: {} \n'.format(bug_id,length)
 
-    # to do: max_seq_len=360
+    # to do: max_seq_len=720
     bc = BertClient(check_length=False)
     for index, row in df.iterrows():
         if row['buggy'] == [] or row['patched'] == []:
@@ -99,11 +99,12 @@ def doc(df, threshold):
 
 if __name__ == '__main__':
 
-    model = 'doc'
     # bert minumum, average, median
-    # threshold = [0.786553263, 0.99778149, 0.998988]
+    model = 'bert'
+    threshold = [0.786553263, 0.99778149, 0.998988]
 
     # doc minumum, average, median
-    threshold = [0.12357366, 0.944302260, 0.972037911]
+    # model = 'doc'
+    # threshold = [0.12357366, 0.944302260, 0.972037911]
 
     test_similarity(path_patch_test,model=model,threshold=threshold[1])
