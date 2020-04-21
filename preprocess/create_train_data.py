@@ -300,6 +300,6 @@ if __name__ == '__main__':
     # create_data(path_patch)
     # create_data_wholefile(path_patched)
 
-    create_train_data5(path_patch_train)
-    # create_train_data5_frag(path_patch_train)
+    # create_train_data5(path_patch_train)
+    create_train_data5_frag(path_patch_train)
     # create_train_data5_for_cc2v(path_patch_train)

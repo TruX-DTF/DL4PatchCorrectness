@@ -52,6 +52,76 @@ def get_diff_files(patch,type):
     #     return 'Error'
     return lines
 
+def get_diff_files_frag(patch,type):
+    with open(patch, 'r') as file:
+        lines = ''
+        p = r"([^\w_])"
+        flag = True
+        # try:
+        for line in file:
+            line = line.strip()
+            if '*/' in line:
+                flag = True
+                continue
+            if flag == False:
+                continue
+            if line != '':
+                if line.startswith('@@') or line.startswith('diff') or line.startswith('index'):
+                    continue
+                elif '/*' in line:
+                    flag = False
+                    continue
+                elif type == 'buggy':
+                    if line.startswith('---'):
+                        line = re.split(pattern=p, string=line.split(' ')[1].strip())
+                        lines += ' '.join(line) + ' '
+                    elif line.startswith('-'):
+                        if line[1:].strip().startswith('//'):
+                            continue
+                        line = re.split(pattern=p, string=line[1:].strip())
+                        line = [x.strip() for x in line]
+                        while '' in line:
+                            line.remove('')
+                        line = ' '.join(line)
+                        lines += line.strip() + ' '
+                    elif line.startswith('+'):
+                        # do nothing
+                        pass
+                    else:
+                        line = re.split(pattern=p, string=line.strip())
+                        line = [x.strip() for x in line]
+                        while '' in line:
+                            line.remove('')
+                        line = ' '.join(line)
+                        lines += line.strip() + ' '
+                elif type == 'patched':
+                    if line.startswith('+++'):
+                        line = re.split(pattern=p, string=line.split(' ')[1].strip())
+                        lines += ' '.join(line) + ' '
+                    elif line.startswith('+'):
+                        if line[1:].strip().startswith('//'):
+                            continue
+                        line = re.split(pattern=p, string=line[1:].strip())
+                        line = [x.strip() for x in line]
+                        while '' in line:
+                            line.remove('')
+                        line = ' '.join(line)
+                        lines += line.strip() + ' '
+                    elif line.startswith('-'):
+                        # do nothing
+                        pass
+                    else:
+                        line = re.split(pattern=p, string=line.strip())
+                        line = [x.strip() for x in line]
+                        while '' in line:
+                            line.remove('')
+                        line = ' '.join(line)
+                        lines += line.strip() + ' '
+        # except Exception:
+        #     print(Exception)
+        #     return 'Error'
+        return lines
+
 
 def get_patch_cc2v(patch):
     p = r"([^\w_])"
@@ -122,6 +192,50 @@ def create_test_data(path_patch_test):
                         with open(bug_path + '/test_data_bug_patches.txt', 'w+') as f2:
                             f2.write(data)
 
+def create_test_data_frag(path_patch_test):
+    # with open('../data/test_data.txt','w+') as f:
+    #     data = ''
+        for benchmark in benchmarks:
+            benchmark_path = os.path.join(path_patch_test, benchmark)
+            for project in os.listdir(benchmark_path):
+                if project.startswith('.'):
+                    continue
+                project_path = os.path.join(benchmark_path, project)
+                folders = os.listdir(project_path)
+                if benchmark == "QuixBugs":
+                    folders = [""]
+                for id in folders:
+                    if id.startswith('.'):
+                        continue
+                    bug_path = os.path.join(project_path, id)
+                    data = ''
+                    for repair_tool in os.listdir(bug_path):
+                        tool_path = os.path.join(bug_path, repair_tool)
+                        if not os.path.isdir(tool_path):
+                            continue
+                        for seed in os.listdir(tool_path):
+                            seed_path = os.path.join(tool_path, seed)
+                            results_path = os.path.join(seed_path, "result.json")
+                            if os.path.exists(results_path):
+                                bug_id = benchmark + '-' + project + '-' + id
+                                patch_id = repair_tool + '-' + seed
+                                with open(results_path,'r') as f1:
+                                    patch_dict = json.load(f1)
+                                patches = patch_dict['patches']
+                                if patches != []:
+                                    for p in patches:
+                                        if 'patch' in p:
+                                            patch = p['patch'].split('\n')
+                                        elif 'PATCH_DIFF_ORIG' in p:
+                                            patch = p['PATCH_DIFF_ORIG'].split('\\n')
+                                        buggy = get_diff_files_frag(patch, type='buggy')
+                                        patched = get_diff_files_frag(patch, type='patched')
+                                        sample = '<ml>'.join(['1',bug_id,patch_id,buggy,patched,'<dl>'.join(patch)])
+                                        data += sample + '\n'
+                    if data != '':
+                        with open(bug_path + '/test_data_bug_patches.txt', 'w+') as f2:
+                            f2.write(data)
+
 def create_test_data_for_cc2v(path_patch_test):
     with open('../data/test_data_bug_patches_all_for_cc2v.txt','w+') as f0:
         all_data = ''
@@ -175,4 +289,5 @@ def create_test_data_for_cc2v(path_patch_test):
 
 if __name__ == '__main__':
     # create_test_data(path_patch_test)
+    create_test_data_frag(path_patch_test)
     create_test_data_for_cc2v(path_patch_test)

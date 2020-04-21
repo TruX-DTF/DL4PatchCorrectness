@@ -32,9 +32,27 @@ def test_similarity(path_patch_test, model, threshold):
                 df['simi'] = None
 
                 if model == 'bert':
-                    bert(df, threshold)
+                    df_ranked = bert(df, threshold)
                 elif model == 'doc':
-                    doc(df,threshold)
+                    df_ranked = doc(df,threshold)
+                else:
+                    print('wrong model')
+
+                path_rank = os.path.join(root,model+'_top10')
+                if not os.path.exists(path_rank):
+                    os.mkdir(path_rank)
+
+                for index, row in df_ranked.iterrows():
+                    similarity = str(row['simi'])
+                    patch_id = str(row['patchid'])
+                    path_save = str(index) + '_' + similarity + '_' + patch_id + '.txt'
+                    patch = str(row['patch'])
+                    patch = patch.replace('<dl>','\n')
+                    with open(os.path.join(path_rank, path_save),'w+') as f:
+                        f.write(patch)
+
+                    # df_ranked[['bugid','patchid','simi']].to_csv(os.path.join(root,'ranked_list.csv'), header=None, index=None, sep=' ',
+                    #                              mode='a')
 
 
 def bert(df, threshold):
@@ -44,12 +62,9 @@ def bert(df, threshold):
     block += '**************\n'
     block += 'Budid: {}, patches: {} \n'.format(bug_id,length)
 
-    # to do: max_seq_len=720
+    # to do: max_seq_len=360
     bc = BertClient(check_length=False)
     for index, row in df.iterrows():
-        if row['buggy'] == [] or row['patched'] == []:
-            print('buggy or patched is []')
-            continue
         try:
             bug_vec = bc.encode([row['buggy']], is_tokenized=True)
             patched_vec = bc.encode([row['patched']], is_tokenized=True)
@@ -59,14 +74,21 @@ def bert(df, threshold):
         result = cosine_similarity(bug_vec, patched_vec)
         df.loc[index, 'simi'] = result[0][0]
     df = df.sort_values(by='simi',ascending=False)
-    df = df[df['simi'].values >= threshold]
-    block += 'Threshold: {}, post_patches: {}\n'.format(threshold,df.shape[0])
-    top = 50
-    block += 'Top:{}\n'.format(top)
-    block += '{}\n'.format(df[['bugid','patchid','simi','patch']][:top])
+    df.index = range(len(df))
+    # threshold
+    # df = df[df['simi'].values >= threshold]
+
+    # top filter
+    top = 10
+    df = df[:top]
+
+    block += 'Threshold: {}, post_patches: {}\n'.format(threshold, df.shape[0])
+
+    block += '{}\n'.format(df[['bugid', 'patchid', 'simi']])
     print(block)
-    with open('../data/test_result_bert.txt','a+') as f:
+    with open('../data/test_result_bert_new_top10.txt', 'a+') as f:
         f.write(block)
+    return df
 
 def doc(df, threshold):
     block = ''
@@ -87,24 +109,30 @@ def doc(df, threshold):
         result = cosine_similarity(bug_vec.reshape((1,-1)), patched_vec.reshape((1,-1)))
         df.loc[index, 'simi'] = result[0][0]
     df = df.sort_values(by='simi', ascending=False)
-    df = df[df['simi'].values >= threshold]
-    block += 'Threshold: {}, post_patches: {}\n'.format(threshold, df.shape[0])
-    top = 50
-    block += 'Top:{}\n'.format(top)
-    block += '{}\n'.format(df[['bugid', 'patchid', 'simi', 'patch']][:top])
-    print(block)
-    with open('../data/test_result_doc.txt', 'a+') as f:
-        f.write(block)
+    df.index = range(len(df))
+    # threshold
+    # df = df[df['simi'].values >= threshold]
 
+    # top filter
+    top = 10
+    df = df[:top]
+
+    block += 'Threshold: {}, post_patches: {}\n'.format(threshold, df.shape[0])
+
+    block += '{}\n'.format(df[['bugid', 'patchid', 'simi']])
+    print(block)
+    with open('../data/test_result_doc_new_top10.txt', 'a+') as f:
+        f.write(block)
+    return df
 
 if __name__ == '__main__':
 
     # bert minumum, average, median
-    model = 'bert'
-    threshold = [0.786553263, 0.99778149, 0.998988]
+    # model = 'bert'
+    # threshold = [0.786553263, 0.99778149, 0.998988]
 
     # doc minumum, average, median
-    # model = 'doc'
-    # threshold = [0.12357366, 0.944302260, 0.972037911]
+    model = 'doc'
+    threshold = [0.12357366, 0.944302260, 0.972037911]
 
     test_similarity(path_patch_test,model=model,threshold=threshold[1])
