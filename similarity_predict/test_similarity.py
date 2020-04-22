@@ -32,17 +32,18 @@ def test_similarity(path_patch_test, model, threshold):
                 df['simi'] = None
 
                 if model == 'bert':
-                    df_ranked = bert(df, threshold)
+                    df_threshold, df_top = bert(df, threshold)
                 elif model == 'doc':
-                    df_ranked = doc(df,threshold)
+                    df_threshold, df_top= doc(df, threshold)
                 else:
                     print('wrong model')
 
-                path_rank = os.path.join(root,model+'_top10')
+                # threshold version
+                path_rank = os.path.join(root,model+'_threshold_version')
                 if not os.path.exists(path_rank):
                     os.mkdir(path_rank)
 
-                for index, row in df_ranked.iterrows():
+                for index, row in df_threshold.iterrows():
                     similarity = str(row['simi'])
                     patch_id = str(row['patchid'])
                     path_save = str(index) + '_' + similarity + '_' + patch_id + '.txt'
@@ -51,8 +52,22 @@ def test_similarity(path_patch_test, model, threshold):
                     with open(os.path.join(path_rank, path_save),'w+') as f:
                         f.write(patch)
 
-                    # df_ranked[['bugid','patchid','simi']].to_csv(os.path.join(root,'ranked_list.csv'), header=None, index=None, sep=' ',
-                    #                              mode='a')
+                # top version
+                path_rank = os.path.join(root, model + '_top_version')
+                if not os.path.exists(path_rank):
+                    os.mkdir(path_rank)
+
+                for index, row in df_top.iterrows():
+                    similarity = str(row['simi'])
+                    patch_id = str(row['patchid'])
+                    path_save = str(index) + '_' + similarity + '_' + patch_id + '.txt'
+                    patch = str(row['patch'])
+                    patch = patch.replace('<dl>', '\n')
+                    with open(os.path.join(path_rank, path_save), 'w+') as f:
+                        f.write(patch)
+
+            # df_ranked[['bugid','patchid','simi']].to_csv(os.path.join(root,'ranked_list.csv'), header=None, index=None, sep=' ',
+            #                              mode='a')
 
 
 def bert(df, threshold):
@@ -76,19 +91,20 @@ def bert(df, threshold):
     df = df.sort_values(by='simi',ascending=False)
     df.index = range(len(df))
     # threshold
-    # df = df[df['simi'].values >= threshold]
+    df_threshold = df[df['simi'].values >= threshold]
 
     # top filter
     top = 10
-    df = df[:top]
+    df_top = df[:top]
 
-    block += 'Threshold: {}, post_patches: {}\n'.format(threshold, df.shape[0])
+    block += 'Threshold: {}, post_patches: {}\n'.format(threshold, df_threshold.shape[0])
+    block += 'Top: {}, post_patches: {}\n'.format(top, df_top.shape[0])
 
-    block += '{}\n'.format(df[['bugid', 'patchid', 'simi']])
+    block += '{}\n'.format(df_threshold[['bugid', 'patchid', 'simi']])
     print(block)
-    with open('../data/test_result_bert_new_top10.txt', 'a+') as f:
+    with open('../data/test_result_bert_new_threshold_top.txt', 'a+') as f:
         f.write(block)
-    return df
+    return df_threshold, df_top
 
 def doc(df, threshold):
     block = ''
@@ -111,28 +127,29 @@ def doc(df, threshold):
     df = df.sort_values(by='simi', ascending=False)
     df.index = range(len(df))
     # threshold
-    # df = df[df['simi'].values >= threshold]
+    df_threshold = df[df['simi'].values >= threshold]
 
     # top filter
     top = 10
-    df = df[:top]
+    df_top = df[:top]
 
-    block += 'Threshold: {}, post_patches: {}\n'.format(threshold, df.shape[0])
+    block += 'Threshold: {}, post_patches: {}\n'.format(threshold, df_threshold.shape[0])
+    block += 'Top: {}, post_patches: {}\n'.format(top, df_top.shape[0])
 
-    block += '{}\n'.format(df[['bugid', 'patchid', 'simi']])
+    block += '{}\n'.format(df_threshold[['bugid', 'patchid', 'simi']])
     print(block)
-    with open('../data/test_result_doc_new_top10.txt', 'a+') as f:
+    with open('../data/test_result_doc_new_threshold_top.txt', 'a+') as f:
         f.write(block)
-    return df
+    return df_threshold, df_top
 
 if __name__ == '__main__':
 
     # bert minumum, average, median
-    # model = 'bert'
-    # threshold = [0.786553263, 0.99778149, 0.998988]
+    model = 'bert'
+    threshold = [0.786553263, 0.99778149, 0.998988]
 
     # doc minumum, average, median
-    model = 'doc'
-    threshold = [0.12357366, 0.944302260, 0.972037911]
+    # model = 'doc'
+    # threshold = [0.12357366, 0.944302260, 0.972037911]
 
     test_similarity(path_patch_test,model=model,threshold=threshold[1])
