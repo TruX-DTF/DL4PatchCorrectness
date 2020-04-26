@@ -5,6 +5,7 @@ import pickle
 # path_patched = '/Users/haoye.tian/Documents/University/data/quixbugs_wholefile/quicksort'
 path_patch_test = '/Users/haoye.tian/Documents/University/data/kui_patches/Patches_test'
 path_patch_train = '../data/kui_Patches/Patches_train'
+path_kui_data = '/Users/haoye.tian/Documents/University/project/APR-Efficiency/Patches/NFL'
 
 def get_patch_cc2v(patch):
     with open(patch, 'r') as file:
@@ -15,7 +16,7 @@ def get_patch_cc2v(patch):
             if line != '':
                 if line.startswith('@@') or line.startswith('diff') or line.startswith('index'):
                     continue
-                if line.startswith('---'):
+                if line.startswith('---') or line.startswith('PATCH_DIFF_ORIG=---'):
                     newline = re.split(pattern=p,string=line.split(' ')[1].strip())
                     newline = 'mmm ' + ' '.join(newline) + ' <nl> '
                     lines += newline
@@ -283,9 +284,9 @@ def create_train_data5_for_cc2v(path_patch_kui):
             for file in files:
                 if file.endswith('txt') or file.endswith('patch'):
                     if file.endswith('.patch'):
-                        bug_id = '_'.join([root.split('/')[-2],root.split('/')[-1], file])
+                        bug_id = '_'.join([root.split('/')[-2], root.split('/')[-1], file])
                     else:
-                        bug_id = '_'.join([root.split('/')[-1],file])
+                        bug_id = '_'.join([root.split('/')[-1], file])
                     try:
                         patch_cc2v = get_patch_cc2v(os.path.join(root, file))
                     except Exception as e:
@@ -296,10 +297,37 @@ def create_train_data5_for_cc2v(path_patch_kui):
                     data += sample + '\n'
         f.write(data)
 
+def create_kui_data_for_cc2v(path_patch_kui):
+    with open('../data/kui_test_data_for_cc2v.txt','w+') as f:
+        data = ''
+        for root,dirs,files in os.walk(path_patch_kui):
+            if files == ['.DS_Store']:
+                continue
+            # files = sorted(files,key=lambda x:int(x.split('-')[1].split('.')[0]))
+
+            if files == []:
+                continue
+            patch_all = ''
+            for file in files:
+                if file.endswith('txt') :
+                    bug_id = '_'.join([root.split('/')[-2],root.split('/')[-1], file])
+                    try:
+                        patch_cc2v = get_patch_cc2v(os.path.join(root, file))
+                    except Exception as e:
+                        print(e)
+                        continue
+                    patch_all += patch_cc2v
+            label_temp = root.split('/')[-1][-1]
+            label = '1' if (label_temp == 'C') else '0'
+            sample = label + '<ml>' + bug_id + '<ml>' + bug_id + '<ml>' + patch_all
+            data += sample + '\n'
+        f.write(data)
+
 if __name__ == '__main__':
     # create_data(path_patch)
     # create_data_wholefile(path_patched)
 
     # create_train_data5(path_patch_train)
-    create_train_data5_frag(path_patch_train)
+    # create_train_data5_frag(path_patch_train)
     # create_train_data5_for_cc2v(path_patch_train)
+    create_kui_data_for_cc2v(path_kui_data)

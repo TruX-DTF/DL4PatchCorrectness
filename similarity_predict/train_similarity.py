@@ -11,8 +11,8 @@ data_path = '../data/pre_data_new.txt'
 data_path_whole = '../data/pre_data_whole.txt'
 data_path_kui = '../data/pre_data_kui.txt'
 
-path_patch_test = '/Users/haoye.tian/Documents/University/data/kui_patches/Patches_test'
-path_patch_train = '../data/train_data5.txt'
+# path_patch_test = '/Users/haoye.tian/Documents/University/data/kui_patches/Patches_test'
+path_patch_train = '../data/train_data5_frag.txt'
 
 def load_data(data_path, bugName=None):
 
@@ -65,12 +65,12 @@ def bert(df):
     print('the median similarity is {}'.format(np.median(np.array(df[['simi']]))))
 
     re = ''
-    re += 'the minimum similarity is {}'.format(df['simi'].head(1).values[0]) + '\n'
-    re += 'the average similarity is {}'.format(np.mean(np.array(df[['simi']]))) + '\n'
-    re += 'the median similarity is {}'.format(np.median(np.array(df[['simi']]))) + '\n'
+    # re += 'the minimum similarity is {}'.format(df['simi'].head(1).values[0]) + '\n'
+    # re += 'the average similarity is {}'.format(np.mean(np.array(df[['simi']]))) + '\n'
+    # re += 'the median similarity is {}'.format(np.median(np.array(df[['simi']]))) + '\n'
 
-    np.savetxt(r'../data/train_result_bert.txt', df[['bugid', 'simi']].values, fmt='%s', header=re)
-    # df[['bugid','simi']].to_csv('../data/train_result_bert.txt', header=None, index=None, sep=' ', mode='a+')
+    # np.savetxt(r'../data/train_result_bert.txt', df[['bugid', 'simi']].values, fmt='%s', header=re)
+    df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_bert.csv', header=None, index=None, sep=' ', mode='a+')
 
 
 def Doc_whole(df):
@@ -97,7 +97,7 @@ def Doc(df):
     data = list(df['buggy']) + list(df['patched'])
     documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(data)]
     model = Doc2Vec(documents, vector_size=64, window=5, min_count=1, workers=4)
-    model.save('../data/doc.model')
+    model.save('../data/doc_frag.model')
 
     for index, row in df.iterrows():
         print('{}/{}'.format(index,length))
@@ -116,15 +116,16 @@ def Doc(df):
     re += 'the average similarity is {}'.format(np.mean(np.array(df[['simi']]))) + '\n'
     re += 'the median similarity is {}'.format(np.median(np.array(df[['simi']]))) + '\n'
 
-    np.savetxt(r'../data/train_result_doc.txt', df[['bugid','simi']].values, fmt='%s', header=re)
-    # df[['bugid','simi']].to_csv('../data/train_result_doc.txt', header=None, index=None, sep=' ', mode='a')
+    # np.savetxt(r'../data/train_result_frag_doc.txt', df[['bugid','simi']].values, fmt='%s', header=re)
+    df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_doc.csv', header=None, index=None, sep=' ', mode='a')
     # with open('../data/train_result_doc.txt','w+') as f:
         # f.write(re)
 if __name__ == '__main__':
     # df = load_data(data_path,'patch_quicksort')
     # df = load_data(data_path_whole)
 
-    # model = 'bert'
-    model = 'doc'
+    model = 'bert'
+    # model = 'doc'
+    print('model:{}'.format(model))
     df = load_data(path_patch_train)
     core(df, model=model)
