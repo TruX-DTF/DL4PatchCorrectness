@@ -1,1 +1,2 @@
 *.txt filter=lfs diff=lfs merge=lfs -text
+doc_frag.model filter=lfs diff=lfs merge=lfs -text

@@ -130,6 +130,8 @@ def test_similarity_repair_tool(path_patch_test, model, threshold):
                                 # Bert_top10 = os.path.join(path_result,'Bert_top10')
                                 # Doc_threshold = os.path.join(path_result,'Doc_threshold')
                                 # Bert_threshold = os.path.join(path_result,'Bert_threshold')
+                                if os.path.exists(os.path.join(path_result, model + '_all')):
+                                    continue
                                 cnt = 0
                                 for p in patches:
                                     if 'patch' in p:

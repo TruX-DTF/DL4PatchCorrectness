@@ -28,6 +28,8 @@ def get_diff_files_frag(patch,type):
             if line != '':
                 if line.startswith('@@') or line.startswith('diff') or line.startswith('index'):
                     continue
+                if line.startswith('Index') or line.startswith('==='):
+                    continue
                 elif '/*' in line:
                     flag = False
                     continue
@@ -157,6 +159,8 @@ def create_kui_data_for(path_patch_kui, path_defects4f_c, model):
             bug_path = os.path.join(path_defects4f_c,bug)
             correct_patches = os.path.join(bug_path,'patches')
             for patch in os.listdir(correct_patches):
+                if not patch.endswith('src.patch'):
+                    continue
                 path_patch = os.path.join(correct_patches,patch)
                 try:
                     label, bug_vec, patched_vec = get_sample_supply(model, path_patch,)
@@ -195,6 +199,63 @@ def create_kui_data_for(path_patch_kui, path_defects4f_c, model):
         data = label_array,buggy_array,patched_array
         pickle.dump(data, f)
 
+def create_kui_data_for_doc(path_patch_kui, path_defects4f_c):
+    with open('../data/kui_data_frag_all_for_doc.txt','w+') as f:
+
+        # buggy_array = np.array([])
+        # patched_array = np.array([])
+        # label_array = np.array([])
+
+        cnt = 0
+        label_array, buggy_array, patched_array = list(), list(), list()
+
+        data = ''
+        # label=1 supply
+        for bug in bug_folder:
+            bug_path = os.path.join(path_defects4f_c,bug)
+            correct_patches = os.path.join(bug_path,'patches')
+            for patch in os.listdir(correct_patches):
+                if not patch.endswith('src.patch'):
+                    continue
+                path_patch = os.path.join(correct_patches,patch)
+                try:
+                    bugy_all = get_diff_files_frag(path_patch, type='buggy')
+                    patched_all = get_diff_files_frag(path_patch, type='patched')
+                except Exception as e:
+                    print(e)
+                    continue
+                label_temp = '1'
+                bug_id = 'kui_data'
+                sample = label_temp + '<ml>' + bug_id + '<ml>' + bugy_all + '<ml>' + patched_all
+                data += sample + '\n'
+
+        # dataset
+        for root,dirs,files in os.walk(path_patch_kui):
+            if files == ['.DS_Store']:
+                continue
+            # files = sorted(files,key=lambda x:int(x.split('-')[1].split('.')[0]))
+            if files == []:
+                continue
+            bugy_all = ''
+            patched_all = ''
+            for file in files:
+                if file.endswith('txt'):
+                    try:
+                        buggy = get_diff_files_frag(os.path.join(root, file), type='buggy')
+                        patched = get_diff_files_frag(os.path.join(root, file), type='patched')
+                    except Exception as e:
+                        print(e)
+                        continue
+                    bugy_all += buggy
+                    patched_all += patched
+                    label_temp = '1'
+                    bug_id = 'kui_data'
+                    sample = label_temp + '<ml>' + bug_id + '<ml>' + bugy_all + '<ml>' + patched_all
+                    data += sample + '\n'
+
+        if data != '':
+            f.write(data)
+
 
 def doc(bugy_all,patched_all):
 
@@ -218,8 +279,10 @@ def bert(bugy_all, patched_all):
 
 
 if __name__ == '__main__':
+    # provide train data for doc
+    create_kui_data_for_doc(path_kui_data, path_defects4f_c)
 
     model = ['doc','bert']
 
-    for i in range(len(model)):
-        create_kui_data_for(path_kui_data, path_defects4f_c, model=model[i])
+    # for i in range(len(model)):
+    #     create_kui_data_for(path_kui_data, path_defects4f_c, model=model[i])

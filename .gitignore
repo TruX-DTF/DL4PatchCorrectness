@@ -138,3 +138,4 @@ data/kui_Patches/
 data/*.model
 data/experiment1
 data/experiment2
+*.npy
