@@ -100,10 +100,13 @@ def Doc(df):
     df['patched'] = df['patched'].map(lambda x: word_tokenize(x))
     df['simi'] = None
 
-    data = list(df['buggy']) + list(df['patched'])
-    documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(data)]
-    model = Doc2Vec(documents, vector_size=64, window=5, min_count=1, workers=4)
-    model.save('../data/doc_frag.model')
+    # train doc
+    # data = list(df['buggy']) + list(df['patched'])
+    # documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(data)]
+    # model = Doc2Vec(documents, vector_size=64, window=5, min_count=1, workers=4)
+    # model.save('../data/doc_frag.model')
+
+    model = Doc2Vec.load('../data/doc_frag_all.model')
 
     for index, row in df.iterrows():
         print('{}/{}'.format(index,length))
@@ -180,9 +183,9 @@ if __name__ == '__main__':
     # df = load_data(data_path,'patch_quicksort')
     # df = load_data(data_path_whole)
 
-    model = 'bert'
-    # model = 'doc'
-    model = 'code2vec'
+    # model = 'bert'
+    model = 'doc'
+    # model = 'code2vec'
     print('model:{}'.format(model))
     df = load_data(path_patch_train)
     core(df, model=model)
