@@ -2,10 +2,10 @@ from bert_serving.client import BertClient
 import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
-from gensim.models import word2vec,Doc2Vec
+from gensim.models import word2vec, Doc2Vec, KeyedVectors
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from nltk.tokenize import word_tokenize
-
+from utils import my_split
 
 data_path = '../data/pre_data_new.txt'
 data_path_whole = '../data/pre_data_whole.txt'
@@ -14,6 +14,8 @@ data_path_kui = '../data/pre_data_kui.txt'
 # path_patch_test = '/Users/haoye.tian/Documents/University/data/kui_patches/Patches_test'
 path_patch_train = '../data/train_data5_frag.txt'
 
+code2vec_path = '../pretrained_models/code2vec_token.txt'
+
 def load_data(data_path, bugName=None):
 
     # bugName to be used to select a specific bug
@@ -21,7 +23,7 @@ def load_data(data_path, bugName=None):
     df = pd.read_csv(data_path,sep='<ml>')
     df.columns = ["label", "bugid", "buggy", "patched"]
     # df = pd.DataFrame(data,dtype=str,columns=['label','bugid','buggy','patched'])
-
+    print(len(df))
     #bugname experiment
     if bugName != None:
         df = df.loc[df['bugid'].str.startswith(bugName)]
@@ -35,6 +37,8 @@ def core(df,model):
         Doc_whole(df)
     elif model == 'doc':
         Doc(df)
+    elif model == 'code2vec':
+        code2vec(df, code2vec_path)
     else:
         print('wrong model')
 
@@ -43,6 +47,8 @@ def bert(df):
     # tokenize
     df['buggy'] = df['buggy'].map(lambda x: word_tokenize(x))
     df['patched'] = df['patched'].map(lambda x: word_tokenize(x))
+    print(df['buggy'])
+    exit()
     # result = cosine_similarity(bc.encode(list(np.array(df_quick['buggy']))),bc.encode(list(np.array(df_quick['patched']))))
     df['simi'] = None
     bc = BertClient(check_length=False)
@@ -120,12 +126,63 @@ def Doc(df):
     df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_doc.csv', header=None, index=None, sep=' ', mode='a')
     # with open('../data/train_result_doc.txt','w+') as f:
         # f.write(re)
+
+def code2vec(df, code2vec_path):
+    length = df.shape[0]
+    # tokenize
+    df['buggy'] = df['buggy'].map(lambda x: my_split(x))
+    df['patched'] = df['patched'].map(lambda x: my_split(x))
+    # result = cosine_similarity(bc.encode(list(np.array(df_quick['buggy']))),bc.encode(list(np.array(df_quick['patched']))))
+    df['simi'] = None
+
+    print('Loading code2vec pretrained model')
+    code2vec_model = KeyedVectors.load_word2vec_format(code2vec_path, binary=False)
+    
+    for index,row in df.iterrows():
+        print('{}/{}'.format(index,length))
+        if row['buggy'] == [] or row['patched'] == []:
+            print('buggy or patched is []')
+            continue
+        try:
+            buggy_tokens = []
+            patch_tokens = []
+
+            for i, b in enumerate(row['buggy']):
+                if b in code2vec_model.vocab:
+                    buggy_tokens.append(b)
+
+            for i, b in enumerate(row['patched']):
+                if b in code2vec_model.vocab:
+                    patch_tokens.append(b)
+
+            bug_vec = code2vec_model[buggy_tokens]
+            patched_vec = code2vec_model[patch_tokens]
+        except Exception as e:
+            print(e)
+            continue
+        result = cosine_similarity(bug_vec,patched_vec)
+        df.loc[index,'simi'] = float(result[0][0])
+    df = df.sort_values(by='simi')
+    print(df.head())
+    print('the minimum similarity is {}'.format(df['simi'].head(1).values[0]))
+    print('the average similarity is {}'.format(np.mean(np.array(df[['simi']]))))
+    print('the median similarity is {}'.format(np.median(np.array(df[['simi']]))))
+
+    re = ''
+    # re += 'the minimum similarity is {}'.format(df['simi'].head(1).values[0]) + '\n'
+    # re += 'the average similarity is {}'.format(np.mean(np.array(df[['simi']]))) + '\n'
+    # re += 'the median similarity is {}'.format(np.median(np.array(df[['simi']]))) + '\n'
+
+    # np.savetxt(r'../data/train_result_bert.txt', df[['bugid', 'simi']].values, fmt='%s', header=re)
+    df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_code2vec.csv', header=None, index=None, sep=' ', mode='a+')
+
 if __name__ == '__main__':
     # df = load_data(data_path,'patch_quicksort')
     # df = load_data(data_path_whole)
 
     model = 'bert'
     # model = 'doc'
+    model = 'code2vec'
     print('model:{}'.format(model))
     df = load_data(path_patch_train)
     core(df, model=model)
