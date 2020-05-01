@@ -6,6 +6,8 @@ import pickle
 path_patch_test = '/Users/haoye.tian/Documents/University/data/kui_patches/Patches_test'
 path_patch_train = '../data/kui_Patches/Patches_train'
 path_kui_data = '/Users/haoye.tian/Documents/University/project/APR-Efficiency/Patches/NFL'
+path_defects4f_c = '/Users/haoye.tian/Documents/University/data/defects4j-experiment3/framework/projects'
+bug_folder = ['Chart', 'Closure', 'Lang', 'Math', 'Time']
 
 def get_patch_cc2v(patch):
     with open(patch, 'r') as file:
@@ -297,8 +299,8 @@ def create_train_data5_for_cc2v(path_patch_kui):
                     data += sample + '\n'
         f.write(data)
 
-def create_kui_data_for_cc2v(path_patch_kui):
-    with open('../data/kui_test_data_for_cc2v.txt','w+') as f:
+def create_kui_data_for_cc2v(path_patch_kui, path_defects4f_c):
+    with open('../data/experiment3/kui_data_for_cc2v.txt','w+') as f:
         data = ''
         for root,dirs,files in os.walk(path_patch_kui):
             if files == ['.DS_Store']:
@@ -321,6 +323,21 @@ def create_kui_data_for_cc2v(path_patch_kui):
             label = '1' if (label_temp == 'C') else '0'
             sample = label + '<ml>' + bug_id + '<ml>' + bug_id + '<ml>' + patch_all
             data += sample + '\n'
+
+        for bug in bug_folder:
+            bug_path = os.path.join(path_defects4f_c,bug)
+            correct_patches = os.path.join(bug_path, 'patches')
+            for patch in os.listdir(correct_patches):
+                bug_id = bug + '_' + patch
+                path_patch = os.path.join(correct_patches,patch)
+                try:
+                    patch_all = get_patch_cc2v(path_patch)
+                except Exception as e:
+                    print(e)
+                    continue
+                label = '1'
+                sample = label + '<ml>' + bug_id + '<ml>' + bug_id + '<ml>' + patch_all
+                data += sample + '\n'
         f.write(data)
 
 if __name__ == '__main__':
@@ -330,4 +347,4 @@ if __name__ == '__main__':
     # create_train_data5(path_patch_train)
     # create_train_data5_frag(path_patch_train)
     # create_train_data5_for_cc2v(path_patch_train)
-    create_kui_data_for_cc2v(path_kui_data)
+    create_kui_data_for_cc2v(path_kui_data, path_defects4f_c)
