@@ -1,12 +1,16 @@
 import os
 import re
 import pickle
+import json
 # path_patch = '/Users/haoye.tian/Documents/University/data/quixbugs'
 # path_patched = '/Users/haoye.tian/Documents/University/data/quixbugs_wholefile/quicksort'
 path_patch_test = '/Users/haoye.tian/Documents/University/data/kui_patches/Patches_test'
 path_patch_train = '../data/kui_Patches/Patches_train'
-path_kui_data = '/Users/haoye.tian/Documents/University/project/APR-Efficiency/Patches/NFL'
+
+path_kui_data = '/Users/haoye.tian/Documents/University/data/APR-Efficiency/Patches/NFL'
 path_defects4f_c = '/Users/haoye.tian/Documents/University/data/defects4j-experiment3/framework/projects'
+path_supply_data = '/Users/haoye.tian/Documents/University/data/DefectRepairing/tool/patches'
+
 bug_folder = ['Chart', 'Closure', 'Lang', 'Math', 'Time']
 
 def get_patch_cc2v(patch):
@@ -299,15 +303,43 @@ def create_train_data5_for_cc2v(path_patch_kui):
                     data += sample + '\n'
         f.write(data)
 
-def create_kui_data_for_cc2v(path_patch_kui, path_defects4f_c):
+def create_kui_data_for_cc2v(path_patch_kui, path_defects4f_c,path_supply_data):
     with open('../data/experiment3/kui_data_for_cc2v.txt','w+') as f:
         data = ''
+        # supply data
+        path_patch_supply = path_supply_data
+        path_jsons = os.path.join(path_patch_supply, 'INFO')
+        json_files = os.listdir(path_jsons)
+        for j in json_files:
+            with open(os.path.join(path_jsons, j), 'r') as f1:
+                info_dict = json.load(f1)
+            if info_dict['project'] == 'Mockito':
+                continue
+            if info_dict['correctness'] == 'Correct':
+                label = '1'
+            elif info_dict['correctness'] == 'Incorrect':
+                label = '0'
+            else:
+                continue
+            bug_id = info_dict['project'] + '-' + info_dict['bug_id']
+            path_patch = os.path.join(path_patch_supply, j.split('.')[0])
+
+            try:
+                patch_all = get_patch_cc2v(path_patch)
+            except Exception as e:
+                print(e)
+                continue
+            sample = label + '<ml>' + bug_id + '<ml>' + bug_id + '<ml>' + patch_all
+            data += sample + '\n'
+
+        # dataset
         for root,dirs,files in os.walk(path_patch_kui):
             if files == ['.DS_Store']:
                 continue
             # files = sorted(files,key=lambda x:int(x.split('-')[1].split('.')[0]))
-
             if files == []:
+                continue
+            if root.split('/')[-1].startswith('Mockito'):
                 continue
             patch_all = ''
             for file in files:
@@ -324,10 +356,15 @@ def create_kui_data_for_cc2v(path_patch_kui, path_defects4f_c):
             sample = label + '<ml>' + bug_id + '<ml>' + bug_id + '<ml>' + patch_all
             data += sample + '\n'
 
+        # label = 1
         for bug in bug_folder:
             bug_path = os.path.join(path_defects4f_c,bug)
             correct_patches = os.path.join(bug_path, 'patches')
             for patch in os.listdir(correct_patches):
+                if not patch.endswith('src.patch'):
+                    continue
+                # if correct_patches.split('/')[-2] == 'Lang' and patch == '25.src.patch':
+                #     print('a')
                 bug_id = bug + '_' + patch
                 path_patch = os.path.join(correct_patches,patch)
                 try:
@@ -347,4 +384,4 @@ if __name__ == '__main__':
     # create_train_data5(path_patch_train)
     # create_train_data5_frag(path_patch_train)
     # create_train_data5_for_cc2v(path_patch_train)
-    create_kui_data_for_cc2v(path_kui_data, path_defects4f_c)
+    create_kui_data_for_cc2v(path_kui_data, path_defects4f_c,path_supply_data)
