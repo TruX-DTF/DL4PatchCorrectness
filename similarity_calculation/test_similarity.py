@@ -15,8 +15,8 @@ pd.set_option('display.max_colwidth', -1)
 
 
 path_patch_test = '/Users/haoye.tian/Documents/University/data/kui_patches/Patches_test'
-
 root_new = '/Users/haoye.tian/Documents/University/data/experiment2'
+
 benchmarks = ["Bears", "Bugs.jar", "Defects4J", "IntroClassJava","QuixBugs"]
 # benchmarks = ['QuixBugs']
 tools = ["Arja", "GenProg", "Kali", "RSRepair", "Cardumen", "jGenProg", "jKali", "jMutRepair", "Nopol", "DynaMoth", "NPEFix"]

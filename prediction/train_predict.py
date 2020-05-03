@@ -19,11 +19,11 @@ def evaluation_metrics(y_true, y_pred_prob):
     fpr, tpr, thresholds = roc_curve(y_true=y_true, y_score=y_pred_prob, pos_label=1)
     auc_ = auc(fpr, tpr)
 
-    # y_pred = [1 if p >= 0.5 else 0 for p in y_pred_prob]
+    y_pred = [1 if p >= 0.5 else 0 for p in y_pred_prob]
     # filter incorrect patch by adjusting threshold
-    y_pred = [1 if p >= 0.01 else 0 for p in y_pred_prob]
-    print('real positive: {}, real negative: {}'.format(list(y_true).count(1),list(y_true).count(0)))
-    print('positive: {}, negative: {}'.format(y_pred.count(1),y_pred.count(0)))
+    # y_pred = [1 if p >= 0.01 else 0 for p in y_pred_prob]
+    # print('real positive: {}, real negative: {}'.format(list(y_true).count(1),list(y_true).count(0)))
+    # print('positive: {}, negative: {}'.format(y_pred.count(1),y_pred.count(0)))
     acc = accuracy_score(y_true=y_true, y_pred=y_pred)
     prc = precision_score(y_true=y_true, y_pred=y_pred)
     rc = recall_score(y_true=y_true, y_pred=y_pred)
@@ -142,6 +142,14 @@ if __name__ == '__main__':
     # model = 'bert'
     # model = 'doc'
     model = 'cc2vec_premodel'
+
+    # algorithm
+    # algorithm, kfold = 'dt', 5
+    # algorithm, kfold = 'lr', 5
+    algorithm, kfold = 'nb', 5
+
+    # algorithm, kfold = 'svm', 5
+
     print('model: {}'.format(model))
 
     path = '../data/experiment3/kui_data_for_' + model + '.pickle'
@@ -172,8 +180,8 @@ if __name__ == '__main__':
             sample_weight.append(1)
     sample_weight = np.array(sample_weight)
 
-    # print('the number of dataset: {}'.format(len(label)))
-    # print('ratio: {}'.format((len(label)-len(index_p))/len(index_p)))
+    print('the number of dataset: {}'.format(len(label)))
+    print('positive: {}, negative: {}'.format(len(index_p), (len(label)-len(index_p))))
 
     # data
     train_data = get_features(buggy, patched)
@@ -182,12 +190,7 @@ if __name__ == '__main__':
     # train_data = train_data[index_all]
     # label = label[index_all]
 
-    # algorithm
-    # algorithm, kfold = 'dt', 5
-    algorithm, kfold = 'lr', 5
-    # algorithm, kfold = 'nb', 5
 
-    # algorithm, kfold = 'svm', 5
 
     # 5-fold
     bfp_clf_results_cv(train_data=train_data, labels=label, algorithm=algorithm, kfold=kfold,sample_weight=sample_weight)

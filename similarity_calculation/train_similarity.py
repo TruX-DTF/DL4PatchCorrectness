@@ -6,6 +6,7 @@ from gensim.models import word2vec, Doc2Vec, KeyedVectors
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from nltk.tokenize import word_tokenize
 from utils import my_split
+import numpy as geek
 
 data_path = '../data/pre_data_new.txt'
 data_path_whole = '../data/pre_data_whole.txt'
@@ -13,6 +14,7 @@ data_path_kui = '../data/pre_data_kui.txt'
 
 # path_patch_test = '/Users/haoye.tian/Documents/University/data/kui_patches/Patches_test'
 path_patch_train = '../data/train_data5_frag.txt'
+path_patch_train_supply = '../data/train_data_supply_exp1.txt'
 
 code2vec_path = '../pretrained_models/code2vec_token.txt'
 
@@ -20,7 +22,7 @@ def load_data(data_path, bugName=None):
 
     # bugName to be used to select a specific bug
     # data = np.loadtxt(data_path, dtype=str,comments=None, delimiter='<ml>')
-    df = pd.read_csv(data_path,sep='<ml>')
+    df = pd.read_csv(data_path,sep='<ml>',header=None)
     df.columns = ["label", "bugid", "buggy", "patched"]
     # df = pd.DataFrame(data,dtype=str,columns=['label','bugid','buggy','patched'])
     print(len(df))
@@ -30,28 +32,46 @@ def load_data(data_path, bugName=None):
     print('the number of train patches is {}'.format(df.shape[0]))
     return df
 
-def core(df,model):
+def core(df,model,supply=None):
     if model == 'bert':
-        bert(df)
+        bc = BertClient(check_length=False)
+        bert(df,bc,supply)
     elif model == 'Doc_whole':
         Doc_whole(df)
     elif model == 'doc':
-        Doc(df)
+        m = Doc2Vec.load('../data/doc_frag.model')
+        Doc(df,m,supply)
     elif model == 'code2vec':
         code2vec(df, code2vec_path)
     else:
         print('wrong model')
 
-def bert(df):
+def bert(df,bc,supply):
     length = df.shape[0]
     # tokenize
     df['buggy'] = df['buggy'].map(lambda x: word_tokenize(x))
     df['patched'] = df['patched'].map(lambda x: word_tokenize(x))
-    print(df['buggy'])
-    exit()
+
     # result = cosine_similarity(bc.encode(list(np.array(df_quick['buggy']))),bc.encode(list(np.array(df_quick['patched']))))
     df['simi'] = None
-    bc = BertClient(check_length=False)
+
+    # df.iloc[:, 'buggy'] = bc.encode(list(df['buggy']), is_tokenized=True)
+    # df.iloc[:, 'patched'] = bc.encode(list(df['patched']), is_tokenized=True)
+
+    # tmp
+    # for index,row in df.iterrows():
+    #     print('{}/{}'.format(index,length))
+    #     if row['buggy'] == [] or row['patched'] == []:
+    #         print('buggy or patched is []')
+    #         continue
+    #     try:
+    #         df.loc[index, ['buggy']] = str(list(bc.encode([row['buggy']],is_tokenized=True)[0]))
+    #         df.loc[index, ['patched']] = str(list(bc.encode([row['patched']],is_tokenized=True)[0]))
+    #     except Exception as e:
+    #         print(e)
+    #         continue
+    # result = cosine_similarity(list(df['buggy']),list(df['patched']))
+
     for index,row in df.iterrows():
         print('{}/{}'.format(index,length))
         if row['buggy'] == [] or row['patched'] == []:
@@ -76,7 +96,10 @@ def bert(df):
     # re += 'the median similarity is {}'.format(np.median(np.array(df[['simi']]))) + '\n'
 
     # np.savetxt(r'../data/train_result_bert.txt', df[['bugid', 'simi']].values, fmt='%s', header=re)
-    df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_bert.csv', header=None, index=None, sep=' ', mode='a+')
+    if supply == True:
+        df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_bert_supply.csv', header=None, index=None, sep=' ', mode='w')
+    else:
+        df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_bert.csv', header=None, index=None, sep=' ', mode='w')
 
 
 def Doc_whole(df):
@@ -93,20 +116,20 @@ def Doc_whole(df):
         print(df[df['patched']==doc]['bugid'].values[0],sim)
     pass
 
-def Doc(df):
+def Doc(df,m,supply):
+    model = m
     length = df.shape[0]
     # tokenize
     df['buggy'] = df['buggy'].map(lambda x: word_tokenize(x))
     df['patched'] = df['patched'].map(lambda x: word_tokenize(x))
     df['simi'] = None
 
-    # train doc
+    # # train doc
     # data = list(df['buggy']) + list(df['patched'])
     # documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(data)]
     # model = Doc2Vec(documents, vector_size=64, window=5, min_count=1, workers=4)
     # model.save('../data/doc_frag.model')
 
-    model = Doc2Vec.load('../data/doc_frag_all.model')
 
     for index, row in df.iterrows():
         print('{}/{}'.format(index,length))
@@ -126,7 +149,11 @@ def Doc(df):
     re += 'the median similarity is {}'.format(np.median(np.array(df[['simi']]))) + '\n'
 
     # np.savetxt(r'../data/train_result_frag_doc.txt', df[['bugid','simi']].values, fmt='%s', header=re)
-    df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_doc.csv', header=None, index=None, sep=' ', mode='a')
+    if supply == True:
+        df[['bugid', 'simi']].to_csv('../data/experiment1/train_result_frag_doc_supply.csv', header=None, index=None, sep=' ',
+                                     mode='w')
+    else:
+        df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_doc.csv', header=None, index=None, sep=' ', mode='w')
     # with open('../data/train_result_doc.txt','w+') as f:
         # f.write(re)
 
@@ -183,9 +210,13 @@ if __name__ == '__main__':
     # df = load_data(data_path,'patch_quicksort')
     # df = load_data(data_path_whole)
 
-    # model = 'bert'
-    model = 'doc'
+    model = 'bert'
+    # model = 'doc'
     # model = 'code2vec'
     print('model:{}'.format(model))
-    df = load_data(path_patch_train)
-    core(df, model=model)
+    # df = load_data(path_patch_train)
+    # core(df, model=model)
+
+    # supply
+    df = load_data(path_patch_train_supply)
+    core(df, model=model,supply=True)
