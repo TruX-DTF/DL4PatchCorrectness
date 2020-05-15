@@ -316,7 +316,7 @@ def doc(df, threshold):
     block += '**************\n'
     block += 'Bugid: {}, patches: {} \n'.format(bug_id, length)
 
-    model = Doc2Vec.load('../data/doc_frag.model')
+    model = Doc2Vec.load('../data/model/doc_frag.model')
 
     for index, row in df.iterrows():
         bug_vec = model.infer_vector(row['buggy'],alpha=0.025,steps=300)
@@ -346,13 +346,10 @@ def doc(df, threshold):
 
 if __name__ == '__main__':
 
-    # bert minumum, average, median
     model = 'bert'
-    # threshold = [0.90844, 0.99825, 0.99894]
-
-    # doc minumum, average, median, 1stqu
     # model = 'doc'
-    # threshold = [0.28489, 0.91795, 0.93891, 0.8580]
 
     # test_similarity(path_patch_test,model=model,threshold=threshold[1])
+
+    # calculate similarity of all patches
     test_similarity_repair_tool(path_patch_test,model=model,threshold=None)
