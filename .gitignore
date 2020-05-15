@@ -135,8 +135,9 @@ linux_bfp*
 
 data/kui_Patches/
 
-data/*.model
+data/model/*.model
+*.npy
+
 #data/experiment1
 #data/experiment2
 #data/experiment3
-*.npy
