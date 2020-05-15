@@ -21,7 +21,7 @@ def evaluation_metrics(y_true, y_pred_prob):
 
     y_pred = [1 if p >= 0.5 else 0 for p in y_pred_prob]
     # filter incorrect patch by adjusting threshold
-    # y_pred = [1 if p >= 0.01 else 0 for p in y_pred_prob]
+    # y_pred = [1 if p >= 0.039 else 0 for p in y_pred_prob]
     # print('real positive: {}, real negative: {}'.format(list(y_true).count(1),list(y_true).count(0)))
     # print('positive: {}, negative: {}'.format(y_pred.count(1),y_pred.count(0)))
     acc = accuracy_score(y_true=y_true, y_pred=y_pred)
@@ -52,7 +52,7 @@ def bfp_clf_results(train_data, labels, algorithm=None, kfold=5,sample_weight=No
     x_test, y_test = train_data[test_index], labels[test_index]
     clf = None
     if algorithm == 'lr':
-        clf = LogisticRegression(solver='lbfgs',class_weight='balanced', max_iter=1000,tol=0.2).fit(X=x_train, y=y_train)
+        clf = LogisticRegression(solver='lbfgs', max_iter=1000,tol=0.2).fit(X=x_train, y=y_train)
     elif algorithm == 'svm':
         clf = SVC(gamma='auto', probability=True, kernel='linear',class_weight='balanced',max_iter=10,
                   tol=0.1).fit(X=x_train, y=y_train)
@@ -84,12 +84,12 @@ def bfp_clf_results_cv(train_data, labels, algorithm=None, kfold=5,sample_weight
     accs, prcs, rcs, f1s, aucs = list(), list(), list(), list(), list()
     for train_index, test_index in skf.split(train_data, labels):
         x_train, y_train = train_data[train_index], labels[train_index]
-        weight = sample_weight[train_index]
+        # weight = sample_weight[train_index]
 
         x_test, y_test = train_data[test_index], labels[test_index]
         clf = None
         if algorithm == 'lr':
-            clf = LogisticRegression(solver='lbfgs',class_weight='balanced', max_iter=10000).fit(X=x_train, y=y_train)
+            clf = LogisticRegression(solver='lbfgs', max_iter=10000).fit(X=x_train, y=y_train)
         elif algorithm == 'svm':
             clf = SVC(gamma='auto', probability=True, kernel='linear',class_weight='balanced',max_iter=1000,
                       tol=0.1).fit(X=x_train, y=y_train)
@@ -139,20 +139,22 @@ def euclidean_similarity(buggy, patched):
 
 if __name__ == '__main__':
 
-    # model = 'bert'
+    model = 'bert'
     # model = 'doc'
-    model = 'cc2vec_premodel'
+    # model = 'cc2vec_premodel'
 
     # algorithm
     # algorithm, kfold = 'dt', 5
-    # algorithm, kfold = 'lr', 5
-    algorithm, kfold = 'nb', 5
+    algorithm, kfold = 'lr', 5
+    # algorithm, kfold = 'nb', 5
 
     # algorithm, kfold = 'svm', 5
 
     print('model: {}'.format(model))
 
     path = '../data/experiment3/kui_data_for_' + model + '.pickle'
+    # path_test = '../data/experiment3/139_test_data_for_' + model + '.pickle'
+
     with open(path, 'rb') as input:
     #     while True:
     #         try:
@@ -168,7 +170,7 @@ if __name__ == '__main__':
     index_n = list(np.where(label == 0)[0])
     index_all = []
     for i in range(5):
-        index_1 = random.sample(index_n, 137)
+        index_1 = random.sample(index_n, 5)
         index_all.append(index_p+index_1)
 
     # sample weight
@@ -189,8 +191,6 @@ if __name__ == '__main__':
 
     # train_data = train_data[index_all]
     # label = label[index_all]
-
-
 
     # 5-fold
     bfp_clf_results_cv(train_data=train_data, labels=label, algorithm=algorithm, kfold=kfold,sample_weight=sample_weight)

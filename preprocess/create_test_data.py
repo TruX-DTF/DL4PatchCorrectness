@@ -411,6 +411,11 @@ def create_test_data_frag_all(path_patch_test):
 
 if __name__ == '__main__':
     # create_test_data(path_patch_test)
+    # train doc in all data
+    # create_test_data_frag_all(path_patch_test)
+
+    # not use
     # create_test_data_frag(path_patch_test)
-    create_test_data_frag_all(path_patch_test)
-    # create_test_data_for_cc2v(path_patch_test)
+
+    # collect patches for dict of cc2vec
+    create_test_data_for_cc2v(path_patch_test)

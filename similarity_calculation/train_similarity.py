@@ -13,8 +13,8 @@ data_path_whole = '../data/pre_data_whole.txt'
 data_path_kui = '../data/pre_data_kui.txt'
 
 # path_patch_test = '/Users/haoye.tian/Documents/University/data/kui_patches/Patches_test'
-path_patch_train = '../data/train_data5_frag.txt'
-path_patch_train_supply = '../data/train_data_supply_exp1.txt'
+path_patch_train = '../data/experiment1/train_data5_frag.txt'
+path_patch_train_incorrect = '../data/experiment1/train_data5_frag_incorrect.txt'
 
 code2vec_path = '../pretrained_models/code2vec_token.txt'
 
@@ -22,10 +22,11 @@ def load_data(data_path, bugName=None):
 
     # bugName to be used to select a specific bug
     # data = np.loadtxt(data_path, dtype=str,comments=None, delimiter='<ml>')
-    df = pd.read_csv(data_path,sep='<ml>',header=None)
-    df.columns = ["label", "bugid", "buggy", "patched"]
     # df = pd.DataFrame(data,dtype=str,columns=['label','bugid','buggy','patched'])
-    print(len(df))
+
+    df = pd.read_csv(data_path, sep='<ml>', header=None)
+    df.columns = ["label", "bugid", "buggy", "patched"]
+
     #bugname experiment
     if bugName != None:
         df = df.loc[df['bugid'].str.startswith(bugName)]
@@ -39,8 +40,8 @@ def core(df,model,supply=None):
     elif model == 'Doc_whole':
         Doc_whole(df)
     elif model == 'doc':
-        m = Doc2Vec.load('../data/doc_frag.model')
-        Doc(df,m,supply)
+        # m = Doc2Vec.load('../data/doc_frag.model')
+        Doc(df,supply,m=None)
     elif model == 'code2vec':
         code2vec(df, code2vec_path)
     else:
@@ -97,7 +98,7 @@ def bert(df,bc,supply):
 
     # np.savetxt(r'../data/train_result_bert.txt', df[['bugid', 'simi']].values, fmt='%s', header=re)
     if supply == True:
-        df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_bert_supply.csv', header=None, index=None, sep=' ', mode='w')
+        df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_bert_incorrect.csv', header=None, index=None, sep=' ', mode='w')
     else:
         df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_bert.csv', header=None, index=None, sep=' ', mode='w')
 
@@ -116,23 +117,28 @@ def Doc_whole(df):
         print(df[df['patched']==doc]['bugid'].values[0],sim)
     pass
 
-def Doc(df,m,supply):
+def Doc(df,supply,m):
     model = m
     length = df.shape[0]
+
     # tokenize
     df['buggy'] = df['buggy'].map(lambda x: word_tokenize(x))
     df['patched'] = df['patched'].map(lambda x: word_tokenize(x))
     df['simi'] = None
 
-    # # train doc
-    # data = list(df['buggy']) + list(df['patched'])
-    # documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(data)]
-    # model = Doc2Vec(documents, vector_size=64, window=5, min_count=1, workers=4)
-    # model.save('../data/doc_frag.model')
+    # train doc
+    if model == None:
+        data = list(df['buggy']) + list(df['patched'])
+        documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(data)]
+        model = Doc2Vec(documents, vector_size=64, window=5, min_count=1, workers=4)
+        model.save('../data/model/doc_frag.model')
 
 
     for index, row in df.iterrows():
         print('{}/{}'.format(index,length))
+        if row['buggy'] == [] or row['patched'] == []:
+            print('buggy or patched is []')
+            continue
         bug_vec = model.infer_vector(row['buggy'],alpha=0.025,steps=300)
         patched_vec = model.infer_vector(row['patched'],alpha=0.025,steps=300)
         # similarity calculation
@@ -150,7 +156,7 @@ def Doc(df,m,supply):
 
     # np.savetxt(r'../data/train_result_frag_doc.txt', df[['bugid','simi']].values, fmt='%s', header=re)
     if supply == True:
-        df[['bugid', 'simi']].to_csv('../data/experiment1/train_result_frag_doc_supply.csv', header=None, index=None, sep=' ',
+        df[['bugid', 'simi']].to_csv('../data/experiment1/train_result_frag_doc_incorrect.csv', header=None, index=None, sep=' ',
                                      mode='w')
     else:
         df[['bugid','simi']].to_csv('../data/experiment1/train_result_frag_doc.csv', header=None, index=None, sep=' ', mode='w')
@@ -210,13 +216,16 @@ if __name__ == '__main__':
     # df = load_data(data_path,'patch_quicksort')
     # df = load_data(data_path_whole)
 
-    model = 'bert'
-    # model = 'doc'
+    # model = 'bert'
+    models = ['doc','bert']
     # model = 'code2vec'
-    print('model:{}'.format(model))
-    # df = load_data(path_patch_train)
-    # core(df, model=model)
 
-    # supply
-    df = load_data(path_patch_train_supply)
-    core(df, model=model,supply=True)
+    for model in models:
+        print('model:{}'.format(model))
+
+        df = load_data(path_patch_train)
+        core(df, model=model)
+
+        # incorrect
+        df = load_data(path_patch_train_incorrect)
+        core(df, model=model,supply=True)
