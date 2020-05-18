@@ -1,0 +1,16 @@
+--- /tmp/GenProg_Defects4J_Closure_55/src/com/google/javascript/jscomp/FunctionRewriter.java	2019-08-11 15:10:13.561322801 -0400
++++ /tmp/GenProg_Defects4J_Closure_55/patches_jmrq/Patch_1/patched/com/google/javascript/jscomp/FunctionRewriter.java	2019-08-11 15:34:15.513268537 -0400
+@@ -63,11 +63,6 @@
+ 
+     Multimap<Reducer, Reduction> reductionMap = HashMultimap.create();
+ 
+-    // Accumulate possible reductions in the reduction multi map.  They
+-    // will be applied in the loop below.
+-    NodeTraversal.traverse(compiler, root,
+-                           new ReductionGatherer(reducers, reductionMap));
+-
+     // Apply reductions iff they will provide some savings.
+     for (Reducer reducer : reducers) {
+       Collection<Reduction> reductions = reductionMap.get(reducer);
+
+

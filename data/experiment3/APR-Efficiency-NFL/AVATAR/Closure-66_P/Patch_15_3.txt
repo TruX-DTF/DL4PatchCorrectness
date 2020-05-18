@@ -1,0 +1,13 @@
+diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java
+index edb7805..0a20462 100644
+--- a/src/com/google/javascript/jscomp/TypeCheck.java
++++ b/src/com/google/javascript/jscomp/TypeCheck.java
+@@ -1910,7 +1910,7 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {
+    * @return a number between 0.0 and 100.0
+    */
+   double getTypedPercent() {
+-    int total = nullCount + unknownCount + typedCount;
++    int total = this.noTypeCheckSection + unknownCount + typedCount;
+     if (total == 0) {
+       return 0.0;
+     } else {

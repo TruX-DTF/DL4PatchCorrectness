@@ -1,0 +1,24 @@
+--- /tmp/RSRepair_Defects4J_Closure_114/src/com/google/javascript/jscomp/AstChangeProxy.java	2019-08-12 14:24:03.443426213 -0400
++++ /tmp/RSRepair_Defects4J_Closure_114/patches_cw6o/Patch_13/patched/com/google/javascript/jscomp/AstChangeProxy.java	2019-08-12 14:48:13.948018144 -0400
+@@ -117,7 +117,6 @@
+       parent.replaceChild(node, block);
+     } else {
+       for (Node newChild : replacements) {
+-        newChild.copyInformationFrom(node);
+         parent.addChildBefore(newChild, node);
+       }
+       parent.removeChild(node);
+
+
+--- /tmp/RSRepair_Defects4J_Closure_114/src/com/google/javascript/jscomp/NameAnalyzer.java	2019-08-12 14:24:06.471385698 -0400
++++ /tmp/RSRepair_Defects4J_Closure_114/patches_cw6o/Patch_13/patched/com/google/javascript/jscomp/NameAnalyzer.java	2019-08-12 14:48:13.952018090 -0400
+@@ -1608,7 +1608,6 @@
+       }
+ 
+       if (parent.isAssign()) {
+-        return scopes.get(parent);
+       }
+     }
+ 
+
+

@@ -1,0 +1,13 @@
+diff --git a/source/org/jfree/data/Range.java b/source/org/jfree/data/Range.java
+index 6983ecf..d3ef45b 100644
+--- a/source/org/jfree/data/Range.java
++++ b/source/org/jfree/data/Range.java
+@@ -84,7 +84,7 @@ public strictfp class Range implements Serializable {
+         if (lower > upper) {
+             String msg = "Range(double, double): require lower (" + lower 
+                 + ") <= upper (" + upper + ").";
+-            throw new IllegalArgumentException(msg);
++            
+         }
+         this.lower = lower;
+         this.upper = upper;

@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jGenProg_Defects4J_Math_8/src/main/java/org/apache/commons/math3/distribution/DiscreteDistributionjava
++++ /tmp/jGenProg_Defects4J_Math_8/src/main/java/org/apache/commons/math3/distribution/DiscreteDistributionjava
+@@ -187,7 +187,7 @@
+ 		final T[] out = ((T[]) (java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize)));
+ 
+ 		for (int i = 0; i < sampleSize; i++) {
+-			out[i] = sample();
++
+ 		}
+ 
+ 		return out;
+

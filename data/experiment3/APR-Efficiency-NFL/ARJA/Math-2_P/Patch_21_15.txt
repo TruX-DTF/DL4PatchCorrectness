@@ -1,0 +1,14 @@
+--- /tmp/Arja_Defects4J_Math_2/src/main/java/org/apache/commons/math3/distribution/AbstractIntegerDistribution.java	2019-07-25 03:26:20.766331389 -0400
++++ /tmp/Arja_Defects4J_Math_2/patches_2d8v/Patch_15/patched/org/apache/commons/math3/distribution/AbstractIntegerDistribution.java	2019-07-25 04:18:02.819682996 -0400
+@@ -134,9 +134,6 @@
+             }
+             k = 1.0 / k;
+             tmp = mu + k * sigma;
+-            if (tmp < upper) {
+-                upper = ((int) Math.ceil(tmp)) - 1;
+-            }
+         }
+ 
+         return solveInverseCumulativeProbability(p, lower, upper);
+
+

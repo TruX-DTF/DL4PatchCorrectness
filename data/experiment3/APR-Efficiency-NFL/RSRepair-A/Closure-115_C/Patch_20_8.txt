@@ -1,0 +1,13 @@
+--- /tmp/RSRepair_Defects4J_Closure_115/src/com/google/javascript/jscomp/FunctionInjector.java	2019-08-12 14:48:18.459957774 -0400
++++ /tmp/RSRepair_Defects4J_Closure_115/patches_v7z9/Patch_8/patched/com/google/javascript/jscomp/FunctionInjector.java	2019-08-12 15:14:07.311233805 -0400
+@@ -699,7 +699,7 @@
+       Preconditions.checkState(block.hasOneChild());
+       Node stmt = block.getFirstChild();
+       if (stmt.isReturn()) {
+-        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);
++        int start = 0;
+       }
+     }
+     // CALL NODE: [ NAME, ARG1, ARG2, ... ]
+
+

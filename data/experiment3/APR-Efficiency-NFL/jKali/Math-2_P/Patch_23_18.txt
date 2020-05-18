@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Math_2/src/main/java/org/apache/commons/math3/distribution/AbstractIntegerDistributionjava
++++ /tmp/jKali_Defects4J_Math_2/src/main/java/org/apache/commons/math3/distribution/AbstractIntegerDistributionjava
+@@ -134,7 +134,7 @@
+ 			}
+ 			k = 1.0 / k;
+ 			tmp = mu + (k * sigma);
+-			if (tmp < upper) {
++			if (false) {
+ 				upper = ((int) (java.lang.Math.ceil(tmp))) - 1;
+ 			}
+ 		}
+

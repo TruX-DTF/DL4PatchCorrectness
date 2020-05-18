@@ -1,0 +1,13 @@
+diff --git a/source/org/jfree/chart/plot/CategoryPlot.java b/source/org/jfree/chart/plot/CategoryPlot.java
+index dc7d06b..bafca56 100644
+--- a/source/org/jfree/chart/plot/CategoryPlot.java
++++ b/source/org/jfree/chart/plot/CategoryPlot.java
+@@ -2156,7 +2156,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
+     		boolean notify) {
+         ArrayList markers;
+         if (layer == Layer.FOREGROUND) {
+-            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
++            markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
+                     index));
+         }
+         else {

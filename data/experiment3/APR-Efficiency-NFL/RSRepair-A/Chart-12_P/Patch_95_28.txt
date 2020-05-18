@@ -1,0 +1,16 @@
+--- /tmp/RSRepair_Defects4J_Chart_12/source/org/jfree/chart/plot/MultiplePiePlot.java	2019-07-30 04:17:48.396679468 -0400
++++ /tmp/RSRepair_Defects4J_Chart_12/patches_4a74/Patch_28/patched/org/jfree/chart/plot/MultiplePiePlot.java	2019-07-30 04:26:12.447716287 -0400
+@@ -152,7 +152,10 @@
+                 new Font("SansSerif", Font.BOLD, 12));
+         seriesTitle.setPosition(RectangleEdge.BOTTOM);
+         this.pieChart.setTitle(seriesTitle);
+-        this.aggregatedItemsKey = "Other";
++        if (dataset != null) {
++			dataset.addChangeListener(this);
++		}
++		this.aggregatedItemsKey = "Other";
+         this.aggregatedItemsPaint = Color.lightGray;
+         this.sectionPaints = new HashMap();
+     }
+
+

@@ -1,0 +1,21 @@
+diff --git a/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java b/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+index e30c3509..9420b046 100644
+--- a/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
++++ b/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+@@ -1945,9 +1945,16 @@ public final class JsDocInfoParser {
+    * TypeApplication := '.<' TypeExpressionList '>'
+    */
+   private Node parseTypeName(JsDocToken token) {
++// start of generated patch
++if(token==null){
++return reportGenericTypeSyntaxWarning();
++}
++// end of generated patch
++/* start of original code
+     if (token != JsDocToken.STRING) {
+       return reportGenericTypeSyntaxWarning();
+     }
++ end of original code*/
+ 
+     String typeName = stream.getString();
+     int lineno = stream.getLineno();

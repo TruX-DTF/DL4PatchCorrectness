@@ -1,0 +1,30 @@
+diff --git a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java
+index 13895f32..96d5eaa5 100644
+--- a/src/com/google/javascript/jscomp/PeepholeFoldConstants.java
++++ b/src/com/google/javascript/jscomp/PeepholeFoldConstants.java
+@@ -474,6 +474,17 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {
+     }
+ 
+     Node newRight;
++// start of generated patch
++if(areNodesEqualForInlining(left,right.getFirstChild())){
++n.removeChild(right);
++newRight=right.getLastChild();
++}else if(NodeUtil.isCommutative(right.getType())&&areNodesEqualForInlining(left,right.getLastChild())){
++newRight=right.getFirstChild();
++}else {
++return n;
++}
++// end of generated patch
++/* start of original code
+     if (areNodesEqualForInlining(left, right.getFirstChild())) {
+       newRight = right.getLastChild();
+     } else if (NodeUtil.isCommutative(right.getType()) &&
+@@ -482,6 +493,7 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {
+     } else {
+       return n;
+     }
++ end of original code*/
+ 
+     int newType = -1;
+     switch (right.getType()) {

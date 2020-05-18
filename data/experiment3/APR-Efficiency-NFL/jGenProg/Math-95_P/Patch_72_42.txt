@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jGenProg_Defects4J_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpljava
++++ /tmp/jGenProg_Defects4J_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpljava
+@@ -144,7 +144,7 @@
+ 		double ret;
+ 		double d = getDenominatorDegreesOfFreedom();
+ 
+-		ret = d / (d - 2.0);
++		ret = d / (d - 2.0); 		ret = 0.0;
+ 		return ret;
+ 	}
+ 
+

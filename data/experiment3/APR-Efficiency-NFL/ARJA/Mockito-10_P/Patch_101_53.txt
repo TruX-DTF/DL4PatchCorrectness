@@ -1,0 +1,24 @@
+--- /tmp/Arja_Defects4J_Mockito_10/src/org/mockito/internal/util/MockCreationValidator.java	2019-07-21 18:06:13.357378496 -0400
++++ /tmp/Arja_Defects4J_Mockito_10/patches_jkwp/Patch_53/patched/org/mockito/internal/util/MockCreationValidator.java	2019-07-21 18:15:09.573377281 -0400
+@@ -60,7 +60,6 @@
+                 && !(Serializable.class.isAssignableFrom(classToMock))
+                 && Constructors.noArgConstructorOf(classToMock) == null
+                 ) {
+-            new Reporter().serializableWontWorkForObjectsThatDontImplementSerializable(classToMock);
+         }
+     }
+ }
+\ No newline at end of file
+
+
+--- /tmp/Arja_Defects4J_Mockito_10/src/org/mockito/internal/util/Timer.java	2019-07-21 18:06:13.357378496 -0400
++++ /tmp/Arja_Defects4J_Mockito_10/patches_jkwp/Patch_53/patched/org/mockito/internal/util/Timer.java	2019-07-21 18:15:09.581377281 -0400
+@@ -21,6 +21,5 @@
+      * Starts the timer count down.
+      */
+     public void start() {
+-        startTime = System.currentTimeMillis();
+     }
+ }
+
+

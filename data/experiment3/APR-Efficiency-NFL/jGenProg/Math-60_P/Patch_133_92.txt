@@ -1,0 +1,41 @@
+PATCH_DIFF_ORIG=--- /tmp/jGenProg_Defects4J_Math_60/src/main/java/org/apache/commons/math/util/ContinuedFractionjava
++++ /tmp/jGenProg_Defects4J_Math_60/src/main/java/org/apache/commons/math/util/ContinuedFractionjava
+@@ -183,24 +183,24 @@
+ 			double r = p2 / q2;
+ 
+ 			if (java.lang.Double.isNaN(r)) {
+-				throw new org.apache.commons.math.ConvergenceException(
+-				org.apache.commons.math.exception.util.LocalizedFormats.CONTINUED_FRACTION_NAN_DIVERGENCE, 
+-				x);
+-			}
+-			relativeError = org.apache.commons.math.util.FastMath.abs(((r / c) - 1.0));
+ 
+ 
+-			c = p2 / q2;
+-			p0 = p1;
+-			p1 = p2;
+-			q0 = q1;
+-			q1 = q2;
+-		} 
+ 
+-		if (n >= maxIterations) {
++
++
++
++
++
++
++
++
++
++
++
++
+ 			throw new org.apache.commons.math.MaxIterationsExceededException(maxIterations, 
+ 			org.apache.commons.math.exception.util.LocalizedFormats.NON_CONVERGENT_CONTINUED_FRACTION, 
+-			x);
++				x);} 			relativeError = org.apache.commons.math.util.FastMath.abs(((r / c) - 1.0)); 			c = p2 / q2; 			p0 = p1; 			p1 = p2; 			q0 = q1; 			q1 = q2;} 		if (n >= maxIterations) { 			throw new org.apache.commons.math.MaxIterationsExceededException(maxIterations, org.apache.commons.math.exception.util.LocalizedFormats.NON_CONVERGENT_CONTINUED_FRACTION, x);
+ 		}
+ 
+ 		return c;
+

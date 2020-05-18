@@ -1,0 +1,22 @@
+--- /tmp/RSRepair_Defects4J_Closure_124/src/com/google/javascript/jscomp/ExploitAssigns.java	2019-08-12 17:26:07.213263784 -0400
++++ /tmp/RSRepair_Defects4J_Closure_124/patches_onp5/Patch_3/patched/com/google/javascript/jscomp/ExploitAssigns.java	2019-08-12 17:48:44.483103217 -0400
+@@ -168,16 +168,7 @@
+           // To protect against this, we simply only inline when the left side
+           // is guaranteed to evaluate to the same L-value no matter what.
+           Node leftSide = next.getFirstChild();
+-          if (leftSide.isName() ||
+-              leftSide.isGetProp() &&
+-              leftSide.getFirstChild().isThis()) {
+-            // Dive down the right side of the assign.
+-            parent = next;
+-            next = leftSide.getNext();
+-            break;
+-          } else {
+-            return false;
+-          }
++          ;
+ 
+         default:
+           if (NodeUtil.isImmutableValue(next)
+
+

@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/Cardumen_Defects4J_Chart_6/source/org/jfree/chart/util/ShapeListjava
++++ /tmp/Cardumen_Defects4J_Chart_6/source/org/jfree/chart/util/ShapeListjava
+@@ -78,7 +78,7 @@
+ 
+ 
+ 	public void setShape(int index, java.awt.Shape shape) {
+-		set(index, shape);
++		set(org.jfree.chart.util.AbstractObjectList.DEFAULT_INITIAL_CAPACITY, shape);
+ 	}
+ 
+ 
+

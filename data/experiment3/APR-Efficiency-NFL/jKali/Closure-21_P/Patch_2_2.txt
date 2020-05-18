@@ -1,0 +1,22 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Closure_21/src/com/google/javascript/jscomp/CheckSideEffectsjava
++++ /tmp/jKali_Defects4J_Closure_21/src/com/google/javascript/jscomp/CheckSideEffectsjava
+@@ -115,12 +115,12 @@
+ 				return;
+ 			}
+ 			if (n == (parent.getLastChild())) {
+-				for (com.google.javascript.rhino.Node an : parent.getAncestors()) {
+-					int ancestorType = an.getType();
+-					if (ancestorType == (com.google.javascript.rhino.Token.COMMA)) 						continue;
+-					if ((ancestorType != (com.google.javascript.rhino.Token.EXPR_RESULT)) && (ancestorType != (com.google.javascript.rhino.Token.BLOCK))) 						return;else
+-						break;
+-				}
++
++
++
++
++
++
+ 			}
+ 		}else 			if (((parent.getType()) != (com.google.javascript.rhino.Token.EXPR_RESULT)) && ((parent.getType()) != (com.google.javascript.rhino.Token.BLOCK))) {
+ 				if (!((((parent.getType()) == (com.google.javascript.rhino.Token.FOR)) && ((parent.getChildCount()) == 4)) && ((n == (parent.getFirstChild())) || (n == (parent.getFirstChild().getNext().getNext()))))) {
+

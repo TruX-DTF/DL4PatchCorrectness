@@ -1,0 +1,22 @@
+--- /tmp/GenProg_Defects4J_Closure_10/src/com/google/javascript/jscomp/PeepholeFoldConstants.java	2019-08-11 13:07:33.949756676 -0400
++++ /tmp/GenProg_Defects4J_Closure_10/patches_wcjr/Patch_1/patched/com/google/javascript/jscomp/PeepholeFoldConstants.java	2019-08-11 13:34:10.249414971 -0400
+@@ -248,7 +248,7 @@
+         tryConvertToNumber(n.getLastChild());
+         return;
+       case Token.HOOK:
+-        tryConvertToNumber(n.getChildAtIndex(1));
++        ;
+         tryConvertToNumber(n.getLastChild());
+         return;
+       case Token.NAME:
+@@ -806,7 +806,7 @@
+       Node replacement = performArithmeticOp(opType, valueToCombine, right);
+       if (replacement == null) {
+         valueToCombine = lr;
+-        replacement = performArithmeticOp(opType, valueToCombine, right);
++        int start = 0;
+       }
+       if (replacement != null) {
+         // Remove the child that has been combined
+
+

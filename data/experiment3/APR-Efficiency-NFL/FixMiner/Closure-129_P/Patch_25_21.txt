@@ -1,0 +1,12 @@
+diff --git a/src/com/google/javascript/rhino/Node.java b/src/com/google/javascript/rhino/Node.java
+index 9e9d846..00a448b 100644
+--- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1543,7 +1543,7 @@ public class Node implements Cloneable, Serializable {
+       }
+     } else if (type == Token.CALL) {
+       if (this.getBooleanProp(FREE_CALL) != node.getBooleanProp(FREE_CALL)) {
+-        return false;
++        return (false) || !(recur);
+       }
+     }

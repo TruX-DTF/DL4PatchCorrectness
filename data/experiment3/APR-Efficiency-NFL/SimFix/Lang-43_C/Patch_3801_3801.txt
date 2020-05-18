@@ -1,0 +1,26 @@
+diff --git a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java
+index 404be490..1ed86aad 100644
+--- a/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java
++++ b/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java
+@@ -416,11 +416,21 @@ public class ExtendedMessageFormat extends MessageFormat {
+      */
+     private StringBuffer appendQuotedString(String pattern, ParsePosition pos,
+             StringBuffer appendTo, boolean escapingOn) {
++// start of generated patch
++int start=pos.getIndex();
++char[] c=pattern.toCharArray();
++if(escapingOn&&c[start]==QUOTE){
++next(pos);
++return appendTo==null?null:appendTo.append(QUOTE);
++}
++// end of generated patch
++/* start of original code
+         int start = pos.getIndex();
+         char[] c = pattern.toCharArray();
+         if (escapingOn && c[start] == QUOTE) {
+             return appendTo == null ? null : appendTo.append(QUOTE);
+         }
++ end of original code*/
+         int lastHold = start;
+         for (int i = pos.getIndex(); i < pattern.length(); i++) {
+             if (escapingOn && pattern.substring(i).startsWith(ESCAPED_QUOTE)) {

@@ -1,0 +1,54 @@
+--- /tmp/Arja_Defects4J_Closure_46/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java	2019-08-11 20:16:31.320250775 -0400
++++ /tmp/Arja_Defects4J_Closure_46/patches_euvt/Patch_1110/patched/com/google/javascript/rhino/jstype/PrototypeObjectType.java	2019-08-11 20:46:57.186951511 -0400
+@@ -380,10 +380,6 @@
+         sb.append(getPropertyType(property).toString());
+ 
+         ++i;
+-        if (i == MAX_PRETTY_PRINTED_PROPERTIES) {
+-          sb.append(", ...");
+-          break;
+-        }
+       }
+ 
+       sb.append("}");
+
+
+--- /tmp/Arja_Defects4J_Closure_46/src/com/google/javascript/rhino/jstype/RecordTypeBuilder.java	2019-08-11 20:16:31.320250775 -0400
++++ /tmp/Arja_Defects4J_Closure_46/patches_euvt/Patch_1110/patched/com/google/javascript/rhino/jstype/RecordTypeBuilder.java	2019-08-11 20:46:57.194951499 -0400
+@@ -83,7 +83,6 @@
+   public JSType build() {
+      // If we have an empty record, simply return the object type.
+     if (isEmpty) {
+-       return registry.getNativeObjectType(JSTypeNative.OBJECT_TYPE);
+     }
+ 
+     return registry.createRecordType(Collections.unmodifiableMap(properties));
+
+
+--- /tmp/Arja_Defects4J_Closure_46/src/com/google/javascript/rhino/jstype/RecordType.java	2019-08-11 20:16:33.344207874 -0400
++++ /tmp/Arja_Defects4J_Closure_46/patches_euvt/Patch_1110/patched/com/google/javascript/rhino/jstype/RecordType.java	2019-08-11 20:46:57.202951487 -0400
+@@ -107,7 +107,7 @@
+     Set<String> keySet = properties.keySet();
+     Map<String, JSType> otherProps = otherRecord.properties;
+     if (!otherProps.keySet().equals(keySet)) {
+-      return false;
++      return true;
+     }
+     for (String key : keySet) {
+       if (!otherProps.get(key).isEquivalentTo(properties.get(key))) {
+@@ -172,13 +172,6 @@
+             getPropertyNode(property));
+       }
+ 
+-      for (String property : thatRecord.properties.keySet()) {
+-        if (!hasProperty(property)) {
+-          builder.addProperty(property, thatRecord.getPropertyType(property),
+-              thatRecord.getPropertyNode(property));
+-        }
+-      }
+-
+       return builder.build();
+     }
+ 
+
+

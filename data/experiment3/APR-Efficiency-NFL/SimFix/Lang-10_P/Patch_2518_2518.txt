@@ -1,0 +1,57 @@
+diff --git a/src/main/java/org/apache/commons/lang3/event/EventListenerSupport.java b/src/main/java/org/apache/commons/lang3/event/EventListenerSupport.java
+index 9b116599..e4b4cde2 100644
+--- a/src/main/java/org/apache/commons/lang3/event/EventListenerSupport.java
++++ b/src/main/java/org/apache/commons/lang3/event/EventListenerSupport.java
+@@ -136,12 +136,22 @@ public class EventListenerSupport<L> implements Serializable {
+      *         not an interface.
+      */
+     public EventListenerSupport(Class<L> listenerInterface, ClassLoader classLoader) {
++// start of generated patch
++this();
++Validate.notNull(listenerInterface,"Listener interface cannot be null.");
++Validate.notNull(classLoader,"ClassLoader cannot be null.");
++Validate.isTrue(listenerInterface.isInterface(),"Class {0} is not an interface",listenerInterface.getName());
++this.prototypeArray=(L[])Array.newInstance(listenerInterface,0);
++initializeTransientFields(listenerInterface,classLoader);
++// end of generated patch
++/* start of original code
+         this();
+         Validate.notNull(listenerInterface, "Listener interface cannot be null.");
+         Validate.notNull(classLoader, "ClassLoader cannot be null.");
+         Validate.isTrue(listenerInterface.isInterface(), "Class {0} is not an interface",
+                 listenerInterface.getName());
+         initializeTransientFields(listenerInterface, classLoader);
++ end of original code*/
+     }
+ 
+     /**
+diff --git a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
+index a01159bd..76d2a121 100644
+--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
++++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
+@@ -303,6 +303,17 @@ public class FastDateParser implements DateParser, Serializable {
+     private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {
+         boolean wasWhite= false;
+         for(int i= 0; i<value.length(); ++i) {
++// start of generated patch
++char c=value.charAt(i);
++if(Character.isHighSurrogate(c)){
++if(!wasWhite){
++wasWhite=true;
++regex.append("\\s*+");
++}
++continue;
++}
++// end of generated patch
++/* start of original code
+             char c= value.charAt(i);
+             if(Character.isWhitespace(c)) {
+                 if(!wasWhite) {
+@@ -311,6 +322,7 @@ public class FastDateParser implements DateParser, Serializable {
+                 }
+                 continue;
+             }
++ end of original code*/
+             wasWhite= false;
+             switch(c) {
+             case '\'':

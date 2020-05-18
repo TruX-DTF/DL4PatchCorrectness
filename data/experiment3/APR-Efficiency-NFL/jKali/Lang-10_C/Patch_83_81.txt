@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Lang_10/src/main/java/org/apache/commons/lang3/time/FastDateParserjava
++++ /tmp/jKali_Defects4J_Lang_10/src/main/java/org/apache/commons/lang3/time/FastDateParserjava
+@@ -304,7 +304,7 @@
+ 		boolean wasWhite = false;
+ 		for (int i = 0; i < (value.length()); ++i) {
+ 			char c = value.charAt(i);
+-			if (java.lang.Character.isWhitespace(c)) {
++			if (false) {
+ 				if (!wasWhite) {
+ 					wasWhite = true;
+ 					regex.append("\\s*+");
+

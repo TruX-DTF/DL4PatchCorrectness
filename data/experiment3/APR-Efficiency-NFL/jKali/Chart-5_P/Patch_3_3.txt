@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Chart_5/source/org/jfree/data/xy/XYSeriesjava
++++ /tmp/jKali_Defects4J_Chart_5/source/org/jfree/data/xy/XYSeriesjava
+@@ -560,7 +560,7 @@
+ 
+ 
+ 
+-			if (this.autoSort) {
++			if (false) {
+ 				this.data.add(((-index) - 1), new org.jfree.data.xy.XYDataItem(x, y));
+ 			}else 
+ 			{
+

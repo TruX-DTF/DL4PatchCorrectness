@@ -1,0 +1,23 @@
+diff --git a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java
+index e0cb42714..640d9b459 100644
+--- a/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java
+@@ -111,10 +111,18 @@ public class BrentSolver extends UnivariateRealSolverImpl {
+ 
+         // return the first endpoint if it is good enough
+         double yMin = f.value(min);
++// start of generated patch
++if(Math.abs(yMin)<=functionValueAccuracy){
++setResult(min,0);
++return result;
++}
++// end of generated patch
++/* start of original code
+         if (Math.abs(yMin) <= functionValueAccuracy) {
+             setResult(yMin, 0);
+             return result;
+         }
++ end of original code*/
+ 
+         // reduce interval if min and initial bracket the root
+         if (yInitial * yMin < 0) {

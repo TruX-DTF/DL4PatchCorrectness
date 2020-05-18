@@ -1,0 +1,13 @@
+diff --git a/src/java/org/apache/commons/lang/ClassUtils.java b/src/java/org/apache/commons/lang/ClassUtils.java
+index d5de42b..00ff1c4 100644
+--- a/src/java/org/apache/commons/lang/ClassUtils.java
++++ b/src/java/org/apache/commons/lang/ClassUtils.java
+@@ -169,7 +169,7 @@ public class ClassUtils {
+         if (cls == null) {
+             return StringUtils.EMPTY;
+         }
+-        return getShortClassName(cls.getName());
++        return getShortCanonicalName(cls.getName());
+     }
+ 
+     /**

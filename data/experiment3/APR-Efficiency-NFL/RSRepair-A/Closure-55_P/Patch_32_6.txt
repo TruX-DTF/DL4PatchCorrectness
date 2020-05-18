@@ -1,0 +1,23 @@
+--- /tmp/RSRepair_Defects4J_Closure_55/src/com/google/javascript/jscomp/FunctionRewriter.java	2019-08-12 11:32:28.825170457 -0400
++++ /tmp/RSRepair_Defects4J_Closure_55/patches_83p1/Patch_6/patched/com/google/javascript/jscomp/FunctionRewriter.java	2019-08-12 11:54:36.455406473 -0400
+@@ -87,18 +87,6 @@
+       for (Reduction reduction : reductions) {
+         savings += reduction.estimateSavings();
+       }
+-
+-      // Compare estimated savings against the helper cost.  Apply
+-      // reductions if doing so will result in some savings.
+-      if (savings > (helperCodeCost + SAVINGS_THRESHOLD)) {
+-        for (Reduction reduction : reductions) {
+-          reduction.apply();
+-        }
+-
+-        Node addingRoot = compiler.getNodeForCodeInsertion(null);
+-        addingRoot.addChildrenToFront(helperCode);
+-        compiler.reportCodeChange();
+-      }
+     }
+   }
+ 
+
+

@@ -1,0 +1,14 @@
+diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+index 4a1d845..43ff40c 100644
+--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
++++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+@@ -1392,7 +1392,8 @@ public class NumberUtils {
+                 // can't have an E at the last byte
+                 return false;
+             }
+-            if (chars[i] == '.') {
++            if ((chars[i] == '.') || (chars[i] == 'l'
++                || chars[i] == 'L')) {
+                 if (hasDecPoint || hasExp) {
+                     // two decimal points or dec in exponent
+                     return false;

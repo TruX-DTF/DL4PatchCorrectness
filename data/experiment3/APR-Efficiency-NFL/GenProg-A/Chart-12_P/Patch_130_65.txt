@@ -1,0 +1,41 @@
+--- /tmp/GenProg_Defects4J_Chart_12/source/org/jfree/chart/JFreeChart.java	2019-07-23 18:37:04.906183335 -0400
++++ /tmp/GenProg_Defects4J_Chart_12/patches_d944/Patch_65/patched/org/jfree/chart/JFreeChart.java	2019-07-23 18:48:09.585349874 -0400
+@@ -661,7 +661,6 @@
+      * @see #getLegend()
+      */
+     public void removeLegend() {
+-        removeSubtitle(getLegend());
+     }
+     
+     /**
+@@ -793,7 +792,6 @@
+      */
+     public void removeSubtitle(Title title) {
+         this.subtitles.remove(title);
+-        fireChartChanged();
+     }
+     
+     /**
+
+
+--- /tmp/GenProg_Defects4J_Chart_12/source/org/jfree/chart/plot/MultiplePiePlot.java	2019-07-23 18:37:08.886202296 -0400
++++ /tmp/GenProg_Defects4J_Chart_12/patches_d944/Patch_65/patched/org/jfree/chart/plot/MultiplePiePlot.java	2019-07-23 18:48:09.605349969 -0400
+@@ -150,11 +150,12 @@
+         this.pieChart.setBackgroundPaint(null);
+         TextTitle seriesTitle = new TextTitle("Series Title",
+                 new Font("SansSerif", Font.BOLD, 12));
+-        seriesTitle.setPosition(RectangleEdge.BOTTOM);
+-        this.pieChart.setTitle(seriesTitle);
++        if (dataset != null) {
++			setDatasetGroup(dataset.getGroup());
++			dataset.addChangeListener(this);
++		}
+         this.aggregatedItemsKey = "Other";
+-        this.aggregatedItemsPaint = Color.lightGray;
+-        this.sectionPaints = new HashMap();
++        Plot p = getParent();
+     }
+ 
+     /**
+
+

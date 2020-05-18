@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Closure_101/src/com/google/javascript/jscomp/CompilationLeveljava
++++ /tmp/jKali_Defects4J_Closure_101/src/com/google/javascript/jscomp/CompilationLeveljava
+@@ -91,7 +91,7 @@
+ 	private static void applySafeCompilationOptions(com.google.javascript.jscomp.CompilerOptions options) {
+ 
+ 
+-		options.closurePass = true;
++
+ 		options.variableRenaming = com.google.javascript.jscomp.VariableRenamingPolicy.LOCAL;
+ 		options.inlineLocalVariables = true;
+ 		options.checkGlobalThisLevel = com.google.javascript.jscomp.CheckLevel.OFF;
+

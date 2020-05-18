@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jMutRepair_Defects4J_Chart_1/source/org/jfree/chart/renderer/category/AbstractCategoryItemRendererjava
++++ /tmp/jMutRepair_Defects4J_Chart_1/source/org/jfree/chart/renderer/category/AbstractCategoryItemRendererjava
+@@ -1794,7 +1794,7 @@
+ 		}
+ 		int index = this.plot.getIndexOf(this);
+ 		org.jfree.data.category.CategoryDataset dataset = this.plot.getDataset(index);
+-		if (dataset != null) {
++		if (dataset == null) {
+ 			return result;
+ 		}
+ 		int seriesCount = dataset.getRowCount();
+

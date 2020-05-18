@@ -1,0 +1,33 @@
+diff --git a/src/com/google/javascript/jscomp/type/ClosureReverseAbstractInterpreter.java b/src/com/google/javascript/jscomp/type/ClosureReverseAbstractInterpreter.java
+index e2e33161..de285723 100644
+--- a/src/com/google/javascript/jscomp/type/ClosureReverseAbstractInterpreter.java
++++ b/src/com/google/javascript/jscomp/type/ClosureReverseAbstractInterpreter.java
+@@ -208,6 +208,20 @@ public class ClosureReverseAbstractInterpreter
+     if (condition.isCall() && condition.getChildCount() == 2) {
+       Node callee = condition.getFirstChild();
+       Node param = condition.getLastChild();
++// start of generated patch
++if(param.isName()||param.isGetProp()){
++JSType paramType=getTypeIfRefinable(param,blindScope);
++Node left=callee.getFirstChild();
++Node right=callee.getLastChild();
++if(left.isName()&&"goog".equals(left.getString())){
++Function<TypeRestriction,JSType> restricter=restricters.get(right.getString());
++if(restricter!=null){
++return restrictParameter(param,paramType,blindScope,restricter,outcome);
++}
++}
++}
++// end of generated patch
++/* start of original code
+       if (callee.isGetProp() && param.isQualifiedName()) {
+         JSType paramType =  getTypeIfRefinable(param, blindScope);
+         Node left = callee.getFirstChild();
+@@ -222,6 +236,7 @@ public class ClosureReverseAbstractInterpreter
+           }
+         }
+       }
++ end of original code*/
+     }
+     return nextPreciserScopeKnowingConditionOutcome(
+         condition, blindScope, outcome);

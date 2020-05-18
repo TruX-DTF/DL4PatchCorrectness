@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Lang_22/src/main/java/org/apache/commons/lang3/math/Fractionjava
++++ /tmp/jKali_Defects4J_Lang_22/src/main/java/org/apache/commons/lang3/math/Fractionjava
+@@ -581,7 +581,7 @@
+ 	private static int greatestCommonDivisor(int u, int v) {
+ 
+ 
+-		if (((java.lang.Math.abs(u)) <= 1) || ((java.lang.Math.abs(v)) <= 1)) {
++		if (false) {
+ 			return 1;
+ 		}
+ 
+

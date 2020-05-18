@@ -1,0 +1,53 @@
+--- /tmp/Arja_Defects4J_Closure_116/src/com/google/javascript/jscomp/FunctionInjector.java	2019-08-12 00:10:31.507106405 -0400
++++ /tmp/Arja_Defects4J_Closure_116/patches_zern/Patch_120/patched/com/google/javascript/jscomp/FunctionInjector.java	2019-08-12 00:38:58.922966686 -0400
+@@ -552,7 +552,7 @@
+       // Only inline functions that return something.
+       if (block.getFirstChild().isReturn()
+           && block.getFirstChild().getFirstChild() != null) {
+-        return true;
++        return false;
+       }
+     }
+ 
+
+
+--- /tmp/Arja_Defects4J_Closure_116/src/com/google/javascript/jscomp/ExpressionDecomposer.java	2019-08-12 00:10:28.671109911 -0400
++++ /tmp/Arja_Defects4J_Closure_116/patches_zern/Patch_120/patched/com/google/javascript/jscomp/ExpressionDecomposer.java	2019-08-12 00:38:58.930966816 -0400
+@@ -194,22 +194,6 @@
+           && NodeUtil.isGet(parent.getFirstChild())) {
+         Node functionExpression = parent.getFirstChild();
+         decomposeSubExpressions(functionExpression.getNext(), child, state);
+-        // Now handle the call expression
+-        if (isExpressionTreeUnsafe(functionExpression, state.sideEffects)
+-            && functionExpression.getFirstChild() != grandchild) {
+-          // TODO(johnlenz): In Internet Explorer, non-JavaScript objects such
+-          // as DOM objects can not be decomposed.
+-          Preconditions.checkState(allowObjectCallDecomposing(),
+-              "Object method calls can not be decomposed.");
+-          // Either there were preexisting side-effects, or this node has
+-          // side-effects.
+-          state.sideEffects = true;
+-
+-          // Rewrite the call so "this" is preserved.
+-          Node replacement = rewriteCallExpression(parent, state);
+-          // Continue from here.
+-          parent = replacement;
+-        }
+       } else if (parentType == Token.OBJECTLIT) {
+         decomposeObjectLiteralKeys(parent.getFirstChild(), child, state);
+       } else {
+
+
+--- /tmp/Arja_Defects4J_Closure_116/src/com/google/javascript/rhino/Node.java	2019-08-12 00:10:28.951109563 -0400
++++ /tmp/Arja_Defects4J_Closure_116/patches_zern/Patch_120/patched/com/google/javascript/rhino/Node.java	2019-08-12 00:38:58.938966945 -0400
+@@ -1456,7 +1456,7 @@
+       }
+       res = n.checkTreeEqualsImpl(n2);
+       if (res != null) {
+-        return res;
++        return null;
+       }
+     }
+     return res;
+
+

@@ -1,0 +1,27 @@
+diff --git a/src/main/java/org/apache/commons/lang3/event/EventListenerSupport.java b/src/main/java/org/apache/commons/lang3/event/EventListenerSupport.java
+index 9b116599..e4b4cde2 100644
+--- a/src/main/java/org/apache/commons/lang3/event/EventListenerSupport.java
++++ b/src/main/java/org/apache/commons/lang3/event/EventListenerSupport.java
+@@ -136,12 +136,22 @@ public class EventListenerSupport<L> implements Serializable {
+      *         not an interface.
+      */
+     public EventListenerSupport(Class<L> listenerInterface, ClassLoader classLoader) {
++// start of generated patch
++this();
++Validate.notNull(listenerInterface,"Listener interface cannot be null.");
++Validate.notNull(classLoader,"ClassLoader cannot be null.");
++Validate.isTrue(listenerInterface.isInterface(),"Class {0} is not an interface",listenerInterface.getName());
++this.prototypeArray=(L[])Array.newInstance(listenerInterface,0);
++initializeTransientFields(listenerInterface,classLoader);
++// end of generated patch
++/* start of original code
+         this();
+         Validate.notNull(listenerInterface, "Listener interface cannot be null.");
+         Validate.notNull(classLoader, "ClassLoader cannot be null.");
+         Validate.isTrue(listenerInterface.isInterface(), "Class {0} is not an interface",
+                 listenerInterface.getName());
+         initializeTransientFields(listenerInterface, classLoader);
++ end of original code*/
+     }
+ 
+     /**

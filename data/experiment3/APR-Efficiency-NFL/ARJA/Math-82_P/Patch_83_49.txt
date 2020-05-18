@@ -1,0 +1,29 @@
+--- /tmp/Arja_Defects4J_Math_82/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java	2019-07-31 06:24:23.950122892 -0400
++++ /tmp/Arja_Defects4J_Math_82/patches_im6f/Patch_49/patched/org/apache/commons/math/optimization/linear/SimplexTableau.java	2019-07-31 06:32:54.588625922 -0400
+@@ -349,7 +349,11 @@
+               coefficients[i] = 0;
+           } else {
+               basicRows.add(basicRow);
+-              coefficients[i] =
++              for (int artificialVar = 0; artificialVar < numArtificialVariables; artificialVar++) {
++				int row = getBasicRow(getArtificialVariableOffset() + artificialVar);
++				subtractRow(0, row, 1.0);
++			}
++			coefficients[i] =
+                   (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -
+                   (restrictToNonNegative ? 0 : mostNegative);
+           }
+
+
+--- /tmp/Arja_Defects4J_Math_82/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java	2019-07-31 06:24:27.822129291 -0400
++++ /tmp/Arja_Defects4J_Math_82/patches_im6f/Patch_49/patched/org/apache/commons/math/optimization/linear/SimplexSolver.java	2019-07-31 06:32:54.600626593 -0400
+@@ -60,7 +60,6 @@
+         Integer minPos = null;
+         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getWidth() - 1; i++) {
+             if (MathUtils.compareTo(tableau.getEntry(0, i), minValue, epsilon) < 0) {
+-                minValue = tableau.getEntry(0, i);
+                 minPos = i;
+             }
+         }
+
+

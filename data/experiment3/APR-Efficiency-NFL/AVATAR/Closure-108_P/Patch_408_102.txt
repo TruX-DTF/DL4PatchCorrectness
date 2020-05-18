@@ -1,0 +1,13 @@
+diff --git a/src/com/google/javascript/jscomp/ScopedAliases.java b/src/com/google/javascript/jscomp/ScopedAliases.java
+index 1e22c9e..b9dfdcf 100644
+--- a/src/com/google/javascript/jscomp/ScopedAliases.java
++++ b/src/com/google/javascript/jscomp/ScopedAliases.java
+@@ -419,7 +419,7 @@ class ScopedAliases implements HotSwapCompilerPass {
+                 compiler.getCodingConvention(),
+                 globalName,
+                 value,
+-                v.getJSDocInfo())
++                grandparent.getJSDocInfo())
+                 .useSourceInfoIfMissingFromForTree(n);
+             NodeUtil.setDebugInformation(
+                 newDecl.getFirstChild().getFirstChild(), n, name);

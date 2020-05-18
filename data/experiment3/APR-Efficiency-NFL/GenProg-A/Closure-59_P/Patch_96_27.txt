@@ -1,0 +1,13 @@
+--- /tmp/GenProg_Defects4J_Closure_59/src/com/google/javascript/jscomp/WarningLevel.java	2019-08-11 15:34:18.053197985 -0400
++++ /tmp/GenProg_Defects4J_Closure_59/patches_imep/Patch_27/patched/com/google/javascript/jscomp/WarningLevel.java	2019-08-11 15:58:32.008810285 -0400
+@@ -39,7 +39,7 @@
+         addDefaultWarnings(options);
+         break;
+       case VERBOSE:
+-        addVerboseWarnings(options);
++        boolean valid = false;
+         break;
+       default:
+         throw new RuntimeException("Unknown warning level.");
+
+

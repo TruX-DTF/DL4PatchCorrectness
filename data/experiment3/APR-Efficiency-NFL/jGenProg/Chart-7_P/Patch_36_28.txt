@@ -1,0 +1,35 @@
+PATCH_DIFF_ORIG=--- /tmp/jGenProg_Defects4J_Chart_7/source/org/jfree/data/time/TimePeriodValuesjava
++++ /tmp/jGenProg_Defects4J_Chart_7/source/org/jfree/data/time/TimePeriodValuesjava
+@@ -549,23 +549,23 @@
+ 
+ 
+ 	public int getMaxMiddleIndex() {
+-		return this.maxMiddleIndex;
+-	}
+ 
+ 
+ 
+ 
+ 
+ 
+-	public int getMinEndIndex() {
+-		return this.minEndIndex;
+-	}
+ 
+ 
+ 
+ 
+ 
+ 
+-	public int getMaxEndIndex() {
+-		return this.maxEndIndex;
++
++
++
++
++
++
++		return this.maxEndIndex;} 	public int getMinEndIndex() { 		return this.minEndIndex;} 	public int getMaxEndIndex() { 		return this.maxEndIndex;
+ 	}}
+\ No newline at end of file
+

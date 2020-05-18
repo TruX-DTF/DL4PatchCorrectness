@@ -1,0 +1,24 @@
+diff --git a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java
+index 42a4d9dfd..aa20db734 100644
+--- a/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java
++++ b/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java
+@@ -87,12 +87,19 @@ public class MultiDirectional extends DirectSearchOptimizer {
+ 
+             // compute the contracted simplex
+             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);
++// start of generated patch
++if(comparator.compare(contracted,best)<=0){
++return ;
++}
++// end of generated patch
++/* start of original code
+             if (comparator.compare(contracted, best) < 0) {
+                 // accept the contracted simplex
+ 
+             // check convergence
+                 return;
+             }
++ end of original code*/
+ 
+         }
+ 

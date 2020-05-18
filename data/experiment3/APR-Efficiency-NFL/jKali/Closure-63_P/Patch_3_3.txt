@@ -1,0 +1,14 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Closure_63/src/com/google/javascript/jscomp/LightweightMessageFormatterjava
++++ /tmp/jKali_Defects4J_Closure_63/src/com/google/javascript/jscomp/LightweightMessageFormatterjava
+@@ -94,8 +94,8 @@
+ 
+ 
+ 
+-			if (((excerpt.equals(com.google.javascript.jscomp.SourceExcerptProvider.SourceExcerpt.LINE)) && 
+-			(0 <= charno)) && (charno < (sourceExcerpt.length()))) {
++			if (true) 
++			{
+ 				for (int i = 0; i < charno; i++) {
+ 					char c = sourceExcerpt.charAt(i);
+ 					if (java.lang.Character.isWhitespace(c)) {
+

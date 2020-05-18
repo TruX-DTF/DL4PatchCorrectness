@@ -1,0 +1,13 @@
+--- /tmp/RSRepair_Defects4J_Lang_13/src/main/java/org/apache/commons/lang3/SerializationUtils.java	2019-07-31 19:29:33.123134662 -0400
++++ /tmp/RSRepair_Defects4J_Lang_13/patches_c9x2/Patch_66/patched/org/apache/commons/lang3/SerializationUtils.java	2019-07-31 19:38:40.081745231 -0400
+@@ -96,7 +96,7 @@
+             return readObject;
+ 
+         } catch (ClassNotFoundException ex) {
+-            throw new SerializationException("ClassNotFoundException while reading cloned object data", ex);
++            return object;
+         } catch (IOException ex) {
+             throw new SerializationException("IOException while reading cloned object data", ex);
+         } finally {
+
+

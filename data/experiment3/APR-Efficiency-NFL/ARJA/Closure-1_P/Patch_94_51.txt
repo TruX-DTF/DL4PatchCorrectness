@@ -1,0 +1,35 @@
+--- /tmp/Arja_Defects4J_Closure_1/src/com/google/javascript/rhino/Node.java	2019-08-11 11:54:23.043997768 -0400
++++ /tmp/Arja_Defects4J_Closure_1/patches_a0it/Patch_51/patched/com/google/javascript/rhino/Node.java	2019-08-11 12:08:51.390623499 -0400
+@@ -1408,11 +1408,7 @@
+   public String checkTreeEquals(Node node2) {
+       NodeMismatch diff = checkTreeEqualsImpl(node2);
+       if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        return toString(true, true, true);
+       }
+       return null;
+   }
+
+
+--- /tmp/Arja_Defects4J_Closure_1/src/com/google/javascript/jscomp/RemoveUnusedVars.java	2019-08-11 11:54:25.391997717 -0400
++++ /tmp/Arja_Defects4J_Closure_1/patches_a0it/Patch_51/patched/com/google/javascript/jscomp/RemoveUnusedVars.java	2019-08-11 12:08:51.406623561 -0400
+@@ -393,12 +393,7 @@
+       Node lastArg;
+       while ((lastArg = argList.getLastChild()) != null) {
+         Var var = fnScope.getVar(lastArg.getString());
+-        if (!referenced.contains(var)) {
+-          argList.removeChild(lastArg);
+-          compiler.reportCodeChange();
+-        } else {
+-          break;
+-        }
++        break;
+       }
+     } else {
+       callSiteOptimizer.optimize(fnScope, referenced);
+
+

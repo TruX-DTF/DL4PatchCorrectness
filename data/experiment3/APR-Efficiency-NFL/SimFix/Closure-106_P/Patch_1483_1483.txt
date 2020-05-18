@@ -1,0 +1,22 @@
+diff --git a/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java b/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+index 47dc5af9..47ddaa30 100644
+--- a/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
++++ b/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+@@ -1304,9 +1304,17 @@ public final class JsDocInfoParser {
+           builder.append(toString(token));
+ 
+           String line = stream.getRemainingJSDocLine();
++// start of generated patch
++line=trimEnd(line);
++builder.append(line);
++jsdocBuilder.recordDescription(line);
++token=next();
++// end of generated patch
++/* start of original code
+           line = trimEnd(line);
+           builder.append(line);
+           token = next();
++ end of original code*/
+       }
+     } while (true);
+   }

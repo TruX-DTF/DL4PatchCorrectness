@@ -1,0 +1,24 @@
+--- /tmp/Arja_Defects4J_Chart_5/source/org/jfree/data/xy/XYSeries.java	2019-07-19 01:50:40.741902735 -0400
++++ /tmp/Arja_Defects4J_Chart_5/patches_clxy/Patch_70/patched/org/jfree/data/xy/XYSeries.java	2019-07-19 02:04:42.069900828 -0400
+@@ -556,17 +556,8 @@
+             existing.setY(y);
+         }
+         else {
+-            // if the series is sorted, the negative index is a result from
+-            // Collections.binarySearch() and tells us where to insert the
+-            // new item...otherwise it will be just -1 and we should just
+-            // append the value to the list...
+-            if (this.autoSort) {
+-                this.data.add(-index - 1, new XYDataItem(x, y));
+-            }
+-            else {
+-                this.data.add(new XYDataItem(x, y));
+-            }
+-            // check if this addition will exceed the maximum item count...
++            this.data.add(new XYDataItem(x, y));
++			// check if this addition will exceed the maximum item count...
+             if (getItemCount() > this.maximumItemCount) {
+                 this.data.remove(0);
+             }
+
+

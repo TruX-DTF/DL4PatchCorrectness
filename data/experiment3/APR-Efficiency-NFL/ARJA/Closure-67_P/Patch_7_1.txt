@@ -1,0 +1,24 @@
+--- /tmp/Arja_Defects4J_Closure_67/src/com/google/javascript/jscomp/RemoveUnusedPrototypeProperties.java	2019-08-11 21:34:45.398843747 -0400
++++ /tmp/Arja_Defects4J_Closure_67/patches_we9z/Patch_1/patched/com/google/javascript/jscomp/RemoveUnusedPrototypeProperties.java	2019-08-11 21:54:28.318292031 -0400
+@@ -84,19 +84,6 @@
+         for (Symbol declaration : nameInfo.getDeclarations()) {
+           boolean canRemove = false;
+ 
+-          if (specializationState == null) {
+-            canRemove = true;
+-          } else {
+-            Node specializableFunction =
+-              getSpecializableFunctionFromSymbol(declaration);
+-
+-            if (specializableFunction != null) {
+-              specializationState.reportRemovedFunction(
+-                  specializableFunction, null);
+-              canRemove = true;
+-            }
+-          }
+-
+           if (canRemove) {
+             declaration.remove();
+             changed = true;
+
+

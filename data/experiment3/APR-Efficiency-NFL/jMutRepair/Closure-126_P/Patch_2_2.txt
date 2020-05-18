@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jMutRepair_Defects4J_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPointsjava
++++ /tmp/jMutRepair_Defects4J_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPointsjava
+@@ -138,7 +138,7 @@
+ 
+ 
+ 
+-			if (com.google.javascript.jscomp.NodeUtil.hasFinally(n)) {
++			if (!(com.google.javascript.jscomp.NodeUtil.hasFinally(n))) {
+ 				com.google.javascript.rhino.Node finallyBlock = n.getLastChild();
+ 				tryMinimizeExits(finallyBlock, exitType, labelName);
+ 			}
+

@@ -1,0 +1,13 @@
+diff --git a/src/com/google/javascript/jscomp/TypedScopeCreator.java b/src/com/google/javascript/jscomp/TypedScopeCreator.java
+index 3fb4813..7d461dd 100644
+--- a/src/com/google/javascript/jscomp/TypedScopeCreator.java
++++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java
+@@ -1438,7 +1438,7 @@ final class TypedScopeCreator implements ScopeCreator {
+       JSType valueType = getDeclaredType(t.getSourceName(), info, n, rhsValue);
+       if (valueType == null && rhsValue != null) {
+         // Determining type for #5
+-        valueType = rhsValue.getJSType();
++        valueType = ownerNode.getJSType();
+       }
+       // Function prototypes are special.
+       // It's a common JS idiom to do:

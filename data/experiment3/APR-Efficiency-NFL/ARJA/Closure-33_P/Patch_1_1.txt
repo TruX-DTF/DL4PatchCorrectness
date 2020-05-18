@@ -1,0 +1,12 @@
+--- /tmp/Arja_Defects4J_Closure_33/src/com/google/javascript/rhino/jstype/RecordType.java	2019-08-11 19:28:29.326884406 -0400
++++ /tmp/Arja_Defects4J_Closure_33/patches_kduf/Patch_1/patched/com/google/javascript/rhino/jstype/RecordType.java	2019-08-11 19:53:28.629237074 -0400
+@@ -258,7 +258,6 @@
+           }
+         } else {
+           if (!propA.isSubtype(propB)) {
+-            return false;
+           }
+         }
+       }
+
+

@@ -1,0 +1,18 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Math_49/src/main/java/org/apache/commons/math/linear/OpenMapRealVectorjava
++++ /tmp/jKali_Defects4J_Math_49/src/main/java/org/apache/commons/math/linear/OpenMapRealVectorjava
+@@ -661,10 +661,10 @@
+ 
+ 	public void setEntry(int index, double value) {
+ 		checkIndex(index);
+-		if (!(isDefaultValue(value))) {
+-			entries.put(index, value);
+-		}else 			if (entries.containsKey(index)) {
+-				entries.remove(index);
++		if (true) {
++			this.entries.put(index, value);
++		}else 			if (this.entries.containsKey(index)) {
++				this.entries.remove(index);
+ 			}
+ 	}
+ 
+

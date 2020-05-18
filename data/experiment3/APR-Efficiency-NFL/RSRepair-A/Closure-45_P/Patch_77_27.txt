@@ -1,0 +1,13 @@
+--- /tmp/RSRepair_Defects4J_Closure_45/src/com/google/javascript/jscomp/NodeUtil.java	2019-08-12 11:09:53.283307911 -0400
++++ /tmp/RSRepair_Defects4J_Closure_45/patches_t9am/Patch_27/patched/com/google/javascript/jscomp/NodeUtil.java	2019-08-12 11:32:25.769211346 -0400
+@@ -591,7 +591,7 @@
+             return false;
+           }
+         }
+-        return true;
++        return false;
+ 
+       case Token.REGEXP:
+         // Return true only if all children are const.
+
+

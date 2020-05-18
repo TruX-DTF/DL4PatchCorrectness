@@ -1,0 +1,32 @@
+diff --git a/source/org/jfree/data/time/TimePeriodValues.java b/source/org/jfree/data/time/TimePeriodValues.java
+index 0a3e7a1..3e2a8b2 100644
+--- a/source/org/jfree/data/time/TimePeriodValues.java
++++ b/source/org/jfree/data/time/TimePeriodValues.java
+@@ -296,6 +296,19 @@ public class TimePeriodValues extends Series implements Serializable {
+             this.minMiddleIndex = index;
+         }
+         
++// start of generated patch
++if(this.maxMiddleIndex>=0){
++long s=getDataItem(this.maxMiddleIndex).getPeriod().getStart().getTime();
++long e=getDataItem(this.maxMiddleIndex).getPeriod().getEnd().getTime();
++long maxMiddle=s+(e-s)/2;
++if(middle>maxMiddle){
++this.maxMiddleIndex=index;
++}
++}else {
++this.maxMiddleIndex=index;
++}
++// end of generated patch
++/* start of original code
+         if (this.maxMiddleIndex >= 0) {
+             long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()
+                 .getTime();
+@@ -309,6 +322,7 @@ public class TimePeriodValues extends Series implements Serializable {
+         else {
+             this.maxMiddleIndex = index;
+         }
++end of original code*/
+         
+         if (this.minEndIndex >= 0) {
+             long minEnd = getDataItem(this.minEndIndex).getPeriod().getEnd()

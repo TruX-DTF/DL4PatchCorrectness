@@ -1,0 +1,15 @@
+--- /tmp/GenProg_Defects4J_Chart_3/source/org/jfree/data/time/TimeSeries.java	2019-07-23 12:46:15.213902377 -0400
++++ /tmp/GenProg_Defects4J_Chart_3/patches_ff3y/Patch_733/patched/org/jfree/data/time/TimeSeries.java	2019-07-23 13:01:07.102151342 -0400
+@@ -573,9 +573,7 @@
+      * @param notify  notify listeners?
+      */
+     public void add(TimeSeriesDataItem item, boolean notify) {
+-        if (item == null) {
+-            throw new IllegalArgumentException("Null 'item' argument.");
+-        }
++        updateBoundsForRemovedItem(item);
+         item = (TimeSeriesDataItem) item.clone();
+         Class c = item.getPeriod().getClass();
+         if (this.timePeriodClass == null) {
+
+

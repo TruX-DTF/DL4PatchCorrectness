@@ -1,0 +1,17 @@
+PATCH_DIFF_ORIG=--- /tmp/jGenProg_Defects4J_Math_73/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolverjava
++++ /tmp/jGenProg_Defects4J_Math_73/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolverjava
+@@ -131,11 +131,11 @@
+ 
+ 		if ((yInitial * yMax) < 0) {
+ 			return solve(f, initial, yInitial, max, yMax, initial, yInitial);
+-		}
++		} 		return solve(f, min, max);
++
+ 
+ 
+ 
+-		return solve(f, min, yMin, max, yMax, initial, yInitial);
+ 
+ 	}
+ 
+

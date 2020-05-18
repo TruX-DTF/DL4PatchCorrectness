@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jMutRepair_Defects4J_Math_52/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotationjava
++++ /tmp/jMutRepair_Defects4J_Math_52/src/main/java/org/apache/commons/math/geometry/euclidean/threed/Rotationjava
+@@ -341,7 +341,7 @@
+ 		org.apache.commons.math.geometry.euclidean.threed.Vector3D k = v1Su1.crossProduct(v2Su2);
+ 		org.apache.commons.math.geometry.euclidean.threed.Vector3D u3 = u1.crossProduct(u2);
+ 		double c = k.dotProduct(u3);
+-		if (c == 0) {
++		if (c <= 0) {
+ 
+ 
+ 			org.apache.commons.math.geometry.euclidean.threed.Vector3D v3 = org.apache.commons.math.geometry.euclidean.threed.Vector3D.crossProduct(v1, v2);
+

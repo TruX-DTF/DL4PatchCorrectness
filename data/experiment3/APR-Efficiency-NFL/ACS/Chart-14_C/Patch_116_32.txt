@@ -1,0 +1,44 @@
+diff --git a/source/org/jfree/chart/plot/CategoryPlot.java b/source/org/jfree/chart/plot/CategoryPlot.java
+index dc7d06b..4945860 100644
+--- a/source/org/jfree/chart/plot/CategoryPlot.java
++++ b/source/org/jfree/chart/plot/CategoryPlot.java
+@@ -2163,7 +2163,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
+             markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
+                     index));
+         }
+-        boolean removed = markers.remove(marker);
++if (markers == null){return false;}        boolean removed = markers.remove(marker);
+         if (removed && notify) {
+             fireChangeEvent();
+         }
+@@ -2444,7 +2444,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
+             markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
+                     index));
+         }
+-        boolean removed = markers.remove(marker);
++if (markers == null){return false;}        boolean removed = markers.remove(marker);
+         if (removed && notify) {
+             fireChangeEvent();
+         }
+diff --git a/source/org/jfree/chart/plot/XYPlot.java b/source/org/jfree/chart/plot/XYPlot.java
+index 50cf416..a6234ab 100644
+--- a/source/org/jfree/chart/plot/XYPlot.java
++++ b/source/org/jfree/chart/plot/XYPlot.java
+@@ -2290,7 +2290,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
+             markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
+                     index));
+         }
+-        boolean removed = markers.remove(marker);
++if (markers == null){return false;}        boolean removed = markers.remove(marker);
+         if (removed && notify) {
+             fireChangeEvent();
+         }
+@@ -2526,7 +2526,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
+             markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
+                     index));
+         }
+-        boolean removed = markers.remove(marker);
++if (markers == null){return false;}        boolean removed = markers.remove(marker);
+         if (removed && notify) {
+             fireChangeEvent();
+         }

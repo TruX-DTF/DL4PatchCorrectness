@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Math_71/src/main/java/org/apache/commons/math/ConvergingAlgorithmImpljava
++++ /tmp/jKali_Defects4J_Math_71/src/main/java/org/apache/commons/math/ConvergingAlgorithmImpljava
+@@ -60,7 +60,7 @@
+ 	protected ConvergingAlgorithmImpl(final int defaultMaximalIterationCount, final 
+ 	double defaultAbsoluteAccuracy) {
+ 		this.defaultAbsoluteAccuracy = defaultAbsoluteAccuracy;
+-		this.defaultRelativeAccuracy = 1.0E-14;
++
+ 		this.absoluteAccuracy = defaultAbsoluteAccuracy;
+ 		this.relativeAccuracy = defaultRelativeAccuracy;
+ 		this.defaultMaximalIterationCount = defaultMaximalIterationCount;
+

@@ -1,0 +1,14 @@
+PATCH_DIFF_ORIG=--- /tmp/jGenProg_Defects4J_Math_70/src/main/java/org/apache/commons/math/analysis/solvers/BisectionSolverjava
++++ /tmp/jGenProg_Defects4J_Math_70/src/main/java/org/apache/commons/math/analysis/solvers/BisectionSolverjava
+@@ -68,8 +68,8 @@
+ 
+ 
+ 	public double solve(final org.apache.commons.math.analysis.UnivariateRealFunction f, double min, double max, double initial) throws 
+-	org.apache.commons.math.FunctionEvaluationException, org.apache.commons.math.MaxIterationsExceededException {
+-		return solve(min, max);
++	org.apache.commons.math.FunctionEvaluationException, org.apache.commons.math.MaxIterationsExceededException { 		return solve(f, min, max);
++
+ 	}
+ 
+ 
+

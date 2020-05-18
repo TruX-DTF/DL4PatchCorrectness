@@ -1,0 +1,13 @@
+diff --git a/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java b/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+index 6e3294b..31b1835 100644
+--- a/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
++++ b/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+@@ -956,7 +956,7 @@ public final class JsDocInfoParser {
+                         // Find the return's description (if applicable).
+                         if (jsdocBuilder.shouldParseDocumentation()) {
+                           ExtractionInfo returnDescriptionInfo =
+-                              extractMultilineTextualBlock(token);
++                              extractMultilineTextualBlock(current());
+ 
+                           String returnDescription =
+                               returnDescriptionInfo.string;

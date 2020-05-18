@@ -1,0 +1,36 @@
+--- /tmp/Arja_Defects4J_Chart_3/source/org/jfree/data/time/TimeSeries.java	2019-07-18 23:48:37.293919331 -0400
++++ /tmp/Arja_Defects4J_Chart_3/patches_itwf/Patch_568/patched/org/jfree/data/time/TimeSeries.java	2019-07-19 00:17:42.037915377 -0400
+@@ -580,17 +580,8 @@
+         Class c = item.getPeriod().getClass();
+         if (this.timePeriodClass == null) {
+             this.timePeriodClass = c;
+-        }
+-        else if (!this.timePeriodClass.equals(c)) {
+-            StringBuffer b = new StringBuffer();
+-            b.append("You are trying to add data where the time period class ");
+-            b.append("is ");
+-            b.append(item.getPeriod().getClass().getName());
+-            b.append(", but the TimeSeries is expecting an instance of ");
+-            b.append(this.timePeriodClass.getName());
+-            b.append(".");
+-            throw new SeriesException(b.toString());
+-        }
++        } else
++			findBoundsByIteration();
+ 
+         // make the change (if it's not a duplicate time period)...
+         boolean added = false;
+@@ -664,7 +655,10 @@
+     public void add(RegularTimePeriod period, double value, boolean notify) {
+         // defer argument checking...
+         TimeSeriesDataItem item = new TimeSeriesDataItem(period, value);
+-        add(item, notify);
++        if (notify) {
++			fireSeriesChanged();
++		}
++		add(item, notify);
+     }
+ 
+     /**
+
+

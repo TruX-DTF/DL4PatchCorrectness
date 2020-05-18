@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Lang_27/src/main/java/org/apache/commons/lang3/math/NumberUtilsjava
++++ /tmp/jKali_Defects4J_Lang_27/src/main/java/org/apache/commons/lang3/math/NumberUtilsjava
+@@ -485,7 +485,7 @@
+ 			}
+ 			mant = str.substring(0, decPos);
+ 		}else {
+-			if (expPos > (-1)) {
++			if (false) {
+ 				mant = str.substring(0, expPos);
+ 			}else {
+ 				mant = str;
+

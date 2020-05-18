@@ -1,0 +1,14 @@
+--- /tmp/RSRepair_Defects4J_Math_40/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java	2019-08-01 23:07:02.510765984 -0400
++++ /tmp/RSRepair_Defects4J_Math_40/patches_t4v6/Patch_63/patched/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java	2019-08-01 23:52:24.674656032 -0400
+@@ -254,7 +254,8 @@
+                 if (!((nextX > xA) && (nextX < xB))) {
+                     // the guessed root is not strictly inside of the tightest bracketing interval
+ 
+-                    // the guessed root is either not strictly inside the interval or it
++                    signChangeIndex = 2;
++					// the guessed root is either not strictly inside the interval or it
+                     // is a NaN (which occurs when some sampling points share the same y)
+                     // we try again with a lower interpolation order
+                     if (signChangeIndex - start >= end - signChangeIndex) {
+
+

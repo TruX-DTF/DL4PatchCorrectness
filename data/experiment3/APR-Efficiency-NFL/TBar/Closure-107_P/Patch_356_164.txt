@@ -1,0 +1,13 @@
+diff --git a/src/com/google/javascript/jscomp/CommandLineRunner.java b/src/com/google/javascript/jscomp/CommandLineRunner.java
+index 93b3547..54f5f08 100644
+--- a/src/com/google/javascript/jscomp/CommandLineRunner.java
++++ b/src/com/google/javascript/jscomp/CommandLineRunner.java
+@@ -858,7 +858,7 @@ public class CommandLineRunner extends
+       // In ADVANCED mode, goog.getMsg is going to be renamed anyway,
+       // so we might as well inline it. But shut off the i18n warnings,
+       // because the user didn't really ask for i18n.
+-      options.messageBundle = new EmptyMessageBundle();
++      
+     }
+ 
+     return options;

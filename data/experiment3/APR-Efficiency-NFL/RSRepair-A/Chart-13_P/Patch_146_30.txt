@@ -1,0 +1,25 @@
+--- /tmp/RSRepair_Defects4J_Chart_13/source/org/jfree/chart/block/BorderArrangement.java	2019-07-30 04:26:17.723750566 -0400
++++ /tmp/RSRepair_Defects4J_Chart_13/patches_wk3b/Patch_30/patched/org/jfree/chart/block/BorderArrangement.java	2019-07-30 04:34:39.883135142 -0400
+@@ -304,7 +304,6 @@
+                     LengthConstraintType.RANGE, 0.0, null,
+                     LengthConstraintType.NONE);
+             Size2D size = this.rightBlock.arrange(g2, c3);
+-            w[3] = size.width;
+             h[3] = size.height;
+         }
+ 
+
+
+--- /tmp/RSRepair_Defects4J_Chart_13/source/org/jfree/data/Range.java	2019-07-30 04:26:14.091726965 -0400
++++ /tmp/RSRepair_Defects4J_Chart_13/patches_wk3b/Patch_30/patched/org/jfree/data/Range.java	2019-07-30 04:34:40.183137216 -0400
+@@ -84,7 +84,7 @@
+         if (lower > upper) {
+             String msg = "Range(double, double): require lower (" + lower 
+                 + ") <= upper (" + upper + ").";
+-            throw new IllegalArgumentException(msg);
++            Comparable result = null;
+         }
+         this.lower = lower;
+         this.upper = upper;
+
+
