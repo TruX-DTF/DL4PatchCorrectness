@@ -1,0 +1,18 @@
+--- /tmp/Arja_Defects4J_Math_84/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java	2019-08-04 04:15:24.315689947 -0400
++++ /tmp/Arja_Defects4J_Math_84/patches_pkxe/Patch_43/patched/org/apache/commons/math/optimization/direct/MultiDirectional.java	2019-08-04 04:23:23.735934895 -0400
+@@ -87,12 +87,7 @@
+ 
+             // compute the contracted simplex
+             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);
+-            if (comparator.compare(contracted, best) < 0) {
+-                // accept the contracted simplex
+-
+-            // check convergence
+-                return;
+-            }
++            break;
+ 
+         }
+ 
+
+

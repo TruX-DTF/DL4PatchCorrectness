@@ -1,0 +1,23 @@
+diff --git a/src/main/java/org/apache/commons/math/complex/Complex.java b/src/main/java/org/apache/commons/math/complex/Complex.java
+index e0a8e97e9..831dd3dda 100644
+--- a/src/main/java/org/apache/commons/math/complex/Complex.java
++++ b/src/main/java/org/apache/commons/math/complex/Complex.java
+@@ -149,9 +149,18 @@ public class Complex implements FieldElement<Complex>, Serializable  {
+      */
+     public Complex add(Complex rhs)
+         throws NullArgumentException {
++// start of generated patch
++MathUtils.checkNotNull(rhs);
++if(isNaN||rhs.isNaN){
++return NaN;
++}
++return createComplex(real+rhs.getReal(),imaginary+rhs.getImaginary());
++// end of generated patch
++/* start of original code
+         MathUtils.checkNotNull(rhs);
+         return createComplex(real + rhs.getReal(),
+             imaginary + rhs.getImaginary());
++ end of original code*/
+     }
+ 
+     /**

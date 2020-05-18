@@ -1,0 +1,25 @@
+diff --git a/src/com/google/javascript/jscomp/CommandLineRunner.java b/src/com/google/javascript/jscomp/CommandLineRunner.java
+index 93b35475..58ed7dfa 100644
+--- a/src/com/google/javascript/jscomp/CommandLineRunner.java
++++ b/src/com/google/javascript/jscomp/CommandLineRunner.java
+@@ -849,6 +849,12 @@ public class CommandLineRunner extends
+       } catch (IOException e) {
+         throw new RuntimeException("Reading XTB file", e);
+       }
++} else // start of generated patch
++if(options.messageBundle!=null){
++options.messageBundle=new EmptyMessageBundle();
++}
++// end of generated patch
++/* start of original code
+     } else if (CompilationLevel.ADVANCED_OPTIMIZATIONS == level) {
+       // In SIMPLE or WHITESPACE mode, if the user hasn't specified a
+       // translations file, they might reasonably try to write their own
+@@ -860,6 +866,7 @@ public class CommandLineRunner extends
+       // because the user didn't really ask for i18n.
+       options.messageBundle = new EmptyMessageBundle();
+     }
++ end of original code*/
+ 
+     return options;
+   }

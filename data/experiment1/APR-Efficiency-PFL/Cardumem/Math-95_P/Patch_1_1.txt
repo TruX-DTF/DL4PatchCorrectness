@@ -1,0 +1,10 @@
+--- /tmp/Cardumen_Defects4J_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpljava
++++ /tmp/Cardumen_Defects4J_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpljava
+@@ -144,7 +144,7 @@
+ 		double ret;
+ 		double d = getDenominatorDegreesOfFreedom();
+ 
+-		ret = d / (d - 2.0);
++		ret = p + (p * p);
+ 		return ret;
+ 	}

@@ -1,0 +1,11 @@
+--- /tmp/Cardumen_Defects4J_Chart_9/source/org/jfree/data/time/TimeSeriesjava
++++ /tmp/Cardumen_Defects4J_Chart_9/source/org/jfree/data/time/TimeSeriesjava
+@@ -941,7 +941,7 @@
+ 			endIndex = -(endIndex + 1);
+ 			endIndex = endIndex - 1;
+ 		}
+-		if (endIndex < 0) {
++		if (endIndex < startIndex) {
+ 			emptyRange = true;
+ 		}
+ 		if (emptyRange) {

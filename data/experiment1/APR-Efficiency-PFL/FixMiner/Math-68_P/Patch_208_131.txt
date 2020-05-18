@@ -1,0 +1,33 @@
+diff --git a/src/main/java/org/apache/commons/math/optimization/general/LevenbergMarquardtOptimizer.java b/src/main/java/org/apache/commons/math/optimization/general/LevenbergMarquardtOptimizer.java
+index d1b36ea..8b2f2e9 100644
+--- a/src/main/java/org/apache/commons/math/optimization/general/LevenbergMarquardtOptimizer.java
++++ b/src/main/java/org/apache/commons/math/optimization/general/LevenbergMarquardtOptimizer.java
+@@ -388,7 +388,13 @@ public class LevenbergMarquardtOptimizer extends AbstractLeastSquaresOptimizer {
+                 }
+ 
+                 // test for successful iteration.
+-                if (ratio >= 1.0e-4) {
++                if (((Math.abs(actRed) <= costRelativeTolerance) &&
++                         (preRed <= costRelativeTolerance) &&
++                         (ratio <= 2.0)) ||
++                        (delta <= parRelativeTolerance * xNorm)) {
++                        return new VectorialPointValuePair(point, objective);
++                    }
++	if (ratio >= 1.0e-4) {
+                     // successful iteration, update the norm
+                     firstIteration = false;
+                     xNorm = 0;
+@@ -412,12 +418,7 @@ public class LevenbergMarquardtOptimizer extends AbstractLeastSquaresOptimizer {
+                 // tests for convergence.
+                     // we use the vectorial convergence checker
+                     // we use the Levenberg-Marquardt specific convergence parameters
+-                    if (((Math.abs(actRed) <= costRelativeTolerance) &&
+-                         (preRed <= costRelativeTolerance) &&
+-                         (ratio <= 2.0)) ||
+-                        (delta <= parRelativeTolerance * xNorm)) {
+-                        return new VectorialPointValuePair(point, objective);
+-                    }
++                    
+ 
+                 // tests for termination and stringent tolerances
+                 // (2.2204e-16 is the machine epsilon for IEEE754)

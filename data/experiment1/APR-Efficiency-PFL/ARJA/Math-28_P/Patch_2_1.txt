@@ -1,0 +1,12 @@
+--- /tmp/Arja_Defects4J_Math_28/src/main/java/org/apache/commons/math3/optimization/linear/SimplexSolver.java	2019-08-03 21:11:42.146700824 -0400
++++ /tmp/Arja_Defects4J_Math_28/patches_4x0w/Patch_1/patched/org/apache/commons/math3/optimization/linear/SimplexSolver.java	2019-08-03 22:36:22.989297069 -0400
+@@ -121,7 +121,6 @@
+                         int column = i + tableau.getArtificialVariableOffset();
+                         final double entry = tableau.getEntry(row, column);
+                         if (Precision.equals(entry, 1d, maxUlps) && row.equals(tableau.getBasicRow(column))) {
+-                            return row;
+                         }
+                     }
+                 }
+
+

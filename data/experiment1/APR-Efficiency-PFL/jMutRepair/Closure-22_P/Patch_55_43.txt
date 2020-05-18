@@ -1,0 +1,11 @@
+--- /tmp/jMutRepair_Defects4J_Closure_22/src/com/google/javascript/jscomp/CheckSideEffectsjava
++++ /tmp/jMutRepair_Defects4J_Closure_22/src/com/google/javascript/jscomp/CheckSideEffectsjava
+@@ -113,7 +113,7 @@
+ 					int ancestorType = an.getType();
+ 					if (ancestorType == (com.google.javascript.rhino.Token.COMMA))
+ 						continue;
+-					if ((ancestorType != (com.google.javascript.rhino.Token.EXPR_RESULT)) && (ancestorType != (com.google.javascript.rhino.Token.BLOCK)))
++					if ((ancestorType != (com.google.javascript.rhino.Token.EXPR_RESULT)) && (ancestorType >= (com.google.javascript.rhino.Token.BLOCK)))
+ 						return;else
+ 
+ 						break;

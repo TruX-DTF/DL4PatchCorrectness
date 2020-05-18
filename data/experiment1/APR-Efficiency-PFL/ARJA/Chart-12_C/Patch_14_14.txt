@@ -1,0 +1,13 @@
+--- /tmp/Arja_Defects4J_Chart_12/source/org/jfree/chart/plot/MultiplePiePlot.java	2019-06-25 08:53:49.092150152 -0400
++++ /tmp/Arja_Defects4J_Chart_12/patches_4vxr/Patch_14/patched/org/jfree/chart/plot/MultiplePiePlot.java	2019-06-25 09:02:03.660365672 -0400
+@@ -142,7 +142,7 @@
+      */
+     public MultiplePiePlot(CategoryDataset dataset) {
+         super();
+-        this.dataset = dataset;
++        setDataset(dataset);
+         PiePlot piePlot = new PiePlot(null);
+         this.pieChart = new JFreeChart(piePlot);
+         this.pieChart.removeLegend();
+
+

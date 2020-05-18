@@ -1,0 +1,13 @@
+--- /tmp/Cardumen_Defects4J_Chart_13/source/org/jfree/chart/block/BorderArrangementjava
++++ /tmp/Cardumen_Defects4J_Chart_13/source/org/jfree/chart/block/BorderArrangementjava
+@@ -451,8 +451,8 @@
+ 		}
+ 		h[3] = h[2];
+ 		if ((this.rightBlock) != null) {
+-			org.jfree.chart.block.RectangleConstraint c4 = new org.jfree.chart.block.RectangleConstraint(0.0, 
+-			new org.jfree.data.Range(0.0, ((constraint.getWidth()) - (w[2]))), 
++			org.jfree.chart.block.RectangleConstraint c4 = new org.jfree.chart.block.RectangleConstraint(0.0, constraint.getWidthRange(), 
++
+ 			org.jfree.chart.block.LengthConstraintType.RANGE, h[2], null, 
+ 			org.jfree.chart.block.LengthConstraintType.FIXED);
+ 			org.jfree.chart.util.Size2D size = this.rightBlock.arrange(g2, c4);

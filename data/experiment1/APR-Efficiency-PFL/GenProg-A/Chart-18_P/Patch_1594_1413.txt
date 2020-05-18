@@ -1,0 +1,42 @@
+--- /tmp/GenProg_Defects4J_Chart_18/source/org/jfree/data/DefaultKeyedValues2D.java	2019-06-25 17:19:06.828764944 -0400
++++ /tmp/GenProg_Defects4J_Chart_18/patches_ru94/Patch_1413/patched/org/jfree/data/DefaultKeyedValues2D.java	2019-06-25 17:33:47.981628400 -0400
+@@ -455,9 +455,10 @@
+         Iterator iterator = this.rows.iterator();
+         while (iterator.hasNext()) {
+             DefaultKeyedValues rowData = (DefaultKeyedValues) iterator.next();
+-                rowData.removeValue(columnKey);
+         }
+-        this.columnKeys.remove(columnKey);
++        if (!(this.columnKeys.contains(columnKey))) {
++			throw new UnknownKeyException("Unrecognised columnKey: " + columnKey);
++		}
+     }
+ 
+     /**
+
+
+--- /tmp/GenProg_Defects4J_Chart_18/source/org/jfree/data/DefaultKeyedValues.java	2019-06-25 17:19:06.828764944 -0400
++++ /tmp/GenProg_Defects4J_Chart_18/patches_ru94/Patch_1413/patched/org/jfree/data/DefaultKeyedValues.java	2019-06-25 17:33:47.985628459 -0400
+@@ -315,9 +315,7 @@
+     public void removeValue(int index) {
+         this.keys.remove(index);
+         this.values.remove(index);
+-        if (index < this.keys.size()) {
+-        rebuildIndex();
+-        }
++        this.indexMap.clear();
+     }
+ 
+     /**
+@@ -332,6 +330,9 @@
+     public void removeValue(Comparable key) {
+         int index = getIndex(key);
+         if (index < 0) {
++			if (index < 0) {
++				throw new UnknownKeyException("Key not found: " + key);
++			}
+ 			return;
+         }
+         removeValue(index);
+
+

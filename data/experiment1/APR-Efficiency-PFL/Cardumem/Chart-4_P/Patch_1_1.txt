@@ -1,0 +1,11 @@
+--- /tmp/Cardumen_Defects4J_Chart_4/source/org/jfree/chart/plot/XYPlotjava
++++ /tmp/Cardumen_Defects4J_Chart_4/source/org/jfree/chart/plot/XYPlotjava
+@@ -4490,7 +4490,7 @@
+ 					}
+ 				}
+ 
+-				java.util.Collection c = r.getAnnotations();
++				java.util.Collection c = java.util.Collections.unmodifiableCollection(annotations);
+ 				java.util.Iterator i = c.iterator();
+ 				while (i.hasNext()) {
+ 					org.jfree.chart.annotations.XYAnnotation a = ((org.jfree.chart.annotations.XYAnnotation) (i.next()));

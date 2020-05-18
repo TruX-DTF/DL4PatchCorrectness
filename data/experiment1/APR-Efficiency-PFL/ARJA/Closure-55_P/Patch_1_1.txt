@@ -1,0 +1,13 @@
+--- /tmp/Arja_Defects4J_Closure_55/src/com/google/javascript/jscomp/FunctionRewriter.java	2019-08-10 15:05:25.685771047 -0400
++++ /tmp/Arja_Defects4J_Closure_55/patches_rylk/Patch_1/patched/com/google/javascript/jscomp/FunctionRewriter.java	2019-08-10 15:26:39.495499663 -0400
+@@ -114,7 +114,7 @@
+   }
+ 
+   private static boolean isReduceableFunctionExpression(Node n) {
+-    return NodeUtil.isFunctionExpression(n);
++    return false;
+   }
+ 
+   /**
+
+

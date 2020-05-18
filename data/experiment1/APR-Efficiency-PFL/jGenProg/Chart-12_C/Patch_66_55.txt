@@ -1,0 +1,73 @@
+--- /tmp/jGenProg_Defects4J_Chart_12/source/org/jfree/chart/plot/MultiplePiePlotjava
++++ /tmp/jGenProg_Defects4J_Chart_12/source/org/jfree/chart/plot/MultiplePiePlotjava
+@@ -143,28 +143,12 @@
+ 	public MultiplePiePlot(org.jfree.data.category.CategoryDataset dataset) {
+ 		super();
+ 		this.dataset = dataset;
+-		org.jfree.chart.plot.PiePlot piePlot = new org.jfree.chart.plot.PiePlot(null);
+-		this.pieChart = new org.jfree.chart.JFreeChart(piePlot);
+-		this.pieChart.removeLegend();
+-		this.dataExtractOrder = org.jfree.chart.util.TableOrder.BY_COLUMN;
+-		this.pieChart.setBackgroundPaint(null);
+-		org.jfree.chart.title.TextTitle seriesTitle = new org.jfree.chart.title.TextTitle("Series Title", 
+-		new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12));
+-		seriesTitle.setPosition(org.jfree.chart.util.RectangleEdge.BOTTOM);
+-		this.pieChart.setTitle(seriesTitle);
+-		this.aggregatedItemsKey = "Other";
+-		this.aggregatedItemsPaint = java.awt.Color.lightGray;
+-		this.sectionPaints = new java.util.HashMap();
+-	}
+ 
+ 
+ 
+ 
+ 
+ 
+-	public org.jfree.data.category.CategoryDataset getDataset() {
+-		return this.dataset;
+-	}
+ 
+ 
+ 
+@@ -172,19 +156,35 @@
+ 
+ 
+ 
+-	public void setDataset(org.jfree.data.category.CategoryDataset dataset) {
+ 
+ 
+-		if ((this.dataset) != null) {
+-			this.dataset.removeChangeListener(this);
+-		}
+ 
+ 
+-		this.dataset = dataset;
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
+ 		if (dataset != null) {
+ 			setDatasetGroup(dataset.getGroup());
+ 			dataset.addChangeListener(this);
+-		}
++		} 		org.jfree.chart.plot.PiePlot piePlot = new org.jfree.chart.plot.PiePlot(null); 		this.pieChart = new org.jfree.chart.JFreeChart(piePlot); 		this.pieChart.removeLegend(); 		this.dataExtractOrder = org.jfree.chart.util.TableOrder.BY_COLUMN; 		this.pieChart.setBackgroundPaint(null); 		org.jfree.chart.title.TextTitle seriesTitle = new org.jfree.chart.title.TextTitle("Series Title", new java.awt.Font("SansSerif", java.awt.Font.BOLD, 12)); 		seriesTitle.setPosition(org.jfree.chart.util.RectangleEdge.BOTTOM); 		this.pieChart.setTitle(seriesTitle); 		this.aggregatedItemsKey = "Other"; 		this.aggregatedItemsPaint = java.awt.Color.lightGray; 		this.sectionPaints = new java.util.HashMap();} 	public org.jfree.data.category.CategoryDataset getDataset() { 		return this.dataset;} 	public void setDataset(org.jfree.data.category.CategoryDataset dataset) { 		if ((this.dataset) != null) { 			this.dataset.removeChangeListener(this);} 		this.dataset = dataset; 		if (dataset != null) { 			setDatasetGroup(dataset.getGroup()); 			dataset.addChangeListener(this);}
+ 
+ 
+ 		datasetChanged(new org.jfree.data.general.DatasetChangeEvent(this, dataset));

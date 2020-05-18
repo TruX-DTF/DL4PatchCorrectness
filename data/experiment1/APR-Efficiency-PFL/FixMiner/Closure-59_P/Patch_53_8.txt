@@ -1,0 +1,30 @@
+diff --git a/src/com/google/javascript/jscomp/Compiler.java b/src/com/google/javascript/jscomp/Compiler.java
+index b3ca246..1248cda 100644
+--- a/src/com/google/javascript/jscomp/Compiler.java
++++ b/src/com/google/javascript/jscomp/Compiler.java
+@@ -252,11 +252,7 @@ public class Compiler extends AbstractCompiler {
+           CheckLevel.OFF);
+     }
+ 
+-    if (options.checkGlobalThisLevel.isOn()) {
+-      options.setWarningLevel(
+-          DiagnosticGroups.GLOBAL_THIS,
+-          options.checkGlobalThisLevel);
+-    }
++    
+ 
+     if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {
+       options.setWarningLevel(
+@@ -272,6 +268,12 @@ public class Compiler extends AbstractCompiler {
+     guards.add(options.getWarningsGuard());
+ 
+     ComposeWarningsGuard composedGuards = new ComposeWarningsGuard(guards);
++	if (options.checkGlobalThisLevel.isOn()) {
++      options.setWarningLevel(
++          DiagnosticGroups.GLOBAL_THIS,
++          options.checkGlobalThisLevel);
++    }
++
+ 
+     // All passes must run the variable check. This synthesizes
+     // variables later so that the compiler doesn't crash. It also

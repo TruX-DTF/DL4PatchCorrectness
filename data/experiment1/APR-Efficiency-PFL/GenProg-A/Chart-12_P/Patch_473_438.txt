@@ -1,0 +1,17 @@
+--- /tmp/GenProg_Defects4J_Chart_12/source/org/jfree/chart/plot/MultiplePiePlot.java	2019-06-25 15:13:32.030768658 -0400
++++ /tmp/GenProg_Defects4J_Chart_12/patches_b3n0/Patch_438/patched/org/jfree/chart/plot/MultiplePiePlot.java	2019-06-25 15:26:55.066491725 -0400
+@@ -142,7 +142,11 @@
+      */
+     public MultiplePiePlot(CategoryDataset dataset) {
+         super();
+-        this.dataset = dataset;
++        if (dataset != null) {
++			setDatasetGroup(dataset.getGroup());
++			dataset.addChangeListener(this);
++		}
++		double ep = 0.0;
+         PiePlot piePlot = new PiePlot(null);
+         this.pieChart = new JFreeChart(piePlot);
+         this.pieChart.removeLegend();
+
+

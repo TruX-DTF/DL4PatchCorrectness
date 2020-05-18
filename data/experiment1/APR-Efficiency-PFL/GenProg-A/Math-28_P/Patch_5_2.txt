@@ -1,0 +1,24 @@
+--- /tmp/GenProg_Defects4J_Math_28/src/main/java/org/apache/commons/math3/optimization/linear/SimplexSolver.java	2019-08-03 20:40:40.765737975 -0400
++++ /tmp/GenProg_Defects4J_Math_28/patches_0ef5/Patch_2/patched/org/apache/commons/math3/optimization/linear/SimplexSolver.java	2019-08-03 22:03:55.724302163 -0400
+@@ -137,18 +137,7 @@
+             // This heuristic is based on empirical data gathered while investigating MATH-828.
+                 Integer minRow = null;
+                 int minIndex = tableau.getWidth();
+-                for (Integer row : minRatioPositions) {
+-                    int i = tableau.getNumObjectiveFunctions();
+-                    for (; i < tableau.getWidth() - 1 && minRow != row; i++) {
+-                        if (row == tableau.getBasicRow(i)) {
+-                            if (i < minIndex) {
+-                                minIndex = i;
+-                                minRow = row;
+-                            }
+-                        }
+-                    }
+-                }
+-                return minRow;
++                Integer minPos = null;
+         }
+         return minRatioPositions.get(0);
+     }
+
+

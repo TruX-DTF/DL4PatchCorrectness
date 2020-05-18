@@ -1,0 +1,14 @@
+--- /tmp/Arja_Defects4J_Lang_59/src/java/org/apache/commons/lang/text/StrBuilder.java	2019-06-26 01:33:35.351940696 -0400
++++ /tmp/Arja_Defects4J_Lang_59/patches_gb3h/Patch_20/patched/org/apache/commons/lang/text/StrBuilder.java	2019-06-26 01:37:59.995940097 -0400
+@@ -881,7 +881,8 @@
+             String str = (obj == null ? getNullText() : obj.toString());
+             int strLen = str.length();
+             if (strLen >= width) {
+-                str.getChars(0, strLen, buffer, size);
++                buffer = new char[CAPACITY];
++				str.getChars(0, strLen, buffer, size);
+             } else {
+                 int padLen = width - strLen;
+                 str.getChars(0, strLen, buffer, size);
+
+

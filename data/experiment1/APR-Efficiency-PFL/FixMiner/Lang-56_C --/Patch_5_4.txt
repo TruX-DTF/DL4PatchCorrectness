@@ -1,0 +1,13 @@
+diff --git a/src/java/org/apache/commons/lang/time/FastDateFormat.java b/src/java/org/apache/commons/lang/time/FastDateFormat.java
+index 89d8073..f1ff58f 100644
+--- a/src/java/org/apache/commons/lang/time/FastDateFormat.java
++++ b/src/java/org/apache/commons/lang/time/FastDateFormat.java
+@@ -137,7 +137,7 @@ public class FastDateFormat extends Format {
+     /**
+      * The parsed rules.
+      */
+-    private Rule[] mRules;
++    private transient  Rule[] mRules;
+     /**
+      * The estimated maximum length.
+      */

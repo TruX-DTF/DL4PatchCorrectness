@@ -1,0 +1,13 @@
+--- /tmp/jGenProg_Defects4J_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpljava
++++ /tmp/jGenProg_Defects4J_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpljava
+@@ -142,9 +142,9 @@
+ 
+ 	protected double getInitialDomain(double p) {
+ 		double ret;
+-		double d = getDenominatorDegreesOfFreedom();
++		double d = getDenominatorDegreesOfFreedom(); 		ret = 0.0;
++
+ 
+-		ret = d / (d - 2.0);
+ 		return ret;
+ 	}

@@ -1,0 +1,20 @@
+--- /tmp/RSRepair_Defects4J_Math_85/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java	2019-07-11 19:59:30.505999704 -0400
++++ /tmp/RSRepair_Defects4J_Math_85/patches_lewz/Patch_1/patched/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java	2019-07-11 20:02:53.398926022 -0400
+@@ -195,15 +195,6 @@
+         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && 
+                 ((a > lowerBound) || (b < upperBound)));
+    
+-        if (fa * fb >= 0.0 ) {
+-            throw new ConvergenceException(
+-                      "number of iterations={0}, maximum iterations={1}, " +
+-                      "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
+-                      "final b value={6}, f(a)={7}, f(b)={8}",
+-                      numIterations, maximumIterations, initial,
+-                      lowerBound, upperBound, a, b, fa, fb);
+-        }
+-        
+         return new double[]{a, b};
+     }
+ 
+
+

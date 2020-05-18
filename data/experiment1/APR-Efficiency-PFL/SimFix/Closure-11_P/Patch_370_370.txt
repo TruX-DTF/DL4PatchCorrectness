@@ -1,0 +1,26 @@
+diff --git a/src/com/google/javascript/jscomp/TypeCheck.java b/src/com/google/javascript/jscomp/TypeCheck.java
+index ae8a3200..12be29c4 100644
+--- a/src/com/google/javascript/jscomp/TypeCheck.java
++++ b/src/com/google/javascript/jscomp/TypeCheck.java
+@@ -1311,12 +1311,21 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {
+ 
+     if (childType.isDict()) {
+       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, "'.'", "dict");
++} else // start of generated patch
++if(t.getScope().getVar(property.getString())!=null&&parent.isAssign()){
++return ;
++}else if(validator.expectNotNullOrUndefined(t,n,childType,"No properties on this expression",getNativeType(OBJECT_TYPE))){
++checkPropertyAccess(childType,property.getString(),t,n);
++}
++// end of generated patch
++/* start of original code
+     } else if (n.getJSType() != null && parent.isAssign()) {
+       return;
+     } else if (validator.expectNotNullOrUndefined(t, n, childType,
+         "No properties on this expression", getNativeType(OBJECT_TYPE))) {
+       checkPropertyAccess(childType, property.getString(), t, n);
+     }
++ end of original code*/
+     ensureTyped(t, n);
+   }
+ 

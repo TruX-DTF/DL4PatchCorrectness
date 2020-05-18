@@ -1,0 +1,10 @@
+--- /tmp/Cardumen_Defects4J_Math_73/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolverjava
++++ /tmp/Cardumen_Defects4J_Math_73/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolverjava
+@@ -135,7 +135,7 @@
+ 
+ 
+ 
+-		return solve(f, min, yMin, max, yMax, initial, yInitial);
++		return solve(f, max, max);
+ 
+ 	}

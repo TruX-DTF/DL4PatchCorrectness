@@ -1,0 +1,13 @@
+--- /tmp/RSRepair_Defects4J_Math_58/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java	2019-08-04 14:05:48.469789009 -0400
++++ /tmp/RSRepair_Defects4J_Math_58/patches_ugri/Patch_7/patched/org/apache/commons/math/optimization/fitting/GaussianFitter.java	2019-08-04 14:27:20.978449385 -0400
+@@ -118,7 +118,7 @@
+      */
+     public double[] fit() {
+         final double[] guess = (new ParameterGuesser(getObservations())).guess();
+-        return fit(new Gaussian.Parametric(), guess);
++        return fit((new ParameterGuesser(getObservations())).guess());
+     }
+ 
+     /**
+
+

@@ -1,0 +1,26 @@
+--- /tmp/GenProg_Defects4J_Closure_130/src/com/google/javascript/jscomp/CollapseProperties.java	2019-08-14 03:55:33.367353396 -0400
++++ /tmp/GenProg_Defects4J_Closure_130/patches_yur4/Patch_1/patched/com/google/javascript/jscomp/CollapseProperties.java	2019-08-14 04:16:48.673401682 -0400
+@@ -169,21 +169,6 @@
+         continue;
+       }
+ 
+-      if (name.globalSets == 1 && name.localSets == 0 &&
+-          name.aliasingGets > 0) {
+-        // {@code name} meets condition (b). Find all of its local aliases
+-        // and try to inline them.
+-        List<Ref> refs = Lists.newArrayList(name.getRefs());
+-        for (Ref ref : refs) {
+-          if (ref.type == Type.ALIASING_GET && ref.scope.isLocal()) {
+-            // {@code name} meets condition (c). Try to inline it.
+-            if (inlineAliasIfPossible(ref, namespace)) {
+-              name.removeRef(ref);
+-            }
+-          }
+-        }
+-      }
+-
+       // Check if {@code name} has any aliases left after the
+       // local-alias-inlining above.
+       if ((name.type == Name.Type.OBJECTLIT ||
+
+

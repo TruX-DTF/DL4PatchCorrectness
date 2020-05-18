@@ -1,0 +1,22 @@
+diff --git a/src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java b/src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java
+index 67b368deb..ece2fe730 100644
+--- a/src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java
++++ b/src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java
+@@ -49,6 +49,8 @@ public class ElitisticListPopulation extends ListPopulation {
+                                    final double elitismRate) {
+         super(chromosomes, populationLimit);
+         this.elitismRate = elitismRate;
++      if (elitismRate>(double)1.0){throw new OutOfRangeException(null,null,null);}
++      if (elitismRate<(double)0.0){throw new OutOfRangeException(null,null,null);}
+     }
+ 
+     /**
+@@ -63,6 +65,8 @@ public class ElitisticListPopulation extends ListPopulation {
+     public ElitisticListPopulation(final int populationLimit, final double elitismRate) {
+         super(populationLimit);
+         this.elitismRate = elitismRate;
++      if (elitismRate>(double)1.0){throw new OutOfRangeException(null,null,null);}
++      if (elitismRate<(double)0.0){throw new OutOfRangeException(null,null,null);}
+     }
+ 
+     /**

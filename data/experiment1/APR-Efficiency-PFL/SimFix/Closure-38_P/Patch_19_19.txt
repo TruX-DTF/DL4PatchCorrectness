@@ -1,0 +1,21 @@
+diff --git a/src/com/google/javascript/jscomp/CodeConsumer.java b/src/com/google/javascript/jscomp/CodeConsumer.java
+index 4381487c..e6ec35d1 100644
+--- a/src/com/google/javascript/jscomp/CodeConsumer.java
++++ b/src/com/google/javascript/jscomp/CodeConsumer.java
+@@ -242,9 +242,16 @@ abstract class CodeConsumer {
+     // x--4 (which is a syntax error).
+     char prev = getLastChar();
+     boolean negativeZero = isNegativeZero(x);
++// start of generated patch
++if(prev=='-'){
++add(" ");
++}
++// end of generated patch
++/* start of original code
+     if (x < 0 && prev == '-') {
+       add(" ");
+     }
++ end of original code*/
+ 
+     if ((long) x == x && !negativeZero) {
+       long value = (long) x;
