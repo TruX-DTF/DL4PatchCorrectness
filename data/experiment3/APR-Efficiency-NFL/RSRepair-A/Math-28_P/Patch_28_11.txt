@@ -1,0 +1,12 @@
+--- /tmp/RSRepair_Defects4J_Math_28/src/main/java/org/apache/commons/math3/optimization/linear/SimplexSolver.java	2019-08-01 00:48:50.626330166 -0400
++++ /tmp/RSRepair_Defects4J_Math_28/patches_l2ve/Patch_11/patched/org/apache/commons/math3/optimization/linear/SimplexSolver.java	2019-08-01 02:09:54.582588228 -0400
+@@ -148,7 +148,6 @@
+                         }
+                     }
+                 }
+-                return minRow;
+         }
+         return minRatioPositions.get(0);
+     }
+
+

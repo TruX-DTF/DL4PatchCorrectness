@@ -1,0 +1,15 @@
+--- /tmp/RSRepair_Defects4J_Closure_88/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java	2019-08-12 21:29:27.370333317 -0400
++++ /tmp/RSRepair_Defects4J_Closure_88/patches_w6j9/Patch_1/patched/com/google/javascript/jscomp/DeadAssignmentsElimination.java	2019-08-12 21:41:44.429519316 -0400
+@@ -324,10 +324,6 @@
+       Node n, String variable) {
+     if (NodeUtil.isName(n) && variable.equals(n.getString())) {
+       if (NodeUtil.isLhs(n, n.getParent())) {
+-        // The expression to which the assignment is made is evaluated before
+-        // the RHS is evaluated (normal left to right evaluation) but the KILL
+-        // occurs after the RHS is evaluated.
+-        return VariableLiveness.KILL;
+       } else {
+         return VariableLiveness.READ;
+       }
+
+

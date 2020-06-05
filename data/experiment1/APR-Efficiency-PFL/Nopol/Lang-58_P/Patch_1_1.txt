@@ -1,0 +1,15 @@
+a/src/java/org/apache/commons/lang/math/NumberUtils.java
++++ b/src/java/org/apache/commons/lang/math/NumberUtils.java
+@@ -451,6 +451,3 @@
+                 case 'L' :
+-                    if (dec == null
+-                        && exp == null
+-                        && isDigits(numeric.substring(1))
+-                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {
++                    if (((dec == null) && (exp == null))) {
+                         try {
+@@ -461,3 +458,3 @@
+                         return createBigInteger(numeric);
+-
++                        
+                     }

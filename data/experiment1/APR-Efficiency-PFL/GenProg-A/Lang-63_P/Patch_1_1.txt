@@ -1,0 +1,12 @@
+--- /tmp/GenProg_Defects4J_Lang_63/src/java/org/apache/commons/lang/time/DurationFormatUtils.java	2019-07-02 00:08:16.904882845 -0400
++++ /tmp/GenProg_Defects4J_Lang_63/patches_tcf6/Patch_1/patched/org/apache/commons/lang/time/DurationFormatUtils.java	2019-07-02 00:12:25.233237264 -0400
+@@ -320,7 +320,6 @@
+         minutes -= reduceAndCorrect(start, end, Calendar.MINUTE, minutes);
+         hours -= reduceAndCorrect(start, end, Calendar.HOUR_OF_DAY, hours);
+         days -= reduceAndCorrect(start, end, Calendar.DAY_OF_MONTH, days);
+-        months -= reduceAndCorrect(start, end, Calendar.MONTH, months);
+         years -= reduceAndCorrect(start, end, Calendar.YEAR, years);
+ 
+         // This next block of code adds in values that 
+
+

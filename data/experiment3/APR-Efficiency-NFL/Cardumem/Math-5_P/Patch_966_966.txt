@@ -1,0 +1,12 @@
+PATCH_DIFF_ORIG=--- /tmp/Cardumen_Defects4J_Math_5/src/main/java/org/apache/commons/math3/complex/Complexjava
++++ /tmp/Cardumen_Defects4J_Math_5/src/main/java/org/apache/commons/math3/complex/Complexjava
+@@ -337,7 +337,7 @@
+ 
+ 	@java.lang.Override
+ 	public boolean equals(java.lang.Object other) {
+-		if ((this) == other) {
++		if ((java.lang.Double.isNaN(imaginary)) || (java.lang.Double.isNaN(real))) {
+ 			return true;
+ 		}
+ 		if (other instanceof org.apache.commons.math3.complex.Complex) {
+

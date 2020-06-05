@@ -1,0 +1,19 @@
+--- /tmp/Arja_Defects4J_Closure_78/src/com/google/javascript/jscomp/PeepholeFoldConstants.java	2019-08-10 23:04:10.925417809 -0400
++++ /tmp/Arja_Defects4J_Closure_78/patches_uol3/Patch_6/patched/com/google/javascript/jscomp/PeepholeFoldConstants.java	2019-08-10 23:24:26.888439424 -0400
+@@ -708,14 +708,12 @@
+         break;
+       case Token.MOD:
+         if (rval == 0) {
+-          error(DiagnosticType.error("JSC_DIVIDE_BY_0_ERROR", "Divide by 0"), right);
+           return null;
+         }
+         result = lval % rval;
+         break;
+       case Token.DIV:
+         if (rval == 0) {
+-          error(DiagnosticType.error("JSC_DIVIDE_BY_0_ERROR", "Divide by 0"), right);
+           return null;
+         }
+         result = lval / rval;
+
+

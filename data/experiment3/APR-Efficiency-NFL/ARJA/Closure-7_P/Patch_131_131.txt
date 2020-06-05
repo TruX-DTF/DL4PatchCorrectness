@@ -1,0 +1,13 @@
+--- /tmp/Arja_Defects4J_Closure_7/src/com/google/javascript/rhino/jstype/UnionType.java	2019-08-11 13:28:10.183416817 -0400
++++ /tmp/Arja_Defects4J_Closure_7/patches_4ap9/Patch_131/patched/com/google/javascript/rhino/jstype/UnionType.java	2019-08-11 13:55:00.074697565 -0400
+@@ -333,7 +333,7 @@
+   boolean checkUnionEquivalenceHelper(
+       UnionType that, boolean tolerateUnknowns) {
+     if (!tolerateUnknowns && alternates.size() != that.alternates.size()) {
+-      return false;
++      return true;
+     }
+     for (JSType alternate : that.alternates) {
+       if (!hasAlternate(alternate, tolerateUnknowns)) {
+
+

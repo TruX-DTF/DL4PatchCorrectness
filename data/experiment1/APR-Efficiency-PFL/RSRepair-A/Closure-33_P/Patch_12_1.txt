@@ -1,0 +1,33 @@
+--- /tmp/RSRepair_Defects4J_Closure_33/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java	2019-08-10 08:45:30.497187791 -0400
++++ /tmp/RSRepair_Defects4J_Closure_33/patches_g6t3/Patch_1/patched/com/google/javascript/rhino/jstype/PrototypeObjectType.java	2019-08-10 09:07:11.248300021 -0400
+@@ -555,27 +555,6 @@
+   public void matchConstraint(ObjectType constraintObj) {
+     // We only want to match contraints on anonymous types.
+ 
+-    // Handle the case where the constraint object is a record type.
+-    //
+-    // param constraintObj {{prop: (number|undefined)}}
+-    // function f(constraintObj) {}
+-    // f({});
+-    //
+-    // We want to modify the object literal to match the constraint, by
+-    // taking any each property on the record and trying to match
+-    // properties on this object.
+-    if (constraintObj.isRecordType()) {
+-      for (String prop : constraintObj.getOwnPropertyNames()) {
+-        JSType propType = constraintObj.getPropertyType(prop);
+-        if (!isPropertyTypeDeclared(prop)) {
+-          JSType typeToInfer = propType;
+-          if (!hasProperty(prop)) {
+-            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)
+-                .getLeastSupertype(propType);
+-          }
+-          defineInferredProperty(prop, typeToInfer, null);
+-        }
+-      }
+-    }
++    
+   }
+ }
+
+

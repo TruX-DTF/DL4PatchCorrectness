@@ -1,0 +1,17 @@
+--- /tmp/RSRepair_Defects4J_Closure_59/src/com/google/javascript/jscomp/Compiler.java\t2019-08-11 18:15:10.477585979 -0400
++++ /tmp/RSRepair_Defects4J_Closure_59/patches_dmmq/Patch_1/patched/com/google/javascript/jscomp/Compiler.java\t2019-08-11 18:35:02.446770581 -0400
+@@ -252,12 +252,6 @@
+           CheckLevel.OFF);
+     }
+
+-    if (options.checkGlobalThisLevel.isOn()) {
+-      options.setWarningLevel(
+-          DiagnosticGroups.GLOBAL_THIS,
+-          options.checkGlobalThisLevel);
+-    }
+-
+     if (options.getLanguageIn() == LanguageMode.ECMASCRIPT5_STRICT) {
+       options.setWarningLevel(
+           DiagnosticGroups.ES5_STRICT,
+
+

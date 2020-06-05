@@ -1,0 +1,26 @@
+--- /tmp/Arja_Defects4J_Closure_3/src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java	2019-08-08 23:34:03.373208090 -0400
++++ /tmp/Arja_Defects4J_Closure_3/patches_kaxo/Patch_1/patched/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java	2019-08-08 23:58:13.241874140 -0400
+@@ -152,20 +152,7 @@
+     reachingUses = new MaybeReachingVariableUse(cfg, t.getScope(), compiler);
+     reachingUses.analyze();
+     for (Candidate c : candidates) {
+-      if (c.canInline()) {
+-        c.inlineVariable();
+-
+-        // If definition c has dependencies, then inlining it may have
+-        // introduced new dependencies for our other inlining candidates.
+-        //
+-        // MustBeReachingVariableDef uses this dependency graph in its
+-        // analysis, so some of these candidates may no longer be valid.
+-        // We keep track of when the variable dependency graph changed
+-        // so that we can back off appropriately.
+-        if (!c.defMetadata.depends.isEmpty()) {
+-          inlinedNewDependencies.add(t.getScope().getVar(c.varName));
+-        }
+-      }
++      break;
+     }
+   }
+ 
+
+

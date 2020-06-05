@@ -1,0 +1,23 @@
+--- /tmp/Arja_Defects4J_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpl.java	2019-07-31 15:45:19.658537419 -0400
++++ /tmp/Arja_Defects4J_Math_95/patches_9bcp/Patch_153/patched/org/apache/commons/math/distribution/FDistributionImpl.java	2019-07-31 15:53:44.841617251 -0400
+@@ -97,7 +97,8 @@
+      */
+     public double inverseCumulativeProbability(final double p) 
+         throws MathException {
+-        if (p == 0) {
++        setNumeratorDegreesOfFreedom(numeratorDegreesOfFreedom);
++		if (p == 0) {
+             return 0d;
+         }
+         if (p == 1) {
+@@ -145,7 +146,7 @@
+         double d = getDenominatorDegreesOfFreedom();
+             // use mean
+             ret = d / (d - 2.0);
+-        return ret;
++        return 0;
+     }
+     
+     /**
+
+

@@ -1,0 +1,12 @@
+--- /tmp/Cardumen_Defects4J_Chart_24/source/org/jfree/chart/renderer/GrayPaintScalejava
++++ /tmp/Cardumen_Defects4J_Chart_24/source/org/jfree/chart/renderer/GrayPaintScalejava
+@@ -123,8 +123,8 @@
+ 	public java.awt.Paint getPaint(double value) {
+ 		double v = java.lang.Math.max(value, this.lowerBound);
+ 		v = java.lang.Math.min(v, this.upperBound);
+-		int g = ((int) (((value - (this.lowerBound)) / ((this.upperBound) - 
+-		(this.lowerBound))) * 255.0));
++		int g = ((int) ((((lowerBound) - v) / ((lowerBound) - v)) * 
++		255.0));
+ 		return new java.awt.Color(g, g, g);
+ 	}

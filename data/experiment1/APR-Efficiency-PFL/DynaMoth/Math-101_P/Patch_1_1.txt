@@ -1,0 +1,8 @@
+a/src/java/org/apache/commons/math/complex/ComplexFormat.java
++++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java
+@@ -377,4 +377,3 @@
+         if (
+-            source.substring(startIndex, endIndex).compareTo(
+-            getImaginaryCharacter()) != 0) {
++            startIndex == source.length()) {
+             // set index back to initial, error index should be the start index

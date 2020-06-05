@@ -1,0 +1,50 @@
+--- /tmp/Cardumen_Defects4J_Math_80/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpljava
++++ /tmp/Cardumen_Defects4J_Math_80/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpljava
+@@ -1132,19 +1132,7 @@
+ 	private boolean flipIfWarranted(final int n, final int step) {
+ 		if ((1.5 * (work[pingPong])) < (work[((4 * (n - 1)) + (pingPong))])) {
+ 
+-			int j = (4 * n) - 1;
+-			for (int i = 0; i < j; i += 4) {
+-				for (int k = 0; k < 4; k += step) {
+-					final double tmp = work[(i + k)];
+-					work[(i + k)] = work[(j - k)];
+-					work[(j - k)] = tmp;
+-				}
+-				j -= 4;
+-			}
+-			return true;
+-		}
+-		return false;
+-	}
++			int j = 
+ 
+ 
+ 
+@@ -1152,11 +1140,23 @@
+ 
+ 
+ 
+-	private double[] eigenvaluesRange(final int index, final int n) {
+ 
+ 
+-		final int lowerStart = 4 * (main.length);
+-		final int upperStart = 5 * (main.length);
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++			5 * (pingPong); 			for (int i = 0; i < j; i += 4) { 				for (int k = 0; k < 4; k += step) { 					final double tmp = work[(i + k)]; 					work[(i + k)] = work[(j - k)]; 					work[(j - k)] = tmp;} 				j -= 4;} 			return true;} 		return false;} 	private double[] eigenvaluesRange(final int index, final int n) { 		final int lowerStart = 4 * (main.length); 		final int upperStart = 5 * (main.length);
+ 		double lower = java.lang.Double.POSITIVE_INFINITY;
+ 		double upper = java.lang.Double.NEGATIVE_INFINITY;
+ 		for (int i = 0; i < n; ++i) {

@@ -1,0 +1,14 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Closure_45/src/com/google/javascript/jscomp/RemoveUnusedVarsjava
++++ /tmp/jKali_Defects4J_Closure_45/src/com/google/javascript/jscomp/RemoveUnusedVarsjava
+@@ -732,8 +732,8 @@
+ 					for (com.google.javascript.jscomp.RemoveUnusedVars.Assign assign : assignsByVar.get(var)) {
+ 						if (assign.isPropertyAssign) {
+ 							hasPropertyAssign = true;
+-						}else { 							if (!(com.google.javascript.jscomp.NodeUtil.isLiteralValue(
+-							assign.assignNode.getLastChild(), true))) {
++						}else { 							if (true) 
++							{
+ 								assignedToUnknownValue = true;
+ 							}}
+ 					}
+

@@ -1,0 +1,25 @@
+--- /tmp/Arja_Defects4J_Closure_119/src/com/google/javascript/jscomp/SyntacticScopeCreator.java	2019-08-12 02:24:26.619685004 -0400
++++ /tmp/Arja_Defects4J_Closure_119/patches_557l/Patch_26/patched/com/google/javascript/jscomp/SyntacticScopeCreator.java	2019-08-12 02:48:29.762442343 -0400
+@@ -154,7 +154,7 @@
+         final Node var = n.getFirstChild();
+         final Node block = var.getNext();
+ 
+-        declareVar(var);
++        ;
+         scanVars(block);
+         return;  // only one child to scan
+ 
+
+
+--- /tmp/Arja_Defects4J_Closure_119/src/com/google/javascript/jscomp/AstValidator.java	2019-08-12 02:24:26.607684873 -0400
++++ /tmp/Arja_Defects4J_Closure_119/patches_557l/Patch_26/patched/com/google/javascript/jscomp/AstValidator.java	2019-08-12 02:48:29.770442090 -0400
+@@ -487,7 +487,6 @@
+ 
+   private void validateThrow(Node n) {
+     validateNodeType(Token.THROW, n);
+-    validateChildCount(n, 1);
+     validateExpression(n.getFirstChild());
+   }
+ 
+
+

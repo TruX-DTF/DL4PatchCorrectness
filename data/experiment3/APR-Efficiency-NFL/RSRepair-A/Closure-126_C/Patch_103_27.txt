@@ -1,0 +1,19 @@
+--- /tmp/RSRepair_Defects4J_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java	2019-08-12 17:48:48.471049857 -0400
++++ /tmp/RSRepair_Defects4J_Closure_126/patches_qzki/Patch_27/patched/com/google/javascript/jscomp/MinimizeExitPoints.java	2019-08-12 18:12:20.000163288 -0400
+@@ -134,14 +134,6 @@
+         Node catchCodeBlock = catchNode.getLastChild();
+         tryMinimizeExits(catchCodeBlock, exitType, labelName);
+       }
+-      /* Don't try to minimize the exits of finally blocks, as this
+-       * can cause problems if it changes the completion type of the finally
+-       * block. See ECMA 262 Sections 8.9 & 12.14
+-       */
+-      if (NodeUtil.hasFinally(n)) {
+-        Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
+-      }
+     }
+ 
+     // Just a 'label'.
+
+

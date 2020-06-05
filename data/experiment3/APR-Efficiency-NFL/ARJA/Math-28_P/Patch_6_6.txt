@@ -1,0 +1,12 @@
+--- /tmp/Arja_Defects4J_Math_28/src/main/java/org/apache/commons/math3/optimization/linear/SimplexSolver.java	2019-07-27 17:02:44.982829949 -0400
++++ /tmp/Arja_Defects4J_Math_28/patches_blu4/Patch_6/patched/org/apache/commons/math3/optimization/linear/SimplexSolver.java	2019-07-27 18:05:42.920952838 -0400
+@@ -142,7 +142,6 @@
+                     for (; i < tableau.getWidth() - 1 && minRow != row; i++) {
+                         if (row == tableau.getBasicRow(i)) {
+                             if (i < minIndex) {
+-                                minIndex = i;
+                                 minRow = row;
+                             }
+                         }
+
+

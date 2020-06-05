@@ -1,0 +1,14 @@
+
+diff --git a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java
+index 1da2c45..afcb19b 100644
+--- a/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java
++++ b/src/main/java/org/apache/commons/math3/optimization/fitting/HarmonicFitter.java
+@@ -322,7 +322,7 @@ public class HarmonicFitter extends CurveFitter<HarmonicOscillator.Parametric> {
+             } else {
+                     // In some ill-conditioned cases (cf. MATH-844), the guesser
+                     // procedure cannot produce sensible results.
+-
++if (c2==0.0){throw new MathIllegalStateException();}
+                 a = FastMath.sqrt(c1 / c2);
+                 omega = FastMath.sqrt(c2 / c3);
+             }

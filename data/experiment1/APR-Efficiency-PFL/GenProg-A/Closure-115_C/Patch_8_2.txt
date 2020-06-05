@@ -1,0 +1,18 @@
+--- /tmp/GenProg_Defects4J_Closure_115/src/com/google/javascript/jscomp/FunctionInjector.java	2019-08-13 22:49:35.765894855 -0400
++++ /tmp/GenProg_Defects4J_Closure_115/patches_lqr1/Patch_1/patched/com/google/javascript/jscomp/FunctionInjector.java	2019-08-13 23:13:20.834910972 -0400
+@@ -695,13 +695,6 @@
+     Node block = fnNode.getLastChild();
+ 
+     boolean hasSideEffects = false;
+-    if (block.hasChildren()) {
+-      Preconditions.checkState(block.hasOneChild());
+-      Node stmt = block.getFirstChild();
+-      if (stmt.isReturn()) {
+-        hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);
+-      }
+-    }
+     // CALL NODE: [ NAME, ARG1, ARG2, ... ]
+     Node cArg = callNode.getFirstChild().getNext();
+ 
+
+

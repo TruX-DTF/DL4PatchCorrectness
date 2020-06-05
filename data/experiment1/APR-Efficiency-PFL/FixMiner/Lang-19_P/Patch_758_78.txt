@@ -1,0 +1,12 @@
+diff --git a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java
+index 68891ac..5cf5c62 100644
+--- a/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java
++++ b/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java
+@@ -37,7 +37,7 @@ public class NumericEntityUnescaper extends CharSequenceTranslator {
+     public int translate(CharSequence input, int index, Writer out) throws IOException {
+         int seqEnd = input.length();
+         // Uses -2 to ensure there is something after the &#
+-        if(input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {
++        if(input.charAt(index) == '&' && index < seqEnd - 4 && input.charAt(index + 1) == '#') {
+             int start = index + 2;
+             boolean isHex = false;

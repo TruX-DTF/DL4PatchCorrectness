@@ -1,0 +1,11 @@
+--- /tmp/Cardumen_Defects4J_Chart_11/source/org/jfree/chart/util/ShapeUtilitiesjava
++++ /tmp/Cardumen_Defects4J_Chart_11/source/org/jfree/chart/util/ShapeUtilitiesjava
+@@ -272,7 +272,7 @@
+ 			return false;
+ 		}
+ 		java.awt.geom.PathIterator iterator1 = p1.getPathIterator(null);
+-		java.awt.geom.PathIterator iterator2 = p1.getPathIterator(null);
++		java.awt.geom.PathIterator iterator2 = p2.getPathIterator(null);
+ 		double[] d1 = new double[6];
+ 		double[] d2 = new double[6];
+ 		boolean done = (iterator1.isDone()) && (iterator2.isDone());

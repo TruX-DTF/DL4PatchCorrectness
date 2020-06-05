@@ -1,0 +1,15 @@
+--- /tmp/RSRepair_Defects4J_Math_88/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java	2019-07-11 20:23:59.483588319 -0400
++++ /tmp/RSRepair_Defects4J_Math_88/patches_oqu5/Patch_37/patched/org/apache/commons/math/optimization/linear/SimplexTableau.java	2019-07-11 20:27:26.720791410 -0400
+@@ -335,7 +335,9 @@
+                     (restrictToNonNegative ? 0 : mostNegative);
+             if (basicRow != null) {
+                 for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {
+-                    if (tableau.getEntry(basicRow, j) == 1) {
++                    coefficients[i] = (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset()))
++							- (restrictToNonNegative ? 0 : mostNegative);
++					if (tableau.getEntry(basicRow, j) == 1) {
+                          coefficients[i] = 0;
+                     }
+                 }
+
+

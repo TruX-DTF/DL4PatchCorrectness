@@ -1,0 +1,27 @@
+
+diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/SubLine.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/SubLine.java
+index a146cb6..ee8f12b 100644
+--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/SubLine.java
++++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/threed/SubLine.java
+@@ -112,7 +112,7 @@ public class SubLine {
+         // compute the intersection on infinite line
+         Vector3D v1D = line.intersection(subLine.line);
+ 
+-        // check location of point with respect to first sub-line
++if (v1D == null){return null;}        // check location of point with respect to first sub-line
+         Location loc1 = remainingRegion.checkPoint(line.toSubSpace(v1D));
+ 
+         // check location of point with respect to second sub-line
+diff --git a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/SubLine.java b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/SubLine.java
+index a9d621a..0b1b07e 100644
+--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/SubLine.java
++++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/SubLine.java
+@@ -116,7 +116,7 @@ public class SubLine extends AbstractSubHyperplane<Euclidean2D, Euclidean1D> {
+         // compute the intersection on infinite line
+         Vector2D v2D = line1.intersection(line2);
+ 
+-        // check location of point with respect to first sub-line
++if (v2D == null){return null;}        // check location of point with respect to first sub-line
+         Location loc1 = getRemainingRegion().checkPoint(line1.toSubSpace(v2D));
+ 
+         // check location of point with respect to second sub-line

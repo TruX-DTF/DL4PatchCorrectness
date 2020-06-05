@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+index 4b7dbf6..463dff0 100644
+--- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
++++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+@@ -237,7 +237,7 @@ public class CMAESOptimizer
+      * Default constructor, uses default parameters
+      */
+     public CMAESOptimizer() {
+-        this(0);
++        
+     }
+ 
+     /**

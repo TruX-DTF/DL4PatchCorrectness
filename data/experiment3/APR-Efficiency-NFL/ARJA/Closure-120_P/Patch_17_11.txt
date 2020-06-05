@@ -1,0 +1,14 @@
+--- /tmp/Arja_Defects4J_Closure_120/src/com/google/javascript/jscomp/GlobalVarReferenceMap.java	2019-08-12 02:48:31.222396263 -0400
++++ /tmp/Arja_Defects4J_Closure_120/patches_ukx3/Patch_11/patched/com/google/javascript/jscomp/GlobalVarReferenceMap.java	2019-08-12 03:15:46.769170181 -0400
+@@ -81,9 +81,6 @@
+     refMap = Maps.newHashMap();
+     for (Entry<Var, ReferenceCollection> entry : globalRefMap.entrySet()) {
+       Var var = entry.getKey();
+-      if (var.isGlobal()) {
+-        refMap.put(var.getName(), entry.getValue());
+-      }
+     }
+   }
+ 
+
+

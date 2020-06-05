@@ -1,0 +1,39 @@
+--- /tmp/Arja_Defects4J_Closure_75/src/com/google/javascript/jscomp/CodeGenerator.java	2019-08-11 22:14:06.518098223 -0400
++++ /tmp/Arja_Defects4J_Closure_75/patches_tjoc/Patch_77/patched/com/google/javascript/jscomp/CodeGenerator.java	2019-08-11 22:36:06.094679335 -0400
+@@ -1013,10 +1013,6 @@
+             if (c > 0x1f && c <= 0x7f) {
+               sb.append(c);
+             } else {
+-              // Other characters can be misinterpreted by some js parsers,
+-              // or perhaps mangled by proxies along the way,
+-              // so we play it safe and unicode escape them.
+-              appendHexJavaScriptRepresentation(sb, c);
+             }
+           }
+       }
+@@ -1152,10 +1148,5 @@
+       appendHexJavaScriptRepresentation(surrogates[1], out);
+       return;
+     }
+-    out.append("\\u")
+-        .append(HEX_CHARS[(codePoint >>> 12) & 0xf])
+-        .append(HEX_CHARS[(codePoint >>> 8) & 0xf])
+-        .append(HEX_CHARS[(codePoint >>> 4) & 0xf])
+-        .append(HEX_CHARS[codePoint & 0xf]);
+   }
+ }
+
+
+--- /tmp/Arja_Defects4J_Closure_75/src/com/google/javascript/jscomp/NodeUtil.java	2019-08-11 22:14:08.278210821 -0400
++++ /tmp/Arja_Defects4J_Closure_75/patches_tjoc/Patch_77/patched/com/google/javascript/jscomp/NodeUtil.java	2019-08-11 22:36:06.102679603 -0400
+@@ -346,7 +346,7 @@
+     }
+ 
+     try {
+-      return Double.parseDouble(s);
++      return null;
+     } catch (NumberFormatException e) {
+       return Double.NaN;
+     }
+
+

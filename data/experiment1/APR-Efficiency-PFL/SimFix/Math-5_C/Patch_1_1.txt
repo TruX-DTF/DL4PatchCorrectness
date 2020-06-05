@@ -1,0 +1,21 @@
+diff --git a/src/main/java/org/apache/commons/math3/complex/Complex.java b/src/main/java/org/apache/commons/math3/complex/Complex.java
+index 22b23f24e..cfe532bba 100644
+--- a/src/main/java/org/apache/commons/math3/complex/Complex.java
++++ b/src/main/java/org/apache/commons/math3/complex/Complex.java
+@@ -301,9 +301,16 @@ public class Complex implements FieldElement<Complex>, Serializable  {
+             return NaN;
+         }
+ 
++// start of generated patch
++if(real==0.0&&imaginary==0.0){
++return INF;
++}
++// end of generated patch
++/* start of original code
+         if (real == 0.0 && imaginary == 0.0) {
+             return NaN;
+         }
++ end of original code*/
+ 
+         if (isInfinite) {
+             return ZERO;

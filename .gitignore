@@ -141,3 +141,4 @@ data/model/*.model
 #data/experiment1
 #data/experiment2
 #data/experiment3
+.DS_Store

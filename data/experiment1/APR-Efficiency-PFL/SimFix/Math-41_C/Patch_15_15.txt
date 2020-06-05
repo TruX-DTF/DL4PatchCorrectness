@@ -1,0 +1,21 @@
+diff --git a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java
+index e5518e31a..fe49cd7f4 100644
+--- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java
++++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java
+@@ -517,9 +517,16 @@ public class Variance extends AbstractStorelessUnivariateStatistic implements Se
+                 }
+ 
+                 double sumWts = 0;
++// start of generated patch
++for(int i=begin;i<begin+length;i++){
++sumWts+=weights[i];
++}
++// end of generated patch
++/* start of original code
+                 for (int i = 0; i < weights.length; i++) {
+                     sumWts += weights[i];
+                 }
++ end of original code*/
+ 
+                 if (isBiasCorrected) {
+                     var = (accum - (accum2 * accum2 / sumWts)) / (sumWts - 1.0);

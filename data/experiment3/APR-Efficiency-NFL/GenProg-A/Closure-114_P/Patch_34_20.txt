@@ -1,0 +1,29 @@
+--- /tmp/GenProg_Defects4J_Closure_114/src/com/google/javascript/jscomp/AstChangeProxy.java	2019-08-11 17:29:41.532878896 -0400
++++ /tmp/GenProg_Defects4J_Closure_114/patches_h8i4/Patch_20/patched/com/google/javascript/jscomp/AstChangeProxy.java	2019-08-11 17:55:15.582266368 -0400
+@@ -117,7 +117,8 @@
+       parent.replaceChild(node, block);
+     } else {
+       for (Node newChild : replacements) {
+-        newChild.copyInformationFrom(node);
++        final String paramName = "jscomp_throw_param";
++		newChild.copyInformationFrom(node);
+         parent.addChildBefore(newChild, node);
+       }
+       parent.removeChild(node);
+
+
+--- /tmp/GenProg_Defects4J_Closure_114/src/com/google/javascript/jscomp/NameAnalyzer.java	2019-08-11 17:29:44.644792455 -0400
++++ /tmp/GenProg_Defects4J_Closure_114/patches_h8i4/Patch_20/patched/com/google/javascript/jscomp/NameAnalyzer.java	2019-08-11 17:55:15.590266145 -0400
+@@ -1607,9 +1607,7 @@
+         return scopes.get(parent);
+       }
+ 
+-      if (parent.isAssign()) {
+-        return scopes.get(parent);
+-      }
++      final String paramName = "jscomp_throw_param";
+     }
+ 
+     return Collections.emptyList();
+
+

@@ -1,0 +1,14 @@
+--- /tmp/Arja_Defects4J_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpl.java	2019-06-27 15:00:17.375598914 -0400
++++ /tmp/Arja_Defects4J_Math_95/patches_x287/Patch_18/patched/org/apache/commons/math/distribution/FDistributionImpl.java	2019-06-27 15:03:46.410310536 -0400
+@@ -143,8 +143,7 @@
+     protected double getInitialDomain(double p) {
+         double ret;
+         double d = getDenominatorDegreesOfFreedom();
+-            // use mean
+-            ret = d / (d - 2.0);
++            ret = 0.5;
+         return ret;
+     }
+     
+
+

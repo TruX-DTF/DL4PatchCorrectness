@@ -1,0 +1,18 @@
+--- /tmp/RSRepair_Defects4J_Closure_125/src/com/google/javascript/jscomp/TypeCheck.java	2019-08-13 22:32:03.466866445 -0400
++++ /tmp/RSRepair_Defects4J_Closure_125/patches_xmdf/Patch_1/patched/com/google/javascript/jscomp/TypeCheck.java	2019-08-13 22:55:26.181657677 -0400
+@@ -1658,12 +1658,7 @@
+     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();
+     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {
+       FunctionType fnType = type.toMaybeFunctionType();
+-      if (fnType != null) {
+-        visitParameterList(t, n, fnType);
+-        ensureTyped(t, n, fnType.getInstanceType());
+-      } else {
+-        ensureTyped(t, n);
+-      }
++      final String paramName = "jscomp_throw_param";
+     } else {
+       report(t, n, NOT_A_CONSTRUCTOR);
+       ensureTyped(t, n);
+
+

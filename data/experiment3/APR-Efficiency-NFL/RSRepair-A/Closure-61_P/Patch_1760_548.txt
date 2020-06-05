@@ -1,0 +1,13 @@
+--- /tmp/RSRepair_Defects4J_Closure_61/src/com/google/javascript/rhino/Node.java	2019-08-12 12:18:04.348568555 -0400
++++ /tmp/RSRepair_Defects4J_Closure_61/patches_5q5e/Patch_548/patched/com/google/javascript/rhino/Node.java	2019-08-12 12:51:27.221769673 -0400
+@@ -1500,7 +1500,7 @@
+       }
+       res = n.checkTreeEqualsImpl(n2);
+       if (res != null) {
+-        return res;
++        return null;
+       }
+     }
+     return res;
+
+

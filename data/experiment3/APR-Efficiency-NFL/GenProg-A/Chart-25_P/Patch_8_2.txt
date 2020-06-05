@@ -1,0 +1,14 @@
+--- /tmp/GenProg_Defects4J_Chart_25/source/org/jfree/data/statistics/DefaultStatisticalCategoryDataset.java	2019-07-24 02:14:37.020416696 -0400
++++ /tmp/GenProg_Defects4J_Chart_25/patches_8aax/Patch_2/patched/org/jfree/data/statistics/DefaultStatisticalCategoryDataset.java	2019-07-24 02:18:25.257381239 -0400
+@@ -107,9 +107,6 @@
+         Number result = null;
+         MeanAndStandardDeviation masd 
+             = (MeanAndStandardDeviation) this.data.getObject(row, column);
+-        if (masd != null) {
+-            result = masd.getMean();
+-        }
+         return result;
+     }
+ 
+
+

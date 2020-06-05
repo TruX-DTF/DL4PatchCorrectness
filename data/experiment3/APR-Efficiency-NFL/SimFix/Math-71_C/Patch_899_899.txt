@@ -1,0 +1,61 @@
+diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java
+index 0840ac1cc..966384584 100644
+--- a/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java
++++ b/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java
+@@ -291,6 +291,19 @@ public abstract class EmbeddedRungeKuttaIntegrator
+           interpolator.storeTime(stepStart + stepSize);
+           if (manager.evaluateStep(interpolator)) {
+               final double dt = manager.getEventTime() - stepStart;
++// start of generated patch
++if(Math.abs(dt)<=Math.ulp(stepStart)){
++interpolator.storeTime(stepStart);
++System.arraycopy(y,0,yTmp,0,y0.length);
++hNew=0;
++stepSize=0;
++
++loop=false;
++}else {
++hNew=dt;
++}
++// end of generated patch
++/* start of original code
+               if (Math.abs(dt) <= Math.ulp(stepStart)) {
+                   // we cannot simply truncate the step, reject the current computation
+                   // and let the loop compute another state with the truncated step.
+@@ -302,6 +315,7 @@ public abstract class EmbeddedRungeKuttaIntegrator
+                   // reject the step to match exactly the next switch time
+                   hNew = dt;
+               }
++ end of original code*/
+           } else {
+             // accept the step
+             loop = false;
+diff --git a/src/main/java/org/apache/commons/math/ode/nonstiff/RungeKuttaIntegrator.java b/src/main/java/org/apache/commons/math/ode/nonstiff/RungeKuttaIntegrator.java
+index 255b1f42b..b6b592ee7 100644
+--- a/src/main/java/org/apache/commons/math/ode/nonstiff/RungeKuttaIntegrator.java
++++ b/src/main/java/org/apache/commons/math/ode/nonstiff/RungeKuttaIntegrator.java
+@@ -171,6 +171,16 @@ public abstract class RungeKuttaIntegrator extends AbstractIntegrator {
+         interpolator.storeTime(stepStart + stepSize);
+         if (manager.evaluateStep(interpolator)) {
+             final double dt = manager.getEventTime() - stepStart;
++// start of generated patch
++if(Math.abs(dt)<=Math.ulp(stepStart)){
++System.arraycopy(y,0,yTmp,0,y0.length);
++stepSize=0;
++loop=false;
++}else {
++stepSize=dt;
++}
++// end of generated patch
++/* start of original code
+             if (Math.abs(dt) <= Math.ulp(stepStart)) {
+                 // we cannot simply truncate the step, reject the current computation
+                 // and let the loop compute another state with the truncated step.
+@@ -182,6 +192,7 @@ public abstract class RungeKuttaIntegrator extends AbstractIntegrator {
+                 // reject the step to match exactly the next switch time
+                 stepSize = dt;
+             }
++ end of original code*/
+         } else {
+           loop = false;
+         }

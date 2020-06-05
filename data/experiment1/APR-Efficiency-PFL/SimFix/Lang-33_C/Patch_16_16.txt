@@ -1,0 +1,21 @@
+diff --git a/src/main/java/org/apache/commons/lang3/ClassUtils.java b/src/main/java/org/apache/commons/lang3/ClassUtils.java
+index 615e4a9a..6c297d6e 100644
+--- a/src/main/java/org/apache/commons/lang3/ClassUtils.java
++++ b/src/main/java/org/apache/commons/lang3/ClassUtils.java
+@@ -906,9 +906,16 @@ public class ClassUtils {
+             return ArrayUtils.EMPTY_CLASS_ARRAY;
+         }
+         Class<?>[] classes = new Class[array.length];
++// start of generated patch
++for(int i=0;i<array.length;i++){
++classes[i]=array[i]==null?null:array[i].getClass();
++}
++// end of generated patch
++/* start of original code
+         for (int i = 0; i < array.length; i++) {
+             classes[i] = array[i].getClass();
+         }
++ end of original code*/
+         return classes;
+     }
+ 

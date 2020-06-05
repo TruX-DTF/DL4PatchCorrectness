@@ -1,0 +1,13 @@
+diff --git a/source/org/jfree/data/statistics/DefaultStatisticalCategoryDataset.java b/source/org/jfree/data/statistics/DefaultStatisticalCategoryDataset.java
+index 7e408a3..ff12062 100644
+--- a/source/org/jfree/data/statistics/DefaultStatisticalCategoryDataset.java
++++ b/source/org/jfree/data/statistics/DefaultStatisticalCategoryDataset.java
+@@ -106,7 +106,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
+     public Number getMeanValue(int row, int column) {
+         Number result = null;
+         MeanAndStandardDeviation masd 
+-            = (MeanAndStandardDeviation) this.data.getObject(row, column);
++            = (MeanAndStandardDeviation) this.data.getObject(this.minimumRangeValue, column);
+         if (masd != null) {
+             result = masd.getMean();
+         }

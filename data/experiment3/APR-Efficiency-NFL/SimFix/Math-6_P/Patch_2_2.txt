@@ -1,0 +1,17 @@
+diff --git a/src/main/java/org/apache/commons/math3/optim/BaseOptimizer.java b/src/main/java/org/apache/commons/math3/optim/BaseOptimizer.java
+index 75c9757ae..f6a819f1c 100644
+--- a/src/main/java/org/apache/commons/math3/optim/BaseOptimizer.java
++++ b/src/main/java/org/apache/commons/math3/optim/BaseOptimizer.java
+@@ -90,7 +90,12 @@ public abstract class BaseOptimizer<PAIR> {
+      * @return the number of evaluations of the objective function.
+      */
+     public int getIterations() {
++// start of generated patch
++return evaluations.getCount();
++// end of generated patch
++/* start of original code
+         return iterations.getCount();
++ end of original code*/
+     }
+ 
+     /**

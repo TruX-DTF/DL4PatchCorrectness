@@ -1,0 +1,14 @@
+--- /tmp/Arja_Defects4J_Chart_7/source/org/jfree/data/time/TimePeriodValues.java	2019-07-19 04:00:43.397885052 -0400
++++ /tmp/Arja_Defects4J_Chart_7/patches_cz2a/Patch_357/patched/org/jfree/data/time/TimePeriodValues.java	2019-07-19 04:12:25.673883461 -0400
+@@ -314,7 +314,8 @@
+             long minEnd = getDataItem(this.minEndIndex).getPeriod().getEnd()
+                 .getTime();
+             if (end < minEnd) {
+-                this.minEndIndex = index;           
++                this.data.remove(index);
++				this.minEndIndex = index;           
+             }
+         }
+         else {
+
+

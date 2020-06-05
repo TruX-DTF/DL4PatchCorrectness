@@ -1,0 +1,30 @@
+diff --git a/src/java/org/apache/commons/lang/math/NumberUtils.java b/src/java/org/apache/commons/lang/math/NumberUtils.java
+index c0f06a47..1e37c4ac 100644
+--- a/src/java/org/apache/commons/lang/math/NumberUtils.java
++++ b/src/java/org/apache/commons/lang/math/NumberUtils.java
+@@ -449,6 +449,17 @@ public class NumberUtils {
+             switch (lastChar) {
+                 case 'l' :
+                 case 'L' :
++// start of generated patch
++if(dec==null&&exp==null&&(numeric.charAt(0)=='-'&&isDigits(numeric.substring(1))||isDigits(numeric))){
++try{
++return createLong(numeric);
++}catch (NumberFormatException nfe) {
++}
++
++return createBigInteger(numeric);
++}
++// end of generated patch
++/* start of original code
+                     if (dec == null
+                         && exp == null
+                         && isDigits(numeric.substring(1))
+@@ -461,6 +472,7 @@ public class NumberUtils {
+                         return createBigInteger(numeric);
+ 
+                     }
++ end of original code*/
+                     throw new NumberFormatException(str + " is not a valid number.");
+                 case 'f' :
+                 case 'F' :

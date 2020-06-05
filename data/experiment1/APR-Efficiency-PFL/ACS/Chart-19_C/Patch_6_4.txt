@@ -1,0 +1,22 @@
+diff --git a/source/org/jfree/chart/plot/CategoryPlot.java b/source/org/jfree/chart/plot/CategoryPlot.java
+index cf3f52f..268ae73 100644
+--- a/source/org/jfree/chart/plot/CategoryPlot.java
++++ b/source/org/jfree/chart/plot/CategoryPlot.java
+@@ -695,7 +695,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
+      * @since 1.0.3
+      */
+     public int getDomainAxisIndex(CategoryAxis axis) {
+-        return this.domainAxes.indexOf(axis);
++if (axis == null){throw new IllegalArgumentException();}        return this.domainAxes.indexOf(axis);
+     }
+     
+     /**
+@@ -970,7 +970,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
+      * @since 1.0.7
+      */
+     public int getRangeAxisIndex(ValueAxis axis) {
+-        int result = this.rangeAxes.indexOf(axis);
++if (axis == null){throw new IllegalArgumentException();}        int result = this.rangeAxes.indexOf(axis);
+         if (result < 0) { // try the parent plot
+             Plot parent = getParent();
+             if (parent instanceof CategoryPlot) {

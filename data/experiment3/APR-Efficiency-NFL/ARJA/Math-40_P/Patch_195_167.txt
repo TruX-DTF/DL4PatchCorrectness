@@ -1,0 +1,14 @@
+--- /tmp/Arja_Defects4J_Math_40/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java	2019-07-29 00:21:28.424877014 -0400
++++ /tmp/Arja_Defects4J_Math_40/patches_nvej/Patch_167/patched/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java	2019-07-29 00:59:26.761543370 -0400
+@@ -261,7 +261,8 @@
+                         // we have more points before the sign change, drop the lowest point
+                         ++start;
+                     } else {
+-                        // we have more points after sign change, drop the highest point
++                        ++start;
++						// we have more points after sign change, drop the highest point
+                         --end;
+                     }
+ 
+
+

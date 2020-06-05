@@ -1,0 +1,52 @@
+PATCH_DIFF_ORIG=--- /tmp/jGenProg_Defects4J_Math_53/src/main/java/org/apache/commons/math/complex/Complexjava
++++ /tmp/jGenProg_Defects4J_Math_53/src/main/java/org/apache/commons/math/complex/Complexjava
+@@ -150,9 +150,6 @@
+ 	public org.apache.commons.math.complex.Complex add(org.apache.commons.math.complex.Complex rhs) throws 
+ 	org.apache.commons.math.exception.NullArgumentException {
+ 		org.apache.commons.math.util.MathUtils.checkNotNull(rhs);
+-		return createComplex(((real) + (rhs.getReal())), 
+-		((imaginary) + (rhs.getImaginary())));
+-	}
+ 
+ 
+ 
+@@ -168,12 +165,6 @@
+ 
+ 
+ 
+-	public org.apache.commons.math.complex.Complex conjugate() {
+-		if (isNaN) {
+-			return org.apache.commons.math.complex.Complex.NaN;
+-		}
+-		return createComplex(real, (-(imaginary)));
+-	}
+ 
+ 
+ 
+@@ -210,12 +201,21 @@
+ 
+ 
+ 
+-	public org.apache.commons.math.complex.Complex divide(org.apache.commons.math.complex.Complex rhs) throws 
+-	org.apache.commons.math.exception.NullArgumentException {
+-		org.apache.commons.math.util.MathUtils.checkNotNull(rhs);
++
++
++
++
++
++
++
++
++
++
++
++
+ 		if ((isNaN) || (rhs.isNaN)) {
+ 			return org.apache.commons.math.complex.Complex.NaN;
+-		}
++		} 		return createComplex(((real) + (rhs.getReal())), ((imaginary) + (rhs.getImaginary())));} 	public org.apache.commons.math.complex.Complex conjugate() { 		if (isNaN) { 			return org.apache.commons.math.complex.Complex.NaN;} 		return createComplex(real, (-(imaginary)));} 	public org.apache.commons.math.complex.Complex divide(org.apache.commons.math.complex.Complex rhs) throws org.apache.commons.math.exception.NullArgumentException { 		org.apache.commons.math.util.MathUtils.checkNotNull(rhs); 		if ((isNaN) || (rhs.isNaN)) { 			return org.apache.commons.math.complex.Complex.NaN;}
+ 
+ 		double c = rhs.getReal();
+ 		double d = rhs.getImaginary();
+

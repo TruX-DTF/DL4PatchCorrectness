@@ -1,0 +1,22 @@
+diff --git a/src/main/java/org/apache/commons/math/ode/events/EventState.java b/src/main/java/org/apache/commons/math/ode/events/EventState.java
+index 8e9ff46a5..e14c58aff 100644
+--- a/src/main/java/org/apache/commons/math/ode/events/EventState.java
++++ b/src/main/java/org/apache/commons/math/ode/events/EventState.java
+@@ -187,9 +187,17 @@ public class EventState {
+     public boolean evaluateStep(final StepInterpolator interpolator)
+         throws ConvergenceException {
+ 
++// start of generated patch
++forward=interpolator.isForward();
++t0=interpolator.getPreviousTime();
++ final double t1=interpolator.getCurrentTime();
++ final double dt=t1-t0;
++// end of generated patch
++/* start of original code
+             forward = interpolator.isForward();
+             final double t1 = interpolator.getCurrentTime();
+             final double dt = t1 - t0;
++ end of original code*/
+             if (FastMath.abs(dt) < convergence) {
+                 // we cannot do anything on such a small step, don't trigger any events
+                 return false;

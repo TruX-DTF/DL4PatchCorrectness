@@ -1,0 +1,13 @@
+--- /tmp/Arja_Defects4J_Lang_16/src/main/java/org/apache/commons/lang3/math/NumberUtils.java	2019-07-22 15:25:27.526223489 -0400
++++ /tmp/Arja_Defects4J_Lang_16/patches_phj5/Patch_82/patched/org/apache/commons/lang3/math/NumberUtils.java	2019-07-22 15:34:02.707203269 -0400
+@@ -542,7 +542,7 @@
+                     }
+                     //$FALL-THROUGH$
+                 default :
+-                    throw new NumberFormatException(str + " is not a valid number.");
++				return createInteger(str);
+ 
+             }
+         } else {
+
+

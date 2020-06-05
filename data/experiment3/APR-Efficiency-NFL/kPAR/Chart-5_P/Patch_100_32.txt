@@ -1,0 +1,13 @@
+diff --git a/source/org/jfree/data/xy/XYSeries.java b/source/org/jfree/data/xy/XYSeries.java
+index 0b37e6e..c57053b 100644
+--- a/source/org/jfree/data/xy/XYSeries.java
++++ b/source/org/jfree/data/xy/XYSeries.java
+@@ -560,7 +560,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
+             // Collections.binarySearch() and tells us where to insert the
+             // new item...otherwise it will be just -1 and we should just
+             // append the value to the list...
+-            if (this.autoSort) {
++            if ((index >= 0 && !this.allowDuplicateXValues)) {
+                 this.data.add(-index - 1, new XYDataItem(x, y));
+             }
+             else {

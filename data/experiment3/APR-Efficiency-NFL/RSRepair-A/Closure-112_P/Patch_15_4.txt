@@ -1,0 +1,13 @@
+--- /tmp/RSRepair_Defects4J_Closure_112/src/com/google/javascript/jscomp/TypeInference.java	2019-08-12 13:59:00.507535824 -0400
++++ /tmp/RSRepair_Defects4J_Closure_112/patches_oujc/Patch_4/patched/com/google/javascript/jscomp/TypeInference.java	2019-08-12 14:24:01.887447032 -0400
+@@ -1116,8 +1116,6 @@
+       Iterable<Node> declParams,
+       Iterable<Node> callParams,
+       Map<TemplateType, JSType> resolvedTypes) {
+-    maybeResolveTemplateTypeFromNodes(
+-        declParams.iterator(), callParams.iterator(), resolvedTypes);
+   }
+ 
+   private void maybeResolveTemplateTypeFromNodes(
+
+

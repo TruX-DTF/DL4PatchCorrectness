@@ -1,0 +1,14 @@
+--- /tmp/RSRepair_Defects4J_Closure_10/src/com/google/javascript/jscomp/NodeUtil.java	2019-08-12 09:00:00.609742918 -0400
++++ /tmp/RSRepair_Defects4J_Closure_10/patches_vwhx/Patch_2/patched/com/google/javascript/jscomp/NodeUtil.java	2019-08-12 09:24:41.113578065 -0400
+@@ -1268,8 +1268,7 @@
+         return allResultsMatch(n.getFirstChild(), p)
+             && allResultsMatch(n.getLastChild(), p);
+       case Token.HOOK:
+-        return allResultsMatch(n.getFirstChild().getNext(), p)
+-            && allResultsMatch(n.getLastChild(), p);
++        int type = n.getType();
+       default:
+         return p.apply(n);
+     }
+
+

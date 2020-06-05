@@ -1,0 +1,14 @@
+--- /tmp/Arja_Defects4J_Chart_13/source/org/jfree/chart/block/BorderArrangement.java	2019-07-19 06:02:19.029868519 -0400
++++ /tmp/Arja_Defects4J_Chart_13/patches_et25/Patch_4/patched/org/jfree/chart/block/BorderArrangement.java	2019-07-19 06:10:31.193867404 -0400
+@@ -319,7 +319,8 @@
+             w[4] = size.width;
+             h[4] = size.height;
+         }
+-        double height = h[0] + h[1] + Math.max(h[2], Math.max(h[3], h[4]));
++        this.rightBlock = null;
++		double height = h[0] + h[1] + Math.max(h[2], Math.max(h[3], h[4]));
+         return arrange(container, g2, new RectangleConstraint(width, height));
+     }
+ 
+
+

@@ -1,0 +1,21 @@
+diff --git a/src/com/google/javascript/jscomp/FunctionInjector.java b/src/com/google/javascript/jscomp/FunctionInjector.java
+index 73d6a4b3..92fc3a1b 100644
+--- a/src/com/google/javascript/jscomp/FunctionInjector.java
++++ b/src/com/google/javascript/jscomp/FunctionInjector.java
+@@ -698,9 +698,16 @@ class FunctionInjector {
+     if (block.hasChildren()) {
+       Preconditions.checkState(block.hasOneChild());
+       Node stmt = block.getFirstChild();
++// start of generated patch
++if(stmt.getFirstChild().isReturn()){
++hasSideEffects=NodeUtil.mayHaveSideEffects(stmt.getFirstChild(),compiler);
++}
++// end of generated patch
++/* start of original code
+       if (stmt.isReturn()) {
+         hasSideEffects = NodeUtil.mayHaveSideEffects(stmt.getFirstChild(), compiler);
+       }
++ end of original code*/
+     }
+     // CALL NODE: [ NAME, ARG1, ARG2, ... ]
+     Node cArg = callNode.getFirstChild().getNext();

@@ -1,0 +1,26 @@
+--- /tmp/Arja_Defects4J_Math_22/src/main/java/org/apache/commons/math3/distribution/FDistribution.java	2019-08-03 19:45:19.554803416 -0400
++++ /tmp/Arja_Defects4J_Math_22/patches_fvu1/Patch_22/patched/org/apache/commons/math3/distribution/FDistribution.java	2019-08-03 21:11:33.382696340 -0400
+@@ -272,7 +272,7 @@
+ 
+     /** {@inheritDoc} */
+     public boolean isSupportLowerBoundInclusive() {
+-        return true;
++        return false;
+     }
+ 
+     /** {@inheritDoc} */
+
+
+--- /tmp/Arja_Defects4J_Math_22/src/main/java/org/apache/commons/math3/distribution/UniformRealDistribution.java	2019-08-03 19:45:19.554803416 -0400
++++ /tmp/Arja_Defects4J_Math_22/patches_fvu1/Patch_22/patched/org/apache/commons/math3/distribution/UniformRealDistribution.java	2019-08-03 21:11:33.418696358 -0400
+@@ -181,7 +181,7 @@
+ 
+     /** {@inheritDoc} */
+     public boolean isSupportUpperBoundInclusive() {
+-        return false;
++        return true;
+     }
+ 
+     /**
+
+

@@ -1,0 +1,55 @@
+diff --git a/src/java/org/apache/commons/math/linear/BigMatrixImpl.java b/src/java/org/apache/commons/math/linear/BigMatrixImpl.java
+index 7cd61cb2c..81214ae2e 100644
+--- a/src/java/org/apache/commons/math/linear/BigMatrixImpl.java
++++ b/src/java/org/apache/commons/math/linear/BigMatrixImpl.java
+@@ -986,9 +986,16 @@ public class BigMatrixImpl implements BigMatrix, Serializable {
+         if (v.length != this.getColumnDimension()) {
+             throw new IllegalArgumentException("vector has wrong length");
+         }
++// start of generated patch
++ final int nRows=this.getRowDimension();
++ final int nCols=this.getColumnDimension();
++ final BigDecimal[] out=new BigDecimal[nRows];
++// end of generated patch
++/* start of original code
+         final int nRows = this.getRowDimension();
+         final int nCols = this.getColumnDimension();
+         final BigDecimal[] out = new BigDecimal[v.length];
++ end of original code*/
+         for (int row = 0; row < nRows; row++) {
+             BigDecimal sum = ZERO;
+             for (int i = 0; i < nCols; i++) {
+diff --git a/src/java/org/apache/commons/math/linear/RealMatrixImpl.java b/src/java/org/apache/commons/math/linear/RealMatrixImpl.java
+index 791064425..3b587ecf4 100644
+--- a/src/java/org/apache/commons/math/linear/RealMatrixImpl.java
++++ b/src/java/org/apache/commons/math/linear/RealMatrixImpl.java
+@@ -773,6 +773,21 @@ public class RealMatrixImpl implements RealMatrix, Serializable {
+     public double[] operate(double[] v) throws IllegalArgumentException {
+         final int nRows = this.getRowDimension();
+         final int nCols = this.getColumnDimension();
++// start of generated patch
++if(v.length!=nCols){
++throw new IllegalArgumentException("vector has wrong length");
++}
++ final double[] out=new double[nRows];
++for(int row=0;row<nRows;row++){
++ final double[] dataRow=data[row];
++double sum=0;
++for(int i=0;i<nCols;i++){
++sum+=dataRow[i]*v[i];
++}
++out[row]=sum;
++}
++// end of generated patch
++/* start of original code
+         if (v.length != nCols) {
+             throw new IllegalArgumentException("vector has wrong length");
+         }
+@@ -785,6 +800,7 @@ public class RealMatrixImpl implements RealMatrix, Serializable {
+             }
+             out[row] = sum;
+         }
++ end of original code*/
+         return out;
+     }
+ 

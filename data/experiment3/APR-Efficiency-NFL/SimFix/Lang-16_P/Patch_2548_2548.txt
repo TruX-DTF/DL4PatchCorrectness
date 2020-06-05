@@ -1,0 +1,22 @@
+diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+index 882358f2..6719f465 100644
+--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
++++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+@@ -445,9 +445,17 @@ public class NumberUtils {
+         if (str == null) {
+             return null;
+         }
++// start of generated patch
++str=str.toLowerCase();
++if(StringUtils.isBlank(str)){
++throw new NumberFormatException("A blank string is not a valid number");
++}
++// end of generated patch
++/* start of original code
+         if (StringUtils.isBlank(str)) {
+             throw new NumberFormatException("A blank string is not a valid number");
+         }  
++ end of original code*/
+         if (str.startsWith("--")) {
+             // this is protection for poorness in java.lang.BigDecimal.
+             // it accepts this as a legal value, but it does not appear 

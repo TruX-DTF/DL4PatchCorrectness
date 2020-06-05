@@ -1,0 +1,18 @@
+--- /tmp/RSRepair_Defects4J_Math_80/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java	2019-08-04 16:04:02.177413358 -0400
++++ /tmp/RSRepair_Defects4J_Math_80/patches_g9t2/Patch_69/patched/org/apache/commons/math/linear/EigenDecompositionImpl.java	2019-08-04 16:10:51.121622298 -0400
+@@ -1131,7 +1131,12 @@
+      */
+     private boolean flipIfWarranted(final int n, final int step) {
+         if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {
+-            // flip array
++            for (int i = 0; i < realEigenvalues.length; ++i) {
++				if ((realEigenvalues[i] == 0) && (imagEigenvalues[i] == 0)) {
++					return false;
++				}
++			}
++			// flip array
+             int j = 4 * n - 1;
+             for (int i = 0; i < j; i += 4) {
+                 for (int k = 0; k < 4; k += step) {
+
+

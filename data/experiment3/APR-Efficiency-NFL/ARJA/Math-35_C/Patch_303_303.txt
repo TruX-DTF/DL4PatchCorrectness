@@ -1,0 +1,27 @@
+--- /tmp/Arja_Defects4J_Math_35/src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java	2019-07-28 03:45:19.759179973 -0400
++++ /tmp/Arja_Defects4J_Math_35/patches_rvo9/Patch_303/patched/org/apache/commons/math3/genetics/ElitisticListPopulation.java	2019-07-28 04:44:46.033213057 -0400
+@@ -48,7 +48,9 @@
+                                    final int populationLimit,
+                                    final double elitismRate) {
+         super(chromosomes, populationLimit);
+-        this.elitismRate = elitismRate;
++        if (elitismRate < 0 || elitismRate > 1) {
++			throw new OutOfRangeException(LocalizedFormats.ELITISM_RATE, elitismRate, 0, 1);
++		}
+     }
+ 
+     /**
+@@ -62,7 +64,10 @@
+      */
+     public ElitisticListPopulation(final int populationLimit, final double elitismRate) {
+         super(populationLimit);
+-        this.elitismRate = elitismRate;
++        if (elitismRate < 0 || elitismRate > 1) {
++			throw new OutOfRangeException(LocalizedFormats.ELITISM_RATE, elitismRate, 0, 1);
++		}
++		this.elitismRate = elitismRate;
+     }
+ 
+     /**
+
+

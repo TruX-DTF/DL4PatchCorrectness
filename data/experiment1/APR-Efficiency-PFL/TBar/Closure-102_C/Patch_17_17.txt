@@ -1,0 +1,21 @@
+diff --git a/src/com/google/javascript/jscomp/Normalize.java b/src/com/google/javascript/jscomp/Normalize.java
+index 4aa4555..d1757e2 100644
+--- a/src/com/google/javascript/jscomp/Normalize.java
++++ b/src/com/google/javascript/jscomp/Normalize.java
+@@ -86,12 +86,14 @@ class Normalize implements CompilerPass, Callback {
+   @Override
+   public void process(Node externs, Node root) {
+     NodeTraversal.traverse(compiler, root, this);
+-    if (MAKE_LOCAL_NAMES_UNIQUE) {
++    
++    removeDuplicateDeclarations(root);
++	if (MAKE_LOCAL_NAMES_UNIQUE) {
+       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();
+       NodeTraversal t = new NodeTraversal(compiler, renamer);
+       t.traverseRoots(externs, root);
+     }
+-    removeDuplicateDeclarations(root);
++
+     new PropogateConstantAnnotations(compiler, assertOnChange)
+         .process(externs, root);
+   }

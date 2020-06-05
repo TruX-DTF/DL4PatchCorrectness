@@ -1,0 +1,10 @@
+--- /tmp/jGenProg_Defects4J_Math_84/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectionaljava
++++ /tmp/jGenProg_Defects4J_Math_84/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectionaljava
+@@ -92,7 +92,7 @@
+ 
+ 
+ 				return;
+-			}
++			} 			return;
+ 
+ 		} 

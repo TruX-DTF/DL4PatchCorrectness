@@ -1,0 +1,14 @@
+--- /tmp/Arja_Defects4J_Closure_115/src/com/google/javascript/jscomp/FunctionInjector.java	2019-08-11 04:46:32.023061844 -0400
++++ /tmp/Arja_Defects4J_Closure_115/patches_z8wr/Patch_1/patched/com/google/javascript/jscomp/FunctionInjector.java	2019-08-11 05:11:02.710789945 -0400
+@@ -727,9 +727,6 @@
+       // For each named parameter check if a mutable argument use more than one.
+       if (fnParam != null) {
+         if (cArg != null) {
+-          if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {
+-            return CanInlineResult.NO;
+-          }
+           // Check for arguments that are evaluated more than once.
+           // Note: Unlike block inlining, there it is not possible that a
+           // parameter reference will be in a loop.
+
+

@@ -1,0 +1,17 @@
+diff --git a/src/main/java/org/apache/commons/math/util/MathUtils.java b/src/main/java/org/apache/commons/math/util/MathUtils.java
+index 136184990..fc1233615 100644
+--- a/src/main/java/org/apache/commons/math/util/MathUtils.java
++++ b/src/main/java/org/apache/commons/math/util/MathUtils.java
+@@ -414,7 +414,12 @@ public final class MathUtils {
+      * @return {@code true} if the values are equal.
+      */
+     public static boolean equals(double x, double y) {
++// start of generated patch
++return equals(x,y,1)||FastMath.abs(y-x)<=SAFE_MIN;
++// end of generated patch
++/* start of original code
+         return (Double.isNaN(x) && Double.isNaN(y)) || x == y;
++ end of original code*/
+     }
+ 
+     /**

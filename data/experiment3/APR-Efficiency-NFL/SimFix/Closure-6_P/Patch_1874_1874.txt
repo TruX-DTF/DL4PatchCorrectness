@@ -1,0 +1,25 @@
+diff --git a/src/com/google/javascript/jscomp/TypeValidator.java b/src/com/google/javascript/jscomp/TypeValidator.java
+index 8cdb02a4..41248cf5 100644
+--- a/src/com/google/javascript/jscomp/TypeValidator.java
++++ b/src/com/google/javascript/jscomp/TypeValidator.java
+@@ -402,11 +402,20 @@ class TypeValidator {
+   boolean expectCanAssignTo(NodeTraversal t, Node n, JSType rightType,
+       JSType leftType, String msg) {
+     if (!rightType.canAssignTo(leftType)) {
++// start of generated patch
++if(!shouldReport&&(shouldReport||!NodeUtil.mayHaveSideEffects(n,t.getCompiler()))){
++registerMismatch(rightType,leftType,null);
++}else {
++mismatch(t,n,msg,rightType,leftType);
++}
++// end of generated patch
++/* start of original code
+       if ((leftType.isConstructor() || leftType.isEnumType()) && (rightType.isConstructor() || rightType.isEnumType())) {
+         registerMismatch(rightType, leftType, null);
+       } else {
+       mismatch(t, n, msg, rightType, leftType);
+       }
++ end of original code*/
+       return false;
+     }
+     return true;

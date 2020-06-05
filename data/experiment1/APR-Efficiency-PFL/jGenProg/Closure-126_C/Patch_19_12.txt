@@ -1,0 +1,16 @@
+--- /tmp/jGenProg_Defects4J_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPointsjava
++++ /tmp/jGenProg_Defects4J_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPointsjava
+@@ -138,10 +138,10 @@
+ 
+ 
+ 
+-			if (com.google.javascript.jscomp.NodeUtil.hasFinally(n)) {
+-				com.google.javascript.rhino.Node finallyBlock = n.getLastChild();
+-				tryMinimizeExits(finallyBlock, exitType, labelName);
+-			}
++
++
++
++
+ 		}
+ 

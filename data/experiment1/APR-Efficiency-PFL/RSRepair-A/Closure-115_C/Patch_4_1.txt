@@ -1,0 +1,12 @@
+--- /tmp/RSRepair_Defects4J_Closure_115/src/com/google/javascript/jscomp/FunctionInjector.java	2019-08-14 01:01:54.701269530 -0400
++++ /tmp/RSRepair_Defects4J_Closure_115/patches_lpy8/Patch_1/patched/com/google/javascript/jscomp/FunctionInjector.java	2019-08-14 01:22:55.692961375 -0400
+@@ -728,7 +728,6 @@
+       if (fnParam != null) {
+         if (cArg != null) {
+           if (hasSideEffects && NodeUtil.canBeSideEffected(cArg)) {
+-            return CanInlineResult.NO;
+           }
+           // Check for arguments that are evaluated more than once.
+           // Note: Unlike block inlining, there it is not possible that a
+
+

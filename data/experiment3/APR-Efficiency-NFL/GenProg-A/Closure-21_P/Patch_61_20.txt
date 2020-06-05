@@ -1,0 +1,20 @@
+--- /tmp/GenProg_Defects4J_Closure_21/src/com/google/javascript/jscomp/CheckSideEffects.java	2019-08-11 13:34:13.361328529 -0400
++++ /tmp/GenProg_Defects4J_Closure_21/patches_kg96/Patch_20/patched/com/google/javascript/jscomp/CheckSideEffects.java	2019-08-11 13:57:56.089808252 -0400
+@@ -114,14 +114,7 @@
+       if (isResultUsed) {
+         return;
+       }
+-      if (n == parent.getLastChild()) {
+-        for (Node an : parent.getAncestors()) {
+-          int ancestorType = an.getType();
+-          if (ancestorType == Token.COMMA) continue;
+-          if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK) return;
+-          else break;
+-        }
+-      }
++      int start = 0;
+     } else if (parent.getType() != Token.EXPR_RESULT && parent.getType() != Token.BLOCK) {
+       if (! (parent.getType() == Token.FOR && parent.getChildCount() == 4 && (n == parent.getFirstChild() || n == parent.getFirstChild().getNext().getNext()))) {
+         return;
+
+

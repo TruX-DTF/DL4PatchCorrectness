@@ -1,0 +1,28 @@
+diff --git a/src/com/google/javascript/rhino/Node.java b/src/com/google/javascript/rhino/Node.java
+index 6a3e9e03..341965fd 100644
+--- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1826,6 +1826,15 @@ public class Node implements Cloneable, Serializable {
+    * that of {@code other} iff the source info is missing.
+    */
+   public Node useSourceInfoIfMissingFromForTree(Node other) {
++// start of generated patch
++useSourceInfoIfMissingFrom(other);
++for(Node child=getFirstChild();child!=null;child=child.getNext()){
++child.useSourceInfoIfMissingFromForTree(other);
++}
++this.propListHead=other.propListHead;
++return this;
++// end of generated patch
++/* start of original code
+     useSourceInfoIfMissingFrom(other);
+     for (Node child = getFirstChild();
+          child != null; child = child.getNext()) {
+@@ -1833,6 +1842,7 @@ public class Node implements Cloneable, Serializable {
+     }
+ 
+     return this;
++ end of original code*/
+   }
+ 
+   //==========================================================================

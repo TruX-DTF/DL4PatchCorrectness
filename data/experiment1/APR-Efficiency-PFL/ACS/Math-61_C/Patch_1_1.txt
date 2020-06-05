@@ -1,0 +1,23 @@
+
+diff --git a/src/main/java/org/apache/commons/math/distribution/PoissonDistributionImpl.java b/src/main/java/org/apache/commons/math/distribution/PoissonDistributionImpl.java
+index 148daad..c225e86 100644
+--- a/src/main/java/org/apache/commons/math/distribution/PoissonDistributionImpl.java
++++ b/src/main/java/org/apache/commons/math/distribution/PoissonDistributionImpl.java
+@@ -14,7 +14,7 @@
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+-package org.apache.commons.math.distribution;
++package org.apache.commons.math.distribution;import  org.apache.commons.math.exception.NotStrictlyPositiveException;
+ 
+ import java.io.Serializable;
+ 
+@@ -91,7 +91,7 @@ public class PoissonDistributionImpl extends AbstractIntegerDistribution
+      */
+     public PoissonDistributionImpl(double p, double epsilon, int maxIterations) {
+         if (p <= 0) {
+-            throw MathRuntimeException.createIllegalArgumentException(LocalizedFormats.NOT_POSITIVE_POISSON_MEAN, p);
++if (p <= 0){throw new NotStrictlyPositiveException(null);}            throw MathRuntimeException.createIllegalArgumentException(LocalizedFormats.NOT_POSITIVE_POISSON_MEAN, p);
+         }
+         mean = p;
+         normal = new NormalDistributionImpl(p, FastMath.sqrt(p));

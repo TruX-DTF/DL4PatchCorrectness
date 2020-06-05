@@ -1,0 +1,16 @@
+--- /tmp/GenProg_Defects4J_Closure_86/src/com/google/javascript/jscomp/NodeUtil.java	2019-08-12 17:28:55.433238713 -0400
++++ /tmp/GenProg_Defects4J_Closure_86/patches_s16k/Patch_25/patched/com/google/javascript/jscomp/NodeUtil.java	2019-08-12 17:41:37.766163818 -0400
+@@ -2459,10 +2459,7 @@
+             || isToStringMethodCall(value)
+             || locals.apply(value);
+       case Token.NEW:
+-        // TODO(nicksantos): This needs to be changed so that it
+-        // returns true iff we're sure the value was never aliased from inside
+-        // the constructor (similar to callHasLocalResult)
+-        return true;
++        return false;
+       case Token.FUNCTION:
+       case Token.REGEXP:
+       case Token.ARRAYLIT:
+
+

@@ -1,0 +1,13 @@
+diff --git a/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java b/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
+index f24f87c..9940abf 100644
+--- a/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
++++ b/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
+@@ -124,7 +124,7 @@ public abstract class AbstractIntegrator implements FirstOrderIntegrator {
+                                 final double maxCheckInterval,
+                                 final double convergence,
+                                 final int maxIterationCount) {
+-        addEventHandler(handler, maxCheckInterval, convergence,
++        addEventHandler(handler, maxIterationCount, convergence,
+                         maxIterationCount,
+                         new BracketingNthOrderBrentSolver(convergence, 5));
+     }

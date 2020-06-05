@@ -1,0 +1,11 @@
+--- /tmp/jGenProg_Defects4J_Closure_22/src/com/google/javascript/jscomp/CheckSideEffectsjava
++++ /tmp/jGenProg_Defects4J_Closure_22/src/com/google/javascript/jscomp/CheckSideEffectsjava
+@@ -114,7 +114,7 @@
+ 					if (ancestorType == (com.google.javascript.rhino.Token.COMMA)) 
+ 					{ 						continue;}
+ 					if ((ancestorType != (com.google.javascript.rhino.Token.EXPR_RESULT)) && (ancestorType != (com.google.javascript.rhino.Token.BLOCK)))
+-						return;else
++					{}else
+ 
+ 						break;
+ 				}

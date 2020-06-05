@@ -1,0 +1,26 @@
+--- /tmp/jKali_Defects4J_Math_81/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpljava
++++ /tmp/jKali_Defects4J_Math_81/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpljava
+@@ -1540,18 +1540,18 @@
+ 						double a2 = ((work[(np - 8)]) / b2) * (1 + ((work[(np - 4)]) / b1));
+ 
+ 
+-						if ((end - start) > 2) {
+-							b2 = (work[(nn - 13)]) / (work[(nn - 15)]);
++						if (false) {
++							b2 = (this.work[(nn - 13)]) / (this.work[(nn - 15)]);
+ 							a2 = a2 + b2;
+-							for (int i4 = nn - 17; i4 >= (((4 * start) + 2) + (pingPong)); i4 -= 4) {
++							for (int i4 = nn - 17; i4 >= (((4 * start) + 2) + (this.pingPong)); i4 -= 4) {
+ 								if (b2 == 0.0) {
+ 									break;
+ 								}
+ 								b1 = b2;
+-								if ((work[i4]) > (work[(i4 - 2)])) {
++								if ((this.work[i4]) > (this.work[(i4 - 2)])) {
+ 									return;
+ 								}
+-								b2 = b2 * ((work[i4]) / (work[(i4 - 2)]));
++								b2 = b2 * ((this.work[i4]) / (this.work[(i4 - 2)]));
+ 								a2 = a2 + b2;
+ 								if (((100 * (java.lang.Math.max(b2, b1))) < a2) || (cnst1 < a2)) {
+ 									break;

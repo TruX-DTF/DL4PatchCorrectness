@@ -1,0 +1,17 @@
+--- /tmp/Arja_Defects4J_Closure_125/src/com/google/javascript/jscomp/TypeCheck.java	2019-08-11 08:17:47.587830849 -0400
++++ /tmp/Arja_Defects4J_Closure_125/patches_9ox1/Patch_1/patched/com/google/javascript/jscomp/TypeCheck.java	2019-08-11 08:41:59.410095210 -0400
+@@ -1658,12 +1658,6 @@
+     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();
+     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {
+       FunctionType fnType = type.toMaybeFunctionType();
+-      if (fnType != null) {
+-        visitParameterList(t, n, fnType);
+-        ensureTyped(t, n, fnType.getInstanceType());
+-      } else {
+-        ensureTyped(t, n);
+-      }
+     } else {
+       report(t, n, NOT_A_CONSTRUCTOR);
+       ensureTyped(t, n);
+
+

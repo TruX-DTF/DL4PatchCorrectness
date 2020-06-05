@@ -1,0 +1,14 @@
+--- /tmp/GenProg_Defects4J_Lang_43/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java	2019-07-01 13:36:26.689720435 -0400
++++ /tmp/GenProg_Defects4J_Lang_43/patches_0g6u/Patch_13/patched/org/apache/commons/lang/text/ExtendedMessageFormat.java	2019-07-01 13:41:59.540190899 -0400
+@@ -419,7 +419,8 @@
+         int start = pos.getIndex();
+         char[] c = pattern.toCharArray();
+         if (escapingOn && c[start] == QUOTE) {
+-            return appendTo == null ? null : appendTo.append(QUOTE);
++            next(pos);
++			return appendTo == null ? null : appendTo.append(QUOTE);
+         }
+         int lastHold = start;
+         for (int i = pos.getIndex(); i < pattern.length(); i++) {
+
+

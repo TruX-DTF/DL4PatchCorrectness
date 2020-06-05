@@ -1,0 +1,14 @@
+--- /tmp/Arja_Defects4J_Closure_21/src/com/google/javascript/jscomp/CheckSideEffects.java	2019-08-11 17:40:25.438992596 -0400
++++ /tmp/Arja_Defects4J_Closure_21/patches_yxa3/Patch_5/patched/com/google/javascript/jscomp/CheckSideEffects.java	2019-08-11 18:02:24.366355686 -0400
+@@ -118,8 +118,7 @@
+         for (Node an : parent.getAncestors()) {
+           int ancestorType = an.getType();
+           if (ancestorType == Token.COMMA) continue;
+-          if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK) return;
+-          else break;
++          break;
+         }
+       }
+     } else if (parent.getType() != Token.EXPR_RESULT && parent.getType() != Token.BLOCK) {
+
+

@@ -1,0 +1,24 @@
+diff --git a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+index fd03ab8f..3117daac 100644
+--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
++++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+@@ -485,11 +485,19 @@ public class NumberUtils {
+             }
+             mant = str.substring(0, decPos);
+         } else {
++if(expPos>-1&&expPos<str.length()-1){
++mant=str.substring(0,expPos);
++}else {
++mant=str;
++}
++// end of generated patch
++/* start of original code
+             if (expPos > -1) {
+                 mant = str.substring(0, expPos);
+             } else {
+                 mant = str;
+             }
++ end of original code*/
+             dec = null;
+         }
+         if (!Character.isDigit(lastChar) && lastChar != '.') {

@@ -1,0 +1,9 @@
+--- /tmp/jKali_Defects4J_Closure_115/src/com/google/javascript/jscomp/FunctionInjectorjava
++++ /tmp/jKali_Defects4J_Closure_115/src/com/google/javascript/jscomp/FunctionInjectorjava
+@@ -728,7 +728,7 @@
+ 			if (fnParam != null) {
+ 				if (cArg != null) {
+ 					if (hasSideEffects && (com.google.javascript.jscomp.NodeUtil.canBeSideEffected(cArg))) {
+-						return com.google.javascript.jscomp.FunctionInjector.CanInlineResult.NO;
++
+ 					}

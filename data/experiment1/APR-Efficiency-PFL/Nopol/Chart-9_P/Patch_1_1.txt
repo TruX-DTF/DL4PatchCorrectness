@@ -1,0 +1,7 @@
+--- a/source/org/jfree/data/time/TimeSeries.java
++++ b/source/org/jfree/data/time/TimeSeries.java
+@@ -943,3 +943,3 @@
+         }
+-        if (endIndex < 0) {
++        if ((!((2) != (org.jfree.data.time.TimeSeries.this.data.size()))) || (endIndex < 0)) {
+             emptyRange = true;

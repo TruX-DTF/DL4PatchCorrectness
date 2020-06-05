@@ -1,0 +1,32 @@
+diff --git a/src/com/google/javascript/rhino/jstype/RecordType.java b/src/com/google/javascript/rhino/jstype/RecordType.java
+index 7289803e..c4ff612d 100755
+--- a/src/com/google/javascript/rhino/jstype/RecordType.java
++++ b/src/com/google/javascript/rhino/jstype/RecordType.java
+@@ -139,6 +139,19 @@ class RecordType extends PrototypeObjectType {
+ 
+   @Override
+   public JSType getLeastSupertype(JSType that) {
++// start of generated patch
++if(!that.isRecordType()){
++return super.getLeastSupertype(that);
++}
++RecordTypeBuilder builder=new RecordTypeBuilder(registry);
++for(String property : properties.keySet()){
++if(that.toMaybeRecordType().hasProperty(property)&&that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(getPropertyType(property))){
++builder.addProperty(property,getPropertyType(property),getPropertyNode(property));
++}
++}
++return getLeastSupertype(this,that);
++// end of generated patch
++/* start of original code
+     if (!that.isRecordType()) {
+       return super.getLeastSupertype(that);
+     }
+@@ -152,6 +165,7 @@ class RecordType extends PrototypeObjectType {
+       }
+     }
+     return builder.build();
++ end of original code*/
+   }
+   JSType getGreatestSubtypeHelper(JSType that) {
+     if (that.isRecordType()) {

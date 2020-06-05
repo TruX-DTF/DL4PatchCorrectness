@@ -1,0 +1,75 @@
+diff --git a/source/org/jfree/data/KeyedObjects2D.java b/source/org/jfree/data/KeyedObjects2D.java
+index d0e832f..9262565 100644
+--- a/source/org/jfree/data/KeyedObjects2D.java
++++ b/source/org/jfree/data/KeyedObjects2D.java
+@@ -228,6 +228,15 @@ public class KeyedObjects2D implements Cloneable, Serializable {
+             throw new UnknownKeyException("Column key (" + columnKey 
+                     + ") not recognised.");
+         }
++// start of generated patch
++if(row>=column){
++KeyedObjects rowData=(KeyedObjects)this.rows.get(row);
++return rowData.getObject(columnKey);
++}else {
++return null;
++}
++// end of generated patch
++/* start of original code
+         if (row >= 0) {
+         KeyedObjects rowData = (KeyedObjects) this.rows.get(row);
+             return rowData.getObject(columnKey);
+@@ -235,6 +244,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
+         else {
+             return null;
+         }
++end of original code*/
+     }
+ 
+     /**
+@@ -341,8 +351,17 @@ public class KeyedObjects2D implements Cloneable, Serializable {
+      * @see #removeColumn(Comparable)
+      */
+     public void removeRow(Comparable rowKey) {
++// start of generated patch
++int index=getRowIndex(rowKey);
++if(index<0){
++throw new UnknownKeyException("The key ("+rowKey.toString());
++}
++removeRow(index);
++// end of generated patch
++/* start of original code
+         int index = getRowIndex(rowKey);
+         removeRow(index);
++end of original code*/
+     }
+ 
+     /**
+@@ -367,6 +386,20 @@ public class KeyedObjects2D implements Cloneable, Serializable {
+      * @see #removeRow(Comparable)
+      */
+     public void removeColumn(Comparable columnKey) {
++// start of generated patch
++int index=getColumnIndex(columnKey);
++if(index<0){
++throw new UnknownKeyException("Column key ("+columnKey);
++}
++Iterator iterator=this.rows.iterator();
++while(iterator.hasNext()){
++KeyedObjects rowData=(KeyedObjects)iterator.next();
++this.rows.remove(index);
++rowData.removeValue(columnKey);
++}
++this.columnKeys.remove(columnKey);
++// end of generated patch
++/* start of original code
+         int index = getColumnIndex(columnKey);
+         if (index < 0) {
+             throw new UnknownKeyException("Column key (" + columnKey 
+@@ -378,6 +411,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
+                 rowData.removeValue(columnKey);
+         }
+         this.columnKeys.remove(columnKey);
++ end of original code*/
+     }
+ 
+     /**

@@ -1,0 +1,26 @@
+--- /tmp/Arja_Defects4J_Closure_10/src/com/google/javascript/rhino/Node.java	2019-08-11 14:19:30.213860322 -0400
++++ /tmp/Arja_Defects4J_Closure_10/patches_uv4f/Patch_27/patched/com/google/javascript/rhino/Node.java	2019-08-11 14:45:29.882536146 -0400
+@@ -1459,7 +1459,7 @@
+       }
+       res = n.checkTreeEqualsImpl(n2);
+       if (res != null) {
+-        return res;
++        return null;
+       }
+     }
+     return res;
+
+
+--- /tmp/Arja_Defects4J_Closure_10/src/com/google/javascript/rhino/Token.java	2019-08-11 14:19:30.213860322 -0400
++++ /tmp/Arja_Defects4J_Closure_10/patches_uv4f/Patch_27/patched/com/google/javascript/rhino/Token.java	2019-08-11 14:45:29.894535813 -0400
+@@ -188,7 +188,7 @@
+           case NE:              return "NE";
+           case LT:              return "LT";
+           case LE:              return "LE";
+-          case GT:              return "GT";
++          case GT:              ;
+           case GE:              return "GE";
+           case LSH:             return "LSH";
+           case RSH:             return "RSH";
+
+

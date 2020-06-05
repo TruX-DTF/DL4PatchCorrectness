@@ -1,0 +1,11 @@
+--- /tmp/jGenProg_Defects4J_Math_40/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolverjava
++++ /tmp/jGenProg_Defects4J_Math_40/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolverjava
+@@ -232,7 +232,7 @@
+ 			double targetY;
+ 			if (agingA >= (org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolver.MAXIMAL_AGING)) {
+ 
+-				targetY = (-(org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolver.REDUCTION_FACTOR)) * yB;
++				targetY = (-(org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolver.REDUCTION_FACTOR)) * yB; 				signChangeIndex = 2;
+ 			}else 				if (agingB >= (org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolver.MAXIMAL_AGING)) {
+ 
+ 					targetY = (-(org.apache.commons.math.analysis.solvers.BracketingNthOrderBrentSolver.REDUCTION_FACTOR)) * yA;

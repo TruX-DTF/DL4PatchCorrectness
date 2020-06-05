@@ -1,0 +1,14 @@
+
+diff --git a/src/main/java/org/apache/commons/math3/util/MathArrays.java b/src/main/java/org/apache/commons/math3/util/MathArrays.java
+index 325fd94..7208bf8 100644
+--- a/src/main/java/org/apache/commons/math3/util/MathArrays.java
++++ b/src/main/java/org/apache/commons/math3/util/MathArrays.java
+@@ -843,7 +843,7 @@ public class MathArrays {
+ 
+ 
+         final double prodHighCur = prodHigh[0];
+-        double prodHighNext = prodHigh[1];
++if (len==1.0){return a[0] * b[0];}        double prodHighNext = prodHigh[1];
+         double sHighPrev = prodHighCur + prodHighNext;
+         double sPrime = sHighPrev - prodHighNext;
+         double sLowSum = (prodHighNext - (sHighPrev - sPrime)) + (prodHighCur - sPrime);

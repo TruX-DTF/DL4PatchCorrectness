@@ -1,0 +1,15 @@
+--- /tmp/Arja_Defects4J_Lang_46/src/java/org/apache/commons/lang/StringEscapeUtils.java	2019-06-25 23:38:53.611956292 -0400
++++ /tmp/Arja_Defects4J_Lang_46/patches_k3mh/Patch_5/patched/org/apache/commons/lang/StringEscapeUtils.java	2019-06-25 23:43:05.535955721 -0400
+@@ -241,7 +241,9 @@
+                         out.write('\\');
+                         break;
+                     case '/' :
+-                            out.write('\\');
++					if (escapeSingleQuote) {
++						out.write('\\');
++					}
+                         out.write('/');
+                         break;
+                     default :
+
+

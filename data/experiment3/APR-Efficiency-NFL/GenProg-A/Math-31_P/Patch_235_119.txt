@@ -1,0 +1,40 @@
+--- /tmp/GenProg_Defects4J_Math_31/src/main/java/org/apache/commons/math3/distribution/FDistribution.java	2019-07-31 10:48:31.566974128 -0400
++++ /tmp/GenProg_Defects4J_Math_31/patches_xnp9/Patch_119/patched/org/apache/commons/math3/distribution/FDistribution.java	2019-07-31 12:18:52.469100139 -0400
+@@ -212,7 +212,8 @@
+      */
+     public double getNumericalVariance() {
+         if (!numericalVarianceIsCalculated) {
+-            numericalVariance = calculateNumericalVariance();
++            final double logm = FastMath.log(denominatorDegreesOfFreedom);
++			numericalVariance = calculateNumericalVariance();
+             numericalVarianceIsCalculated = true;
+         }
+         return numericalVariance;
+
+
+--- /tmp/GenProg_Defects4J_Math_31/src/main/java/org/apache/commons/math3/util/ContinuedFraction.java	2019-07-31 10:48:35.794966426 -0400
++++ /tmp/GenProg_Defects4J_Math_31/patches_xnp9/Patch_119/patched/org/apache/commons/math3/util/ContinuedFraction.java	2019-07-31 12:18:52.481100118 -0400
+@@ -174,8 +174,7 @@
+                                                x);
+             }
+             if (Double.isNaN(hN)) {
+-                throw new ConvergenceException(LocalizedFormats.CONTINUED_FRACTION_NAN_DIVERGENCE,
+-                                               x);
++                return -0.0;
+             }
+ 
+             if (FastMath.abs(deltaN - 1.0) < epsilon) {
+
+
+--- /tmp/GenProg_Defects4J_Math_31/src/main/java/org/apache/commons/math3/exception/MathIllegalStateException.java	2019-07-31 10:48:31.210974776 -0400
++++ /tmp/GenProg_Defects4J_Math_31/patches_xnp9/Patch_119/patched/org/apache/commons/math3/exception/MathIllegalStateException.java	2019-07-31 12:18:52.489100102 -0400
+@@ -83,6 +83,6 @@
+     /** {@inheritDoc} */
+     @Override
+     public String getLocalizedMessage() {
+-        return context.getLocalizedMessage();
++        return context.getMessage();
+     }
+ }
+
+

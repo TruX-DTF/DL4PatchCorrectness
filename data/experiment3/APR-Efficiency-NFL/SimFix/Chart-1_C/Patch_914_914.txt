@@ -1,0 +1,25 @@
+diff --git a/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java b/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
+index 226b25a..b695a6b 100644
+--- a/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
++++ b/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
+@@ -1792,11 +1792,20 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
+         if (this.plot == null) {
+             return result;
+         }
++// start of generated patch
++int index=this.plot.getIndexOf(this);
++CategoryDataset dataset=this.plot.getDataset(index);
++if(dataset==null){
++return result;
++}
++// end of generated patch
++/* start of original code
+         int index = this.plot.getIndexOf(this);
+         CategoryDataset dataset = this.plot.getDataset(index);
+         if (dataset != null) {
+             return result;
+         }
++end of original code*/
+         int seriesCount = dataset.getRowCount();
+         if (plot.getRowRenderingOrder().equals(SortOrder.ASCENDING)) {
+             for (int i = 0; i < seriesCount; i++) {

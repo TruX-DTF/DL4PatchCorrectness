@@ -1,0 +1,14 @@
+--- /tmp/Arja_Defects4J_Chart_12/source/org/jfree/chart/plot/MultiplePiePlot.java	2019-07-19 05:49:53.733870208 -0400
++++ /tmp/Arja_Defects4J_Chart_12/patches_p20q/Patch_84/patched/org/jfree/chart/plot/MultiplePiePlot.java	2019-07-19 06:02:12.613868534 -0400
+@@ -145,7 +145,8 @@
+         this.dataset = dataset;
+         PiePlot piePlot = new PiePlot(null);
+         this.pieChart = new JFreeChart(piePlot);
+-        this.pieChart.removeLegend();
++        setDataset(dataset);
++		this.pieChart.removeLegend();
+         this.dataExtractOrder = TableOrder.BY_COLUMN;
+         this.pieChart.setBackgroundPaint(null);
+         TextTitle seriesTitle = new TextTitle("Series Title",
+
+

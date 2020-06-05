@@ -1,0 +1,26 @@
+PATCH_DIFF_ORIG=--- /tmp/jGenProg_Defects4J_Chart_25/source/org/jfree/chart/renderer/category/StatisticalBarRendererjava
++++ /tmp/jGenProg_Defects4J_Chart_25/source/org/jfree/chart/renderer/category/StatisticalBarRendererjava
+@@ -204,14 +204,14 @@
+ 		org.jfree.data.statistics.StatisticalCategoryDataset statData = ((org.jfree.data.statistics.StatisticalCategoryDataset) (data));
+ 
+ 		org.jfree.chart.plot.PlotOrientation orientation = plot.getOrientation();
+-		if (orientation == (org.jfree.chart.plot.PlotOrientation.HORIZONTAL)) {
+-			drawHorizontalItem(g2, state, dataArea, plot, domainAxis, 
+-			rangeAxis, statData, row, column);
+-		}else
+-			if (orientation == (org.jfree.chart.plot.PlotOrientation.VERTICAL)) {
+-				drawVerticalItem(g2, state, dataArea, plot, domainAxis, rangeAxis, 
+-				statData, row, column);
+-			}
++
++
++
++
++
++
++
++
+ 	}
+ 
+ 
+

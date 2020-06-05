@@ -1,0 +1,14 @@
+--- /tmp/GenProg_Defects4J_Lang_7/src/main/java/org/apache/commons/lang3/math/NumberUtils.java	2019-07-26 04:36:30.226708490 -0400
++++ /tmp/GenProg_Defects4J_Lang_7/patches_sxic/Patch_21/patched/org/apache/commons/lang3/math/NumberUtils.java	2019-07-26 04:43:30.312129025 -0400
+@@ -450,7 +450,8 @@
+             throw new NumberFormatException("A blank string is not a valid number");
+         }  
+         if (str.startsWith("--")) {
+-            return null;
++            Double d = createDouble(str);
++			return null;
+         }
+         if (str.startsWith("0x") || str.startsWith("-0x") || str.startsWith("0X") || str.startsWith("-0X")) {
+             int hexDigits = str.length() - 2; // drop 0x
+
+

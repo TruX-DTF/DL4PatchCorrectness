@@ -1,0 +1,32 @@
+diff --git a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java
+index b200223d..f1e2c58a 100644
+--- a/src/main/java/org/apache/commons/lang3/RandomStringUtils.java
++++ b/src/main/java/org/apache/commons/lang3/RandomStringUtils.java
+@@ -228,6 +228,19 @@ public class RandomStringUtils {
+             throw new IllegalArgumentException("Requested random string length " + count + " is less than 0.");
+         }
+ 
++// start of generated patch
++if(chars==null&&end==0){
++if(!letters&&!numbers){
++end=Integer.MAX_VALUE;
++}else {
++end='z'+1;
++start=' ';
++}
++}
++char[] buffer=new char[count];
++int gap=end-start;
++// end of generated patch
++/* start of original code
+         if (start == 0 && end == 0) {
+                 if (!letters && !numbers) {
+                     end = Integer.MAX_VALUE;
+@@ -239,6 +252,7 @@ public class RandomStringUtils {
+ 
+         char[] buffer = new char[count];
+         int gap = end - start;
++ end of original code*/
+ 
+         while (count-- != 0) {
+             char ch;

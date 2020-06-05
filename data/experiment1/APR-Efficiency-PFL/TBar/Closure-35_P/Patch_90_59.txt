@@ -1,0 +1,13 @@
+diff --git a/src/com/google/javascript/jscomp/TypeInference.java b/src/com/google/javascript/jscomp/TypeInference.java
+index 13e1092..a04cd51 100644
+--- a/src/com/google/javascript/jscomp/TypeInference.java
++++ b/src/com/google/javascript/jscomp/TypeInference.java
+@@ -1119,7 +1119,7 @@ class TypeInference
+     ObjectType constraintObj =
+         ObjectType.cast(constraint.restrictByNotNullOrUndefined());
+     if (constraintObj != null && constraintObj.isRecordType()) {
+-      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());
++      ObjectType objType = ObjectType.cast(type.collapseUnion());
+       if (objType != null) {
+         for (String prop : constraintObj.getOwnPropertyNames()) {
+           JSType propType = constraintObj.getPropertyType(prop);

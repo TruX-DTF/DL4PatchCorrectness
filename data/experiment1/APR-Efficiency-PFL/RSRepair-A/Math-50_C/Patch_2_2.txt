@@ -1,0 +1,17 @@
+--- /tmp/RSRepair_Defects4J_Math_50/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java	2019-08-04 13:12:55.404167814 -0400
++++ /tmp/RSRepair_Defects4J_Math_50/patches_y0o8/Patch_2/patched/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java	2019-08-04 13:42:44.825082073 -0400
+@@ -183,11 +183,7 @@
+                     f0 *= f1 / (f1 + fx);
+                     break;
+                 case REGULA_FALSI:
+-                    // Nothing.
+-                    if (x == x1) {
+-                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+-                        f0 = computeObjectiveValue(x0);
+-                    }
++                    ;
+                     break;
+                 default:
+                     // Should never happen.
+
+

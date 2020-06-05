@@ -1,0 +1,14 @@
+PATCH_DIFF_ORIG=--- /tmp/jKali_Defects4J_Math_29/src/main/java/org/apache/commons/math3/linear/OpenMapRealVectorjava
++++ /tmp/jKali_Defects4J_Math_29/src/main/java/org/apache/commons/math3/linear/OpenMapRealVectorjava
+@@ -136,8 +136,8 @@
+ 		this.epsilon = epsilon;
+ 		for (int key = 0; key < (values.length); key++) {
+ 			double value = values[key];
+-			if (!(isDefaultValue(value))) {
+-				entries.put(key, value);
++			if (true) {
++				this.entries.put(key, value);
+ 			}
+ 		}
+ 	}
+
