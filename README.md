@@ -1,4 +1,4 @@
-# patch_prediction
+# Predicting Patch Correctness using Embeddings
 
 data: the dataset and results of each experiment
 
