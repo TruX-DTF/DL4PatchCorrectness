@@ -1,3 +1,6 @@
 [submodule "data/experiment3/DefectRepairing"]
 	path = data/experiment3/DefectRepairing
 	url = https://github.com/Ultimanecat/DefectRepairing.git
+[submodule "data/experiment2/RepairThemAll_experiment"]
+	path = data/experiment2/RepairThemAll_experiment
+	url = https://github.com/program-repair/RepairThemAll_experiment.git
