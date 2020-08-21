@@ -1,6 +1,6 @@
 # Predicting Patch Correctness using Embeddings
 
-##data
+## data
 the dataset and results of each experiment
 
 1. experiemnt1(train dataset)
@@ -19,11 +19,11 @@ the train and test dataset for prediction of patch correctness based on embeddin
 * DefectRepairing: the patches labeled with json file.
 * defects4j-developer: the correct patches.
 
-##preprocess
+## preprocess
 preprocess of code file and data generation for RQ1 and RQ2.
 
-##similarity_calculation:
+## similarity_calculation:
 patch similarity statistics and filetra for RQ1 and RQ2.
 
-##prediction 
+## prediction 
 classifier of patch correctness for RQ3.
