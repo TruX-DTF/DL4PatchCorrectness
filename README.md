@@ -1,12 +1,13 @@
 # Evaluating Representation Learning of Code Changes for Predicting Patch Correctness in Program Repair
 
 ```bibtex
-@article{tian2020evaluating,
-  title={Evaluating Representation Learning of Code Changes for Predicting Patch Correctness in Program Repair},
-  author={Tian, Haoye and Liu, Kui and Kabore{\'e}, Abdoul Kader and Koyuncu, Anil and Li, Li and Klein, Jacques and Bissyand{\'e}, Tegawend{\'e} F},
-  journal={arXiv preprint arXiv:2008.02944},
-  year={2020}
-}
+@inproceedings{tian2020evaluating, 
+  title={Evaluating Representation Learning of Code Changes for Predicting Patch Correctness in Program Repair}, 
+  author={Tian, Haoye and Liu, Kui and Kabor{\'e}, Abdoul Kader and Koyuncu, Anil and Li, Li and Klein, Jacques and Bissyand{\'e}, Tegawend{\'e} F.},
+  booktitle={Proceedings of the 35th IEEE/ACM International Conference on Automated Software Engineering}, 
+  year={2020}, 
+  publisher={ACM}
+} 
 ```
 
 ## data
