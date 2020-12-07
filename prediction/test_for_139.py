@@ -19,7 +19,7 @@ import torch
 from sklearn.metrics.pairwise import *
 from sklearn.metrics import confusion_matrix
 
-from prediction.train_predict import bfp_clf_results_cv as bf
+from train_predict import bfp_clf_results_cv as bf
 def evaluation_metrics(y_true, y_pred_prob):
     fpr, tpr, thresholds = roc_curve(y_true=y_true, y_score=y_pred_prob, pos_label=1)
     auc_ = auc(fpr, tpr)
