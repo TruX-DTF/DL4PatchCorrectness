@@ -89,6 +89,7 @@ def bfp_clf_results_cv(train_data, labels,test_data,labels_t, algorithm=None,ODS
     print('Algorithm results:', algorithm)
     accs, prcs, rcs, f1s, aucs = list(), list(), list(), list(), list()
 
+    # the first 130(deduplicated) data is patch-sim dataset that we use for testing, so exclude them.
     x_train, y_train = train_data[130:], labels[130:]
 
     if ODS == True:
