@@ -273,7 +273,7 @@ def create_kui_data_for(path_patch_kui, path_defects4f_c,path_supply_data,path_F
 
     with open('../data/experiment3/kui_data_for_'+model+'.pickle','wb') as f:
         if model == 'doc':
-            m = Doc2Vec.load('../data/model/doc_frag.model')
+            m = Doc2Vec.load('../data/model/doc_frag.model') # can be trained in 'preprocess/train_doc.py' if not available
         elif model == 'bert':
             # max_seq_len=360
             m = BertClient(check_length=False)

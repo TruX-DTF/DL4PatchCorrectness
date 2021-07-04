@@ -1,4 +1,4 @@
-from bert_serving.client import BertClient
+# from bert_serving.client import BertClient
 import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
@@ -7,7 +7,8 @@ from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from nltk.tokenize import word_tokenize
 
 
-path_patch_train = ['../data/train_data5_frag.txt', '../data/test_data_frag_all_for_doc.txt','../data/kui_data_frag_all_for_doc.txt']
+# path_patch_train_all = ['../data/train_data5_frag.txt', '../data/test_data_frag_all_for_doc.txt','../data/kui_data_frag_all_for_doc.txt']
+path_patch_train = ['../data/experiment1/train_data5_frag.txt']
 
 def load_data(data_path, bugName=None):
 
@@ -35,7 +36,8 @@ def Doc(df):
     data = list(df['buggy']) + list(df['patched'])
     documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(data)]
     model = Doc2Vec(documents, vector_size=128, window=5, min_count=1, workers=4)
-    model.save('../data/doc_frag_all.model')
+    # model.save('../data/doc_frag_all.model')
+    model.save('../data/doc_frag.model')
 
 if __name__ == '__main__':
     # df = load_data(data_path,'patch_quicksort')
