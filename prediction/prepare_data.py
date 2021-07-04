@@ -8,12 +8,14 @@ from bert_serving.client import BertClient
 from nltk.tokenize import word_tokenize
 import json
 
-path_kui_data = '../data/APR-Efficiency/Patches/NFL'
-path_defects4f_c = '../data/defects4j-experiment3/framework/projects'
-path_supply_data = '../data/DefectRepairing/tool/patches'
+# the following data are stored in data/experiment3
+path_kui_data = '../data/experiment3/APR-Efficiency-NFL'
+path_defects4j_developer = '../data/experiment3/defects4j-developer'
+path_patchsim_data = '../data/DefectRepairing/tool/patches' # obtained from https://github.com/Ultimanecat/DefectRepairing/tree/aa519d52773ed6cf8a6273b67dfefa066f9f9ee5
 data_139 = ['Patch1','Patch2','Patch4','Patch5','Patch6','Patch7','Patch8','Patch9','Patch10','Patch11','Patch12','Patch13','Patch14','Patch15','Patch16','Patch17','Patch18','Patch19','Patch20','Patch21','Patch22','Patch23','Patch24','Patch25','Patch26','Patch27','Patch28','Patch29','Patch30','Patch31','Patch32','Patch33','Patch34','Patch36','Patch37','Patch38','Patch44','Patch45','Patch46','Patch47','Patch48','Patch49','Patch51','Patch53','Patch54','Patch55','Patch58','Patch59','Patch62','Patch63','Patch64','Patch65','Patch66','Patch67','Patch68','Patch69','Patch72','Patch73','Patch74','Patch75','Patch76','Patch77','Patch78','Patch79','Patch80','Patch81','Patch82','Patch83','Patch84','Patch88','Patch89','Patch90','Patch91','Patch92','Patch93','Patch150','Patch151','Patch152','Patch153','Patch154','Patch155','Patch157','Patch158','Patch159','Patch160','Patch161','Patch162','Patch163','Patch165','Patch166','Patch167','Patch168','Patch169','Patch170','Patch171','Patch172','Patch173','Patch174','Patch175','Patch176','Patch177','Patch180','Patch181','Patch182','Patch183','Patch184','Patch185','Patch186','Patch187','Patch188','Patch189','Patch191','Patch192','Patch193','Patch194','Patch195','Patch196','Patch197','Patch198','Patch199','Patch201','Patch202','Patch203','Patch204','Patch205','Patch206','Patch207','Patch208','Patch209','Patch210','PatchHDRepair1','PatchHDRepair3','PatchHDRepair4','PatchHDRepair5','PatchHDRepair6','PatchHDRepair7','PatchHDRepair8','PatchHDRepair9','PatchHDRepair10']
-path_incorrect = '../data/PFL'
-path_FSE_defects4j ='../data/FSE_defects4j/'
+
+# path_incorrect = '../data/PFL'
+# path_FSE_defects4j ='../data/FSE_defects4j/'
 
 bug_folder = ['Chart', 'Closure', 'Lang', 'Math', 'Time']
 bugs_folder = ['Chart', 'Closure', 'Lang', 'Math', 'Time','Mockito']
@@ -694,7 +696,7 @@ if __name__ == '__main__':
     # provide train data for doc
     # create_kui_data_for_doc(path_kui_data, path_defects4f_c)
 
-    model = ['doc']
+    model = ['bert']
     # project = 'Chart'
     # project = 'Lang'
     # project = 'Math'
@@ -702,8 +704,8 @@ if __name__ == '__main__':
     project = ''
 
     for i in range(len(model)):
-        create_kui_data_for(path_kui_data, path_defects4f_c,path_supply_data,path_FSE_defects4j, model=model[i])
-        # create_kui_data_for_139(path_supply_data, model=model[i],project=project)
+        create_kui_data_for(path_kui_data, path_defects4j_developer, path_patchsim_data,'', model=model[i])
+        create_kui_data_for_139(path_patchsim_data, model=model[i],project=project)
 
     # for cc2vec with top line
     # create_kui_data_for_cc2v(path_kui_data, path_defects4f_c, path_supply_data)
