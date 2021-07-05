@@ -6,3 +6,5 @@
   * test on patch-sim dataset and obtain confusion matrix.
 * prepare_data
   * generate data/features yourself if you want to try something new.
+* Bert
+  * cased_L-24_H-1024_A-16
