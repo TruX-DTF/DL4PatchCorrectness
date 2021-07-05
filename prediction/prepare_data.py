@@ -707,6 +707,6 @@ if __name__ == '__main__':
         create_kui_data_for(path_kui_data, path_defects4j_developer, path_patchsim_data,'', model=model[i])
         create_kui_data_for_139(path_patchsim_data, model=model[i],project=project)
 
-    # for cc2vec with top line
-    # create_kui_data_for_cc2v(path_kui_data, path_defects4f_c, path_supply_data)
-    # create_kui_data_for_cc2v_139(path_supply_data)
+    # for cc2vec with top line. require CC2Vec to transform patch into pickle
+    # create_kui_data_for_cc2v(path_kui_data, path_defects4f_c, path_patchsim_data)
+    # create_kui_data_for_cc2v_139(path_patchsim_data)
