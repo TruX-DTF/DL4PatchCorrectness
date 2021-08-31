@@ -23,5 +23,5 @@ If you use the dataset above, please cite our paper:
     * APR-Efficiency-NFL: the patches labeled with affix '\_P' and '\_C', means 'palusible' and 'correct'.
 	* DefectRepairing: the patches labeled with json file.
 	* defects4j-developer: the correct patches.
-* PatchCollectingV2UniqueToken
-  * Collected patches, buggy and fixed files from 35 famous APR tools.
+* model
+  * pre-trained Doc2Vec model

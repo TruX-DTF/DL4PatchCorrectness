@@ -8,3 +8,6 @@
   * generate data/features yourself if you want to try something new.
 * Bert
   * cased_L-24_H-1024_A-16
+* Doc2Vec
+  * train your model through `preprocess/train_doc.py`.
+
