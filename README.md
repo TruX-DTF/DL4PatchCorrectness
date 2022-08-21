@@ -33,7 +33,7 @@ patch similarity statistics and filetra for RQ1 and RQ2.
 ## prediction 
 classifier of patch correctness for RQ3.
 
-## API) Custom Prediction
+# API (Custom Prediction)
 To predict the correctness of your custom patches, you are welcome to use the prediction interface.
 ### A) Requirements for BERT
   * **BERT model client&server:** 24-layer, 1024-hidden, 16-heads, 340M parameters. download it [here](https://storage.googleapis.com/bert_models/2019_05_30/wwm_cased_L-24_H-1024_A-16.zip).
