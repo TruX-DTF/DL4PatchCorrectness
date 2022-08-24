@@ -6,35 +6,38 @@
   author={Tian, Haoye and Liu, Kui and Kabor{\'e}, Abdoul Kader and Koyuncu, Anil and Li, Li and Klein, Jacques and Bissyand{\'e}, Tegawend{\'e} F.},
   booktitle={Proceedings of the 35th IEEE/ACM International Conference on Automated Software Engineering}, 
   year={2020}, 
-  publisher={ACM}
+  publisher={ACM},
+  url = {https://doi.org/10.1145/3324884.3416532}, 
+  doi = {10.1145/3324884.3416532}
 } 
 ```
 Paper Link: https://ieeexplore.ieee.org/abstract/document/9286101
 
-## data
-the dataset and results of each experiment.
+## Ⅰ) Catalogue of Repository
 
-* experiemnt1
-  * Patches_train.zip: the developer patches as committed in five open source project repositories.
-  * APR-Efficiency-PFL: the patches under the folders affixed with '\_C'.
-* experiment2
-  * The patches to be evaluated from RepairThemAll.
-* experiment3
+* ### data
+  the dataset and results of each experiment.
+  * experiemnt1
+    * Patches_train.zip: the developer patches as committed in five open source project repositories.
+    * APR-Efficiency-PFL: the patches under the folders affixed with '\_C'.
+  * experiment2
+    * The patches to be evaluated from RepairThemAll.
+  * experiment3
     * APR-Efficiency-NFL: the patches labeled with affix '\_P' and '\_C', means 'palusible' and 'correct'.
-	* DefectRepairing: the patches labeled with json file.
-	* defects4j-developer: the correct patches.
+    * DefectRepairing: the patches labeled with json file.
+    * defects4j-developer: the correct patches.
+* ### preprocess
+  the preprocess of code file and data generation for RQ1 and RQ2.
 
-## preprocess
-preprocess of code file and data generation for RQ1 and RQ2.
+* ### similarity_calculation
+  the patch similarity statistics and filetra for RQ1 and RQ2.
 
-## similarity_calculation
-patch similarity statistics and filetra for RQ1 and RQ2.
+* ### prediction 
+  the classifier of patch correctness for RQ3.
 
-## prediction 
-classifier of patch correctness for RQ3.
-
-# API (Custom Prediction)
+## Ⅱ) Custom Prediction
 To predict the correctness of your custom patches, you are welcome to use the prediction interface.
+
 ### A) Requirements for BERT
   * **BERT model client&server:** 24-layer, 1024-hidden, 16-heads, 340M parameters. download it [here](https://storage.googleapis.com/bert_models/2019_05_30/wwm_cased_L-24_H-1024_A-16.zip).
   * **Environment for BERT server** (different from reproduction)
